@@ -12,7 +12,7 @@ interface WritingDetailProps {
  * - Loads specific writing by slug
  * - Uses ContentViewer for markdown rendering
  * - Featured image display
- * - Back command hint
+ * - Navigation hints
  */
 export function WritingDetail({ slug }: WritingDetailProps) {
   const { item, loading, error, found } = useMarkdownItem('writings', slug);

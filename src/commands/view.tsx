@@ -1,30 +1,31 @@
 import type { Command } from '../types/Command.types';
 import { WritingDetail } from '../components/organisms/WritingDetail';
 import { ProjectDetail } from '../components/organisms/ProjectDetail';
+import { isNumericIndex, getSlugByIndex, getContentIndex } from '../utils/contentIndex';
 
 /**
- * Unified view command - Display any content by slug
+ * Unified view command - Display any content by index number or slug
  * Automatically detects content type and shows appropriate detail view
  */
 export const viewCommand: Command = {
   name: 'view',
-  description: 'View any content by slug (usage: view <slug>)',
+  description: 'View any content by # or slug (usage: view <#> or view <slug>)',
   aliases: ['read', 'open', 'explore', 'show'],
-  usage: 'view <slug>',
+  usage: 'view <#|slug>',
   handler: (args) => {
-    const slug = args[0];
+    const identifier = args[0];
     
-    if (!slug) {
+    if (!identifier) {
       return {
         success: false,
         output: (
           <div className="text-terminal-error font-mono">
-            <p>Usage: view &lt;slug&gt;</p>
+            <p>Usage: view &lt;#&gt; or view &lt;slug&gt;</p>
             <p className="text-terminal-muted mt-2">
-              Example: <code className="text-terminal-accent">view sample-post</code>
+              Example: <code className="text-terminal-accent">view 1</code> or <code className="text-terminal-accent">view sample-post</code>
             </p>
             <p className="text-terminal-muted mt-1">
-              Tip: Type <code className="text-terminal-accent">writings</code> or <code className="text-terminal-accent">projects</code> to see available content.
+              Tip: Type <code className="text-terminal-accent">writings</code> or <code className="text-terminal-accent">projects</code> to see available content with index numbers.
             </p>
           </div>
         ),
@@ -34,18 +35,62 @@ export const viewCommand: Command = {
     // Return a unified content viewer that will try all content types
     return {
       success: true,
-      output: <UnifiedContentView slug={slug} />,
+      output: <UnifiedContentView identifier={identifier} />,
       clearOutput: true,
-      newContext: { currentView: 'detail', contentId: slug },
+      newContext: { currentView: 'detail', contentId: identifier },
     };
   },
 };
 
 /**
  * Unified content view component
- * Tries to render content from writings, projects, or travel based on slug
+ * Tries to render content from writings or projects based on identifier (number or slug)
  */
-function UnifiedContentView({ slug }: { slug: string }) {
+function UnifiedContentView({ identifier }: { identifier: string }) {
+  // If numeric, resolve to slug
+  if (isNumericIndex(identifier)) {
+    const index = parseInt(identifier, 10);
+    
+    // Try writings first
+    const writingsSlug = getSlugByIndex('writings', index);
+    if (writingsSlug) {
+      return <WritingDetail slug={writingsSlug} />;
+    }
+    
+    // Try projects
+    const projectsSlug = getSlugByIndex('projects', index);
+    if (projectsSlug) {
+      return <ProjectDetail slug={projectsSlug} />;
+    }
+    
+    // Index not found - show helpful error with valid ranges
+    const writingsCount = getContentIndex('writings').length;
+    const projectsCount = getContentIndex('projects').length;
+    
+    return (
+      <div className="font-mono" style={{ color: 'var(--color-error)' }}>
+        <p>No content found at index #{identifier}</p>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          Valid ranges:
+        </p>
+        <ul className="mt-1 ml-4" style={{ color: 'var(--color-text-muted)' }}>
+          {writingsCount > 0 && (
+            <li><code style={{ color: 'var(--color-accent)' }}>writings</code>: #1-{writingsCount}</li>
+          )}
+          {projectsCount > 0 && (
+            <li><code style={{ color: 'var(--color-accent)' }}>projects</code>: #1-{projectsCount}</li>
+          )}
+        </ul>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          Type <code style={{ color: 'var(--color-accent)' }}>writings</code> or <code style={{ color: 'var(--color-accent)' }}>projects</code> to see the list.
+        </p>
+      </div>
+    );
+  }
+  
+  // Not a number - treat as slug
+  const slug = identifier;
+  
   // Import content modules to check what exists
   const writingsModules = import.meta.glob('../content/writings/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
   const projectsModules = import.meta.glob('../content/projects/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;

@@ -4,6 +4,7 @@ import { cn } from '../../../utils/cn';
 
 interface ContentCardProps {
   item: ContentItem;
+  index?: number;
   onClick?: () => void;
   commandHint?: string;
   className?: string;
@@ -19,7 +20,7 @@ interface ContentCardProps {
  * - Tech stack tags for projects
  * - Location badge for travel
  */
-export function ContentCard({ item, onClick, commandHint, className }: ContentCardProps) {
+export function ContentCard({ item, index, onClick, commandHint, className }: ContentCardProps) {
   const handleClick = () => {
     onClick?.();
   };
@@ -49,6 +50,9 @@ export function ContentCard({ item, onClick, commandHint, className }: ContentCa
       {/* Header row with title and metadata */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
         <h3 className="text-lg font-bold text-terminal-accent">
+          {index !== undefined && (
+            <span className="text-terminal-secondary font-mono mr-2">#{index}</span>
+          )}
           {item.title}
         </h3>
         <div className="flex items-center gap-3 text-sm text-terminal-muted shrink-0">

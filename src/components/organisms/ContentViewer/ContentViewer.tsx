@@ -290,7 +290,8 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
       {/* Navigation hint */}
       <div className="mt-8 text-sm text-terminal-muted">
         <span className="text-terminal-secondary">Tip:</span> Type{' '}
-        <code className="px-1 bg-terminal-muted/30 rounded">back</code> to return to the list
+        <code className="px-1 bg-terminal-muted/30 rounded">writings</code> or{' '}
+        <code className="px-1 bg-terminal-muted/30 rounded">projects</code> to browse more content
       </div>
     </article>
   );

@@ -58,11 +58,12 @@ export function ProjectsList() {
 
       {/* Projects Grid */}
       <div className="space-y-4">
-        {items.map((item: ContentItem) => (
+        {items.map((item: ContentItem, idx: number) => (
           <ContentCard
             key={item.slug}
             item={item}
-            commandHint={`view ${item.slug}`}
+            index={idx + 1}
+            commandHint={`view ${idx + 1}`}
           />
         ))}
       </div>
@@ -70,8 +71,8 @@ export function ProjectsList() {
       {/* Help hint */}
       <div className="mt-6 pt-4 border-t border-terminal-border text-sm text-terminal-muted">
         <span className="text-terminal-secondary">Tip:</span> Type{' '}
-        <code className="px-1 bg-terminal-muted/30 rounded">view &lt;slug&gt;</code>{' '}
-        to view project details
+        <code className="px-1 bg-terminal-muted/30 rounded">view &lt;#&gt;</code>{' '}
+        to view project details (e.g., <code className="px-1 bg-terminal-muted/30 rounded">view 1</code>)
       </div>
     </div>
   );
