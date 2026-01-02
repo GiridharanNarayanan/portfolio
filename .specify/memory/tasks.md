@@ -423,24 +423,24 @@
 
 ### Content
 
-- [ ] T092 [POLISH] Create `src/content/status.md` with initial status frontmatter template
+- [X] T092 [POLISH] Create `src/content/status.md` with initial status frontmatter template
 
 ### Implementation
 
-- [ ] T093 [POLISH] Create `src/commands/spyonhim.ts`:
+- [X] T093 [POLISH] Create `src/commands/spyonhim.ts`:
   - Read `status.md` content
   - Call Azure OpenAI API with spy-report prompt
   - 5-minute cache to reduce API calls
   - Fallback to raw status if API unavailable
-- [ ] T094 [POLISH] Create `src/components/organisms/SpyReport/SpyReport.tsx`:
+- [X] T094 [POLISH] Create `src/components/organisms/SpyReport/SpyReport.tsx`:
   - Typing animation effect for dramatic reveal
   - Spy-report styled output
   - Terminal aesthetic maintained
-- [ ] T095 [POLISH] Create `src/utils/azureOpenAI.ts` - Azure OpenAI API wrapper with error handling
+- [X] T095 [POLISH] Create `src/utils/azureOpenAI.ts` - Azure OpenAI API wrapper with error handling
 
 ### E2E Test for Easter Egg
 
-- [ ] T096 [POLISH] Create `e2e/specs/easter-egg.spec.ts`:
+- [X] T096 [POLISH] Create `e2e/specs/easter-egg.spec.ts`:
   - `spyonhim` → verify response renders
   - Verify typing animation plays
 
