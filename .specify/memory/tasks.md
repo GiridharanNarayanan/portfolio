@@ -483,9 +483,9 @@
 
 ### Unit Tests
 
-- [ ] T109 [P] [TEST] Unit tests for `parseCommand.ts`
-- [ ] T110 [P] [TEST] Unit tests for `matchCommand.ts`
-- [ ] T111 [P] [TEST] Unit tests for `formatDate.ts`
+- [X] T109 [P] [TEST] Unit tests for `parseCommand.ts`
+- [X] T110 [P] [TEST] Unit tests for `matchCommand.ts`
+- [X] T111 [P] [TEST] Unit tests for `formatDate.ts`
 - [ ] T112 [P] [TEST] Unit tests for all command handlers
 
 ### Component Tests
@@ -496,7 +496,7 @@
 
 ### E2E Full Flow
 
-- [ ] T116 [TEST] Create `e2e/specs/full-flow.spec.ts`:
+- [X] T116 [TEST] Create `e2e/specs/full-flow.spec.ts`:
   - Complete user journey from startup to content browsing
   - Theme toggle persistence within session
   - Cross-browser testing (Chrome, Firefox, Safari)
