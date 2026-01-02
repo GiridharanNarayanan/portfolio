@@ -202,25 +202,25 @@
 
 ### Sample Content
 
-- [ ] T054 [US3] Create `src/content/writings/sample-post.md` with frontmatter and inline image example
+- [X] T054 [US3] Create `src/content/writings/sample-post.md` with frontmatter and inline image example
 
 ### Implementation
 
-- [ ] T055 [US3] Create `src/commands/writings.ts`:
+- [X] T055 [US3] Create `src/commands/writings.ts`:
   - `writings` command → WritingsList component
   - `read [id/slug]` command → WritingDetail component
-- [ ] T056 [US3] Create `src/components/organisms/WritingsList/WritingsList.tsx`:
+- [X] T056 [US3] Create `src/components/organisms/WritingsList/WritingsList.tsx`:
   - List of writing entries
   - Each shows: title, date, excerpt
   - Terminal-styled formatting
-- [ ] T057 [US3] Create `src/components/organisms/WritingDetail/WritingDetail.tsx`:
+- [X] T057 [US3] Create `src/components/organisms/WritingDetail/WritingDetail.tsx`:
   - ContentViewer integration
   - Featured image display
   - Back command hint
 
 ### E2E Test for User Story 3
 
-- [ ] T058 [US3] Create `e2e/specs/writings.spec.ts`:
+- [X] T058 [US3] Create `e2e/specs/writings.spec.ts`:
   - `writings` → verify list renders
   - `read sample-post` → verify content displays
   - Verify featured image loads
