@@ -79,13 +79,13 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
             className="font-mono text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--color-text)' }}
           >
-            Giri Dayanandan
+            Giridharan Narayanan
           </h1>
           <p
             className="font-mono text-lg md:text-xl"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            Software Engineer
+            I code software and build teams
           </p>
         </div>
 
