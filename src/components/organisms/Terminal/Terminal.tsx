@@ -7,9 +7,11 @@ import { useCallback, useEffect } from 'react'
 import { cn } from '../../../utils/cn'
 import { CommandInput } from '../../molecules/CommandInput'
 import { StickyCommandBar } from '../StickyCommandBar'
+import { MobileNavigation } from '../MobileNavigation'
 import { useTerminal } from './useTerminal'
 import { useCommandHistory } from '../../../hooks/useCommandHistory'
 import { useCommands } from '../../../hooks/useCommands'
+import { useMobileDetect } from '../../../hooks/useMobileDetect'
 import { 
   getAvailableCommands,
   registerCommand,
@@ -33,6 +35,7 @@ export function Terminal({ className }: TerminalProps) {
   const { theme, toggleTheme } = useTheme()
   const terminalState = useTerminal()
   const commandHistory = useCommandHistory()
+  const { isMobile } = useMobileDetect()
 
   // Initialize commands on mount
   useEffect(() => {
@@ -139,21 +142,25 @@ export function Terminal({ className }: TerminalProps) {
         )}
       </main>
 
-      {/* Command input (fixed at bottom) */}
-      <div
-        className="sticky bottom-0 border-t"
-        style={{
-          backgroundColor: 'var(--color-bg)',
-          borderColor: 'var(--color-border)',
-        }}
-      >
-        <CommandInput
-          onSubmit={handleCommand}
-          onHistoryUp={commandHistory.navigateUp}
-          onHistoryDown={commandHistory.navigateDown}
-          autoFocus
-        />
-      </div>
+      {/* Command input - desktop vs mobile */}
+      {isMobile ? (
+        <MobileNavigation onCommandExecute={handleCommand} />
+      ) : (
+        <div
+          className="sticky bottom-0 border-t"
+          style={{
+            backgroundColor: 'var(--color-bg)',
+            borderColor: 'var(--color-border)',
+          }}
+        >
+          <CommandInput
+            onSubmit={handleCommand}
+            onHistoryUp={commandHistory.navigateUp}
+            onHistoryDown={commandHistory.navigateDown}
+            autoFocus
+          />
+        </div>
+      )}
     </div>
   )
 }

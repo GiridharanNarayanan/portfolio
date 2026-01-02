@@ -304,27 +304,27 @@
 
 ### Implementation
 
-- [ ] T070 [US6] Create `src/hooks/useMobileDetect.ts` - viewport-based mobile detection
-- [ ] T071 [US6] Create `src/components/organisms/MobileCommandDrawer/MobileCommandDrawer.tsx`:
+- [X] T070 [US6] Create `src/hooks/useMobileDetect.ts` - viewport-based mobile detection
+- [X] T071 [US6] Create `src/components/organisms/MobileCommandDrawer/MobileCommandDrawer.tsx`:
   - Collapsed: "tap for commands" prompt at bottom
   - Expanded: scrollable command list sheet from bottom
   - Contextual commands based on current state
   - 44px minimum touch targets
   - Tap outside to collapse
-- [ ] T072 [P] [US6] Create `src/components/organisms/MobileCommandDrawer/MobileCommandDrawer.test.tsx`
-- [ ] T073 [US6] Create `src/components/molecules/MobileCommandItem/MobileCommandItem.tsx`:
+- [X] T072 [P] [US6] Create `src/components/organisms/MobileCommandDrawer/MobileCommandDrawer.test.tsx`
+- [X] T073 [US6] Create `src/components/molecules/MobileCommandItem/MobileCommandItem.tsx`:
   - Touch-friendly command button
   - Sub-selection for parameterized commands
-- [ ] T074 [US6] Create `src/components/organisms/MobileNavigation/MobileNavigation.tsx`:
+- [X] T074 [US6] Create `src/components/organisms/MobileNavigation/MobileNavigation.tsx`:
   - Integrate drawer with terminal
   - Touch event handling
-- [ ] T075 [US6] Update `src/components/organisms/Terminal/Terminal.tsx`:
+- [X] T075 [US6] Update `src/components/organisms/Terminal/Terminal.tsx`:
   - Conditional render: CommandInput (desktop) vs MobileNavigation (mobile)
   - Responsive layout adjustments
 
 ### E2E Test for User Story 6
 
-- [ ] T076 [US6] Create `e2e/specs/mobile-navigation.spec.ts`:
+- [X] T076 [US6] Create `e2e/specs/mobile-navigation.spec.ts`:
   - Mobile viewport: tap command area → drawer opens
   - Tap `writings` → command executes, drawer closes
   - Tap parameterized command → sub-options appear
