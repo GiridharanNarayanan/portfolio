@@ -50,27 +50,6 @@ export interface ProjectMeta extends BaseContentMeta {
 }
 
 /**
- * Travel entry frontmatter
- */
-export interface TravelMeta extends BaseContentMeta {
-  /** Location name */
-  location: string
-  /** Country */
-  country: string
-  /** Trip start date */
-  startDate: string
-  /** Trip end date */
-  endDate?: string
-  /** Gallery images */
-  images?: string[]
-  /** Coordinates for mapping (optional) */
-  coordinates?: {
-    lat: number
-    lng: number
-  }
-}
-
-/**
  * Status frontmatter for SpyOnHim easter egg
  */
 export interface StatusMeta {
@@ -113,7 +92,7 @@ export interface ContentCollection<T extends BaseContentMeta> {
 /**
  * Content type categories
  */
-export type ContentType = 'writings' | 'projects' | 'travel'
+export type ContentType = 'writings' | 'projects'
 
 /**
  * Unified content frontmatter for parsing

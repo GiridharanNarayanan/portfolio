@@ -42,23 +42,18 @@ test.describe('Full User Journey', () => {
     await page.keyboard.press('Enter')
     await expect(page.getByText(/sample-project/i)).toBeVisible()
 
-    // 10. Navigate to travel
-    await page.fill('[data-testid="command-input"] input', 'travel')
-    await page.keyboard.press('Enter')
-    await expect(page.getByText(/sample-trip/i)).toBeVisible()
-
-    // 11. Check about page
+    // 10. Check about page
     await page.fill('[data-testid="command-input"] input', 'about')
     await page.keyboard.press('Enter')
     await expect(page.locator('[data-testid="about-view"]')).toBeVisible()
     await expect(page.getByText(/Career Timeline/i)).toBeVisible()
 
-    // 12. Check contact page
+    // 11. Check contact page
     await page.fill('[data-testid="command-input"] input', 'contact')
     await page.keyboard.press('Enter')
     await expect(page.locator('[data-testid="contact-view"]')).toBeVisible()
 
-    // 13. Clear screen
+    // 12. Clear screen
     await page.fill('[data-testid="command-input"] input', 'clear')
     await page.keyboard.press('Enter')
     // Output should be cleared

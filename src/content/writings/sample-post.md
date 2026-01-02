@@ -36,7 +36,7 @@ The project is built with:
 
 ### 1. Command System
 
-The heart of the portfolio is its command system. Users can type commands like `help`, `writings`, `projects`, and `travel` to navigate.
+The heart of the portfolio is its command system. Users can type commands like `help`, `writings`, and `projects` to navigate.
 
 ```typescript
 interface Command {

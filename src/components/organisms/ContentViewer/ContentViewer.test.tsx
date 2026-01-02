@@ -89,7 +89,7 @@ describe('ContentViewer', () => {
   it('renders location when provided', () => {
     const contentWithLocation: ContentItem = {
       ...baseContent,
-      type: 'travel',
+      type: 'projects',
       location: 'Tokyo, Japan',
     };
     render(<ContentViewer content={contentWithLocation} />);

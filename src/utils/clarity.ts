@@ -80,11 +80,11 @@ export function trackThemeChange(theme: 'dark' | 'light'): void {
 
 /**
  * Track content views
- * @param contentType - Type of content (writings, projects, travel)
+ * @param contentType - Type of content (writings, projects)
  * @param contentId - Identifier of the content
  */
 export function trackContentView(
-  contentType: 'writings' | 'projects' | 'travel' | 'about' | 'contact',
+  contentType: 'writings' | 'projects' | 'about' | 'contact',
   contentId?: string
 ): void {
   trackEvent(`view_${contentType}`)

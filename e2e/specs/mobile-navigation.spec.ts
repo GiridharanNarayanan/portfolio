@@ -34,7 +34,6 @@ test.describe('US6 - Mobile Touch Navigation', () => {
     await expect(page.locator('text=help')).toBeVisible();
     await expect(page.locator('text=writings')).toBeVisible();
     await expect(page.locator('text=projects')).toBeVisible();
-    await expect(page.locator('text=travel')).toBeVisible();
   });
 
   test('executes command when tapped in drawer', async ({ page }) => {

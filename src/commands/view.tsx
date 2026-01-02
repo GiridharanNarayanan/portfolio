@@ -1,7 +1,6 @@
 import type { Command } from '../types/Command.types';
 import { WritingDetail } from '../components/organisms/WritingDetail';
 import { ProjectDetail } from '../components/organisms/ProjectDetail';
-import { TravelDetail } from '../components/organisms/TravelDetail';
 
 /**
  * Unified view command - Display any content by slug
@@ -25,7 +24,7 @@ export const viewCommand: Command = {
               Example: <code className="text-terminal-accent">view sample-post</code>
             </p>
             <p className="text-terminal-muted mt-1">
-              Tip: Type <code className="text-terminal-accent">writings</code>, <code className="text-terminal-accent">projects</code>, or <code className="text-terminal-accent">travel</code> to see available content.
+              Tip: Type <code className="text-terminal-accent">writings</code> or <code className="text-terminal-accent">projects</code> to see available content.
             </p>
           </div>
         ),
@@ -50,12 +49,10 @@ function UnifiedContentView({ slug }: { slug: string }) {
   // Import content modules to check what exists
   const writingsModules = import.meta.glob('../content/writings/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
   const projectsModules = import.meta.glob('../content/projects/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
-  const travelModules = import.meta.glob('../content/travel/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
   
   // Check which content type has this slug
   const writingPath = Object.keys(writingsModules).find(path => path.includes(`/${slug}.md`));
   const projectPath = Object.keys(projectsModules).find(path => path.includes(`/${slug}.md`));
-  const travelPath = Object.keys(travelModules).find(path => path.includes(`/${slug}.md`));
   
   if (writingPath) {
     return <WritingDetail slug={slug} />;
@@ -63,10 +60,6 @@ function UnifiedContentView({ slug }: { slug: string }) {
   
   if (projectPath) {
     return <ProjectDetail slug={slug} />;
-  }
-  
-  if (travelPath) {
-    return <TravelDetail slug={slug} />;
   }
   
   // Content not found
@@ -79,7 +72,6 @@ function UnifiedContentView({ slug }: { slug: string }) {
       <ul className="mt-1 ml-4" style={{ color: 'var(--color-text-muted)' }}>
         <li><code style={{ color: 'var(--color-accent)' }}>writings</code> - View blog posts</li>
         <li><code style={{ color: 'var(--color-accent)' }}>projects</code> - View projects</li>
-        <li><code style={{ color: 'var(--color-accent)' }}>travel</code> - View travel stories</li>
       </ul>
     </div>
   );

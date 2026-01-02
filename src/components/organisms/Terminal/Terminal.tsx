@@ -22,7 +22,6 @@ import {
   setThemeToggle,
   writingsCommand,
   projectsCommand,
-  travelCommand,
   viewCommand,
   aboutCommand,
   contactCommand,
@@ -57,7 +56,6 @@ export function Terminal({ className }: TerminalProps) {
     // Content commands
     registerCommand(writingsCommand)
     registerCommand(projectsCommand)
-    registerCommand(travelCommand)
     registerCommand(viewCommand)
     registerCommand(aboutCommand)
     registerCommand(contactCommand)

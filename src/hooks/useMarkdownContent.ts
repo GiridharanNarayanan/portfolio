@@ -6,12 +6,10 @@ import type { ContentItem, ContentType, ContentFrontmatter } from '../types/Cont
 // Using eager loading to ensure files are found at build time
 const writingsModules = import.meta.glob('../content/writings/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
 const projectsModules = import.meta.glob('../content/projects/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
-const travelModules = import.meta.glob('../content/travel/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
 
 const contentModules: Record<ContentType, Record<string, string>> = {
   writings: writingsModules,
   projects: projectsModules,
-  travel: travelModules,
 };
 
 /**
