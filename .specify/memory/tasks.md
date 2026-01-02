@@ -115,49 +115,49 @@
 
 ### Command System Implementation
 
-- [ ] T030 [US2] Create `src/commands/registry.ts` - command registration and lookup
-- [ ] T031 [US2] Create `src/commands/types.ts` - re-export from types for convenience
-- [ ] T032 [P] [US2] Create `src/commands/help.ts` - list all available commands
-- [ ] T033 [P] [US2] Create `src/commands/clear.ts` - clear terminal output
-- [ ] T034 [P] [US2] Create `src/commands/back.ts` - navigation stack pop
-- [ ] T035 [P] [US2] Create `src/commands/theme.ts` - toggle dark/light theme
-- [ ] T036 [US2] Create `src/hooks/useCommands.ts` - command execution hook
+- [X] T030 [US2] Create `src/commands/registry.ts` - command registration and lookup
+- [X] T031 [US2] Create `src/commands/types.ts` - re-export from types for convenience
+- [X] T032 [P] [US2] Create `src/commands/help.ts` - list all available commands
+- [X] T033 [P] [US2] Create `src/commands/clear.ts` - clear terminal output
+- [X] T034 [P] [US2] Create `src/commands/back.ts` - navigation stack pop
+- [X] T035 [P] [US2] Create `src/commands/theme.ts` - toggle dark/light theme
+- [X] T036 [US2] Create `src/hooks/useCommands.ts` - command execution hook
 
 ### Terminal UI Implementation
 
-- [ ] T037 [US2] Create `src/components/atoms/Cursor/Cursor.tsx` - blinking cursor animation
-- [ ] T038 [P] [US2] Create `src/components/atoms/Cursor/Cursor.test.tsx`
-- [ ] T039 [US2] Create `src/components/atoms/CommandPrompt/CommandPrompt.tsx` - `$ >` prompt styling
-- [ ] T040 [US2] Create `src/hooks/useCommandHistory.ts` - arrow key history navigation (session only)
-- [ ] T041 [US2] Create `src/components/molecules/CommandInput/CommandInput.tsx`:
+- [X] T037 [US2] Create `src/components/atoms/Cursor/Cursor.tsx` - blinking cursor animation
+- [X] T038 [P] [US2] Create `src/components/atoms/Cursor/Cursor.test.tsx`
+- [X] T039 [US2] Create `src/components/atoms/CommandPrompt/CommandPrompt.tsx` - `$ >` prompt styling
+- [X] T040 [US2] Create `src/hooks/useCommandHistory.ts` - arrow key history navigation (session only)
+- [X] T041 [US2] Create `src/components/molecules/CommandInput/CommandInput.tsx`:
   - Text input with terminal styling
   - Blinking cursor integration
   - Arrow key history navigation
   - Enter to execute
-- [ ] T042 [P] [US2] Create `src/components/molecules/CommandInput/CommandInput.test.tsx`
-- [ ] T043 [US2] Create `src/components/molecules/CommandSuggestions/CommandSuggestions.tsx` - autocomplete dropdown
-- [ ] T044 [US2] Create `src/components/organisms/StickyCommandBar/StickyCommandBar.tsx`:
+- [X] T042 [P] [US2] Create `src/components/molecules/CommandInput/CommandInput.test.tsx`
+- [X] T043 [US2] Create `src/components/molecules/CommandSuggestions/CommandSuggestions.tsx` - autocomplete dropdown
+- [X] T044 [US2] Create `src/components/organisms/StickyCommandBar/StickyCommandBar.tsx`:
   - Fixed header position
   - Available commands display
   - `portfolio@terminal:~` header prompt
-- [ ] T045 [US2] Create `src/components/organisms/Terminal/Terminal.tsx`:
+- [X] T045 [US2] Create `src/components/organisms/Terminal/Terminal.tsx`:
   - Main application shell
   - State: history, currentOutput, context
   - Clear previous output on new command
   - Manage navigation stack
 - [ ] T046 [P] [US2] Create `src/components/organisms/Terminal/Terminal.test.tsx`
-- [ ] T047 [US2] Create `src/components/organisms/Terminal/useTerminal.ts` - terminal state management hook
+- [X] T047 [US2] Create `src/components/organisms/Terminal/useTerminal.ts` - terminal state management hook
 
 ### Integration
 
-- [ ] T048 [US2] Update `src/App.tsx`:
+- [X] T048 [US2] Update `src/App.tsx`:
   - Integrate ThemeProvider
   - Integrate StartupScreen → Terminal flow
   - Wire up command system
 
 ### E2E Test for User Story 2
 
-- [ ] T049 [US2] Create `e2e/specs/desktop-navigation.spec.ts`:
+- [X] T049 [US2] Create `e2e/specs/desktop-navigation.spec.ts`:
   - Type `help` → verify command list
   - Type `clear` → verify output clears
   - Type `theme` → verify theme toggles
