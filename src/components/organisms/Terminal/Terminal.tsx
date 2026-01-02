@@ -14,7 +14,6 @@ import { useCommandHistory } from '../../../hooks/useCommandHistory'
 import { useCommands } from '../../../hooks/useCommands'
 import { useMobileDetect } from '../../../hooks/useMobileDetect'
 import { 
-  getAvailableCommands,
   registerCommand,
   helpCommand,
   clearCommand,
@@ -117,8 +116,6 @@ export function Terminal({ className }: TerminalProps) {
     },
     [execute, commandHistory, terminalState]
   )
-
-  const availableCommands = getAvailableCommands(terminalState.context)
 
   return (
     <div

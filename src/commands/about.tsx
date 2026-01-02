@@ -4,12 +4,12 @@ import aboutContent from '../content/static/about.json'
 import type { AboutContent } from '../types/About.types'
 
 /**
- * about command - Display the About page with bio, resume, and career timeline
+ * whoami command - Display the About page with bio, resume, and career timeline
  */
 export const aboutCommand: Command = {
-  name: 'about',
+  name: 'whoami',
   description: 'Learn more about me, my resume, and career history',
-  aliases: ['me', 'bio', 'whoami'],
+  aliases: ['about', 'me', 'bio'],
   handler: () => ({
     success: true,
     output: <AboutView content={aboutContent as AboutContent} />,

@@ -11,6 +11,19 @@ import { getAvailableCommands } from './registry'
  */
 function renderHelpOutput(context: CommandContext): React.ReactNode {
   const commands = getAvailableCommands(context)
+  // Filter out standard utility commands and easter eggs
+  const filteredCommands = commands.filter(cmd => !['help', 'clear', 'spyonhim'].includes(cmd.name))
+  
+  // Sort in specific order
+  const commandOrder = ['whoami', 'writings', 'projects', 'view', 'theme']
+  const displayCommands = filteredCommands.sort((a, b) => {
+    const aIndex = commandOrder.indexOf(a.name)
+    const bIndex = commandOrder.indexOf(b.name)
+    // If not in order list, put at end
+    const aOrder = aIndex === -1 ? 999 : aIndex
+    const bOrder = bIndex === -1 ? 999 : bIndex
+    return aOrder - bOrder
+  })
   
   return (
     <div className="font-mono space-y-4">
@@ -18,7 +31,7 @@ function renderHelpOutput(context: CommandContext): React.ReactNode {
         Available Commands:
       </p>
       <div className="space-y-2">
-        {commands.map((cmd) => (
+        {displayCommands.map((cmd) => (
           <div key={cmd.name} className="flex gap-4">
             <span 
               className="min-w-[120px]"
