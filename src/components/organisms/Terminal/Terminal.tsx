@@ -21,6 +21,13 @@ import {
   backCommand,
   themeCommand,
   setThemeToggle,
+  writingsCommand,
+  projectsCommand,
+  travelCommand,
+  viewCommand,
+  aboutCommand,
+  contactCommand,
+  spyonhimCommand,
 } from '../../../commands'
 import { useTheme } from '../../../hooks/useTheme'
 
@@ -42,11 +49,21 @@ export function Terminal({ className }: TerminalProps) {
 
   // Initialize commands on mount
   useEffect(() => {
+    // Core commands
     registerCommand(helpCommand)
     registerCommand(clearCommand)
     registerCommand(backCommand)
     registerCommand(themeCommand)
     setThemeToggle(toggleTheme)
+    
+    // Content commands
+    registerCommand(writingsCommand)
+    registerCommand(projectsCommand)
+    registerCommand(travelCommand)
+    registerCommand(viewCommand)
+    registerCommand(aboutCommand)
+    registerCommand(contactCommand)
+    registerCommand(spyonhimCommand)
   }, [toggleTheme])
 
   // Update context theme when theme changes
@@ -71,9 +88,9 @@ export function Terminal({ className }: TerminalProps) {
         liveRegionRef.current.textContent = `Command ${input} executed`
       }
 
+      // Clear previous output if requested
       if (result.clearOutput) {
         terminalState.clearOutput()
-        return
       }
 
       if (result.success) {
@@ -88,12 +105,14 @@ export function Terminal({ className }: TerminalProps) {
         }
       }
 
-      // Add to output history
-      terminalState.addOutput({
-        input,
-        timestamp: Date.now(),
-        result,
-      })
+      // Add to output history (only if not clearing)
+      if (!result.clearOutput) {
+        terminalState.addOutput({
+          input,
+          timestamp: Date.now(),
+          result,
+        })
+      }
 
       // Scroll to new content
       setTimeout(() => {
