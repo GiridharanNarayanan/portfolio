@@ -3,11 +3,15 @@ import matter from 'gray-matter';
 import type { ContentItem, ContentType, ContentFrontmatter } from '../types/Content.types';
 
 // Vite's import.meta.glob for markdown files by category
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const contentModules: Record<ContentType, Record<string, () => Promise<any>>> = {
-  writings: import.meta.glob('/src/content/writings/*.md', { query: '?raw', import: 'default' }),
-  projects: import.meta.glob('/src/content/projects/*.md', { query: '?raw', import: 'default' }),
-  travel: import.meta.glob('/src/content/travel/*.md', { query: '?raw', import: 'default' }),
+// Using eager loading to ensure files are found at build time
+const writingsModules = import.meta.glob('../content/writings/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+const projectsModules = import.meta.glob('../content/projects/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+const travelModules = import.meta.glob('../content/travel/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+
+const contentModules: Record<ContentType, Record<string, string>> = {
+  writings: writingsModules,
+  projects: projectsModules,
+  travel: travelModules,
 };
 
 /**
@@ -59,7 +63,7 @@ export function useMarkdownContent(type: ContentType): UseMarkdownContentResult 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadContent = useCallback(async () => {
+  const loadContent = useCallback(() => {
     setLoading(true);
     setError(null);
 
@@ -73,18 +77,15 @@ export function useMarkdownContent(type: ContentType): UseMarkdownContentResult 
         return;
       }
 
-      const loadedItems = await Promise.all(
-        entries.map(async ([path, loader]) => {
-          try {
-            const rawContent = await loader();
-            const slug = extractSlug(path);
-            return parseMarkdownFile(rawContent, slug, type);
-          } catch (err) {
-            console.error(`Failed to load ${path}:`, err);
-            return null;
-          }
-        })
-      );
+      const loadedItems = entries.map(([path, rawContent]) => {
+        try {
+          const slug = extractSlug(path);
+          return parseMarkdownFile(rawContent, slug, type);
+        } catch (err) {
+          console.error(`Failed to load ${path}:`, err);
+          return null;
+        }
+      });
 
       // Filter out failed loads and unpublished items, sort by date descending
       const validItems = loadedItems
