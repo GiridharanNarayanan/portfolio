@@ -454,10 +454,10 @@
 
 ### Accessibility
 
-- [ ] T097 [POLISH] Add ARIA labels to all interactive components
-- [ ] T098 [POLISH] Add ARIA live region for command output announcements
-- [ ] T099 [POLISH] Verify keyboard navigation through all commands
-- [ ] T100 [POLISH] Add focus management for command input
+- [X] T097 [POLISH] Add ARIA labels to all interactive components
+- [X] T098 [POLISH] Add ARIA live region for command output announcements
+- [X] T099 [POLISH] Verify keyboard navigation through all commands
+- [X] T100 [POLISH] Add focus management for command input
 - [ ] T101 [POLISH] Test with screen reader (manual)
 
 ### Performance
@@ -469,9 +469,9 @@
 
 ### Error Handling
 
-- [ ] T106 [POLISH] Add error boundary component
-- [ ] T107 [POLISH] Add image fallback placeholders
-- [ ] T108 [POLISH] Add loading states for content
+- [X] T106 [POLISH] Add error boundary component
+- [X] T107 [POLISH] Add image fallback placeholders
+- [X] T108 [POLISH] Add loading states for content
 
 **Checkpoint**: ✅ Lighthouse Performance ≥90, Accessibility ≥90
 

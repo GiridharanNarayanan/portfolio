@@ -3,11 +3,12 @@
  * Main application shell with command input and output
  */
 
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { cn } from '../../../utils/cn'
 import { CommandInput } from '../../molecules/CommandInput'
 import { StickyCommandBar } from '../StickyCommandBar'
 import { MobileNavigation } from '../MobileNavigation'
+import { ErrorBoundary } from '../../atoms/ErrorBoundary'
 import { useTerminal } from './useTerminal'
 import { useCommandHistory } from '../../../hooks/useCommandHistory'
 import { useCommands } from '../../../hooks/useCommands'
@@ -36,6 +37,8 @@ export function Terminal({ className }: TerminalProps) {
   const terminalState = useTerminal()
   const commandHistory = useCommandHistory()
   const { isMobile } = useMobileDetect()
+  const mainContentRef = useRef<HTMLElement>(null)
+  const liveRegionRef = useRef<HTMLDivElement>(null)
 
   // Initialize commands on mount
   useEffect(() => {
@@ -63,6 +66,11 @@ export function Terminal({ className }: TerminalProps) {
 
       const result = await execute(input)
 
+      // Announce command execution for screen readers
+      if (liveRegionRef.current) {
+        liveRegionRef.current.textContent = `Command ${input} executed`
+      }
+
       if (result.clearOutput) {
         terminalState.clearOutput()
         return
@@ -74,6 +82,10 @@ export function Terminal({ className }: TerminalProps) {
       } else {
         terminalState.setError(result.error || 'Unknown error')
         terminalState.setOutput(null)
+        // Announce error for screen readers
+        if (liveRegionRef.current) {
+          liveRegionRef.current.textContent = `Error: ${result.error || 'Unknown error'}`
+        }
       }
 
       // Add to output history
@@ -82,6 +94,14 @@ export function Terminal({ className }: TerminalProps) {
         timestamp: Date.now(),
         result,
       })
+
+      // Scroll to new content
+      setTimeout(() => {
+        mainContentRef.current?.scrollTo({
+          top: mainContentRef.current.scrollHeight,
+          behavior: 'smooth',
+        })
+      }, 100)
     },
     [execute, commandHistory, terminalState]
   )
@@ -92,12 +112,37 @@ export function Terminal({ className }: TerminalProps) {
     <div
       className={cn('flex flex-col min-h-screen', className)}
       style={{ backgroundColor: 'var(--color-bg)' }}
+      role="application"
+      aria-label="Terminal Portfolio"
     >
+      {/* Skip link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-terminal-accent focus:text-terminal-bg focus:px-4 focus:py-2 focus:rounded"
+      >
+        Skip to main content
+      </a>
+
+      {/* ARIA live region for command output announcements */}
+      <div
+        ref={liveRegionRef}
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      />
+
       {/* Sticky header */}
       <StickyCommandBar commands={availableCommands} />
 
       {/* Main content area */}
-      <main className="flex-1 p-4 overflow-auto">
+      <main 
+        id="main-content"
+        ref={mainContentRef}
+        className="flex-1 p-4 overflow-auto"
+        tabIndex={-1}
+        aria-label="Terminal output"
+      >
+        <ErrorBoundary>
         {/* Output history */}
         <div className="space-y-4 mb-4">
           {terminalState.outputHistory.map((entry, index) => (
@@ -140,6 +185,7 @@ export function Terminal({ className }: TerminalProps) {
             Error: {terminalState.error}
           </div>
         )}
+        </ErrorBoundary>
       </main>
 
       {/* Command input - desktop vs mobile */}
