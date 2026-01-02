@@ -65,9 +65,9 @@
 
 **Purpose**: Dark/light theme infrastructure required by all UI components
 
-- [ ] T023 [INFRA] Create `src/hooks/useTheme.ts` - theme context and toggle hook
-- [ ] T024 [INFRA] Create `src/components/atoms/ThemeProvider/ThemeProvider.tsx` - context provider with class-based switching
-- [ ] T025 [INFRA] Create `src/components/atoms/ThemeProvider/index.ts` - barrel export
+- [X] T023 [INFRA] Create `src/hooks/useTheme.ts` - theme context and toggle hook
+- [X] T024 [INFRA] Create `src/components/atoms/ThemeProvider/ThemeProvider.tsx` - context provider with class-based switching
+- [X] T025 [INFRA] Create `src/components/atoms/ThemeProvider/index.ts` - barrel export
 
 **Checkpoint**: ✅ Theme toggle working, CSS variables switch correctly
 
