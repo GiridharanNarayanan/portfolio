@@ -21,7 +21,7 @@ export interface StartupScreenProps {
 export function StartupScreen({ onActivate, className }: StartupScreenProps) {
   const { isActive, showIdlePrompt } = useStartupScreen({
     onActivate,
-    idlePromptDelay: 3000,
+    idlePromptDelay: 500,
   })
 
   if (!isActive) {
@@ -92,7 +92,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
         {/* Idle prompt */}
         <div
           className={cn(
-            'text-center mt-12 font-mono transition-opacity duration-500',
+            'text-center mt-6 font-mono transition-opacity duration-500',
             showIdlePrompt ? 'opacity-100' : 'opacity-0'
           )}
           style={{ color: 'var(--color-accent-secondary)' }}
@@ -101,15 +101,6 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
           <span className="animate-pulse">
             {'>'} Press any key to continue...
           </span>
-        </div>
-
-        {/* Decorative cursor */}
-        <div
-          className="absolute bottom-4 right-8 font-mono"
-          style={{ color: 'var(--color-accent)' }}
-          aria-hidden="true"
-        >
-          <span className="inline-block w-3 h-5 animate-pulse" style={{ backgroundColor: 'var(--color-accent)' }} />
         </div>
       </div>
     </div>
