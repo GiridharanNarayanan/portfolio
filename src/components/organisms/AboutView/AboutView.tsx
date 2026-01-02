@@ -136,7 +136,8 @@ export function AboutView({ content }: AboutViewProps) {
       {/* Help tip */}
       <div className="mt-8 pt-4 border-t border-terminal-border text-terminal-muted text-sm">
         <span className="text-terminal-accent">Tip:</span> Type{' '}
-        <code className="text-terminal-accent">help</code> to see other available commands.
+        <code className="text-terminal-accent">ls</code> to explore, or{' '}
+        <code className="text-terminal-accent">cd writings</code> to see my articles.
       </div>
     </div>
   )

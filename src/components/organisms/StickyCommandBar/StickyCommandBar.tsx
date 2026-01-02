@@ -6,6 +6,8 @@
 import { cn } from '../../../utils/cn'
 
 export interface StickyCommandBarProps {
+  /** Current directory path */
+  currentPath?: string
   /** Custom class name */
   className?: string
 }
@@ -13,7 +15,7 @@ export interface StickyCommandBarProps {
 /**
  * Sticky header bar with terminal prompt
  */
-export function StickyCommandBar({ className }: StickyCommandBarProps) {
+export function StickyCommandBar({ currentPath = '~', className }: StickyCommandBarProps) {
   return (
     <header
       className={cn(
@@ -29,10 +31,12 @@ export function StickyCommandBar({ className }: StickyCommandBarProps) {
     >
       {/* Terminal prompt */}
       <div className="flex items-center gap-2">
-        <span style={{ color: 'var(--color-accent)' }}>portfolio</span>
+        <span style={{ color: 'var(--color-accent)' }}>girid</span>
         <span style={{ color: 'var(--color-text-muted)' }}>@</span>
-        <span style={{ color: 'var(--color-accent-secondary)' }}>terminal</span>
-        <span style={{ color: 'var(--color-text-muted)' }}>:~$</span>
+        <span style={{ color: 'var(--color-accent-secondary)' }}>portfolio</span>
+        <span style={{ color: 'var(--color-text-muted)' }}>:</span>
+        <span style={{ color: 'var(--color-accent)' }}>{currentPath}</span>
+        <span style={{ color: 'var(--color-text-muted)' }}>$</span>
       </div>
     </header>
   )

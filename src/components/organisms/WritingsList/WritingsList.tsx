@@ -58,12 +58,11 @@ export function WritingsList() {
 
       {/* Writings Grid */}
       <div className="space-y-4">
-        {items.map((item: ContentItem, idx: number) => (
+        {items.map((item: ContentItem) => (
           <ContentCard
             key={item.slug}
             item={item}
-            index={idx + 1}
-            commandHint={`read ${idx + 1}`}
+            commandHint={`cat ${item.slug}.md`}
           />
         ))}
       </div>
@@ -71,8 +70,8 @@ export function WritingsList() {
       {/* Help hint */}
       <div className="mt-6 pt-4 border-t border-terminal-border text-sm text-terminal-muted">
         <span className="text-terminal-secondary">Tip:</span> Type{' '}
-        <code className="px-1 bg-terminal-muted/30 rounded">read &lt;#&gt;</code>{' '}
-        to read an article (e.g., <code className="px-1 bg-terminal-muted/30 rounded">read 1</code>)
+        <code className="px-1 bg-terminal-muted/30 rounded">cat &lt;filename&gt;</code>{' '}
+        to read a file, or <code className="px-1 bg-terminal-muted/30 rounded">cd ..</code> to go back
       </div>
     </div>
   );

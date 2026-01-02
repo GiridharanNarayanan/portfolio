@@ -11,11 +11,11 @@ import { getAvailableCommands } from './registry'
  */
 function renderHelpOutput(context: CommandContext): React.ReactNode {
   const commands = getAvailableCommands(context)
-  // Filter out standard utility commands and easter eggs
+  // Filter out help, clear, and easter eggs
   const filteredCommands = commands.filter(cmd => !['help', 'clear', 'spyonhim'].includes(cmd.name))
   
-  // Sort in specific order
-  const commandOrder = ['whoami', 'writings', 'projects', 'view', 'theme']
+  // Sort in specific order - filesystem commands first, then utilities
+  const commandOrder = ['ls', 'cd', 'cat', 'pwd', 'tree', 'theme']
   const displayCommands = filteredCommands.sort((a, b) => {
     const aIndex = commandOrder.indexOf(a.name)
     const bIndex = commandOrder.indexOf(b.name)
@@ -34,7 +34,7 @@ function renderHelpOutput(context: CommandContext): React.ReactNode {
         {displayCommands.map((cmd) => (
           <div key={cmd.name} className="flex gap-4">
             <span 
-              className="min-w-[120px]"
+              className="min-w-[140px]"
               style={{ color: 'var(--color-accent-secondary)' }}
             >
               {cmd.usage || cmd.name}
@@ -46,7 +46,8 @@ function renderHelpOutput(context: CommandContext): React.ReactNode {
         ))}
       </div>
       <p className="mt-4" style={{ color: 'var(--color-text-muted)' }}>
-        Type a command and press Enter to execute.
+        Tip: Navigate with <span className="text-terminal-accent">cd</span>, 
+        read files with <span className="text-terminal-accent">cat</span>
       </p>
     </div>
   )
@@ -55,7 +56,7 @@ function renderHelpOutput(context: CommandContext): React.ReactNode {
 export const helpCommand: Command = {
   name: 'help',
   aliases: ['h', '?'],
-  description: 'List all available commands',
+  description: 'Show available commands',
   handler: (_args, context) => {
     return {
       success: true,

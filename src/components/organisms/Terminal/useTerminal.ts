@@ -35,6 +35,7 @@ export interface UseTerminalReturn extends TerminalState {
 }
 
 const initialContext: CommandContext = {
+  currentPath: '~',
   currentView: 'home',
   history: ['home'],
   theme: 'dark',

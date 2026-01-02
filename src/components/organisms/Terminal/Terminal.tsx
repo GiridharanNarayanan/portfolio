@@ -13,16 +13,19 @@ import { useTerminal } from './useTerminal'
 import { useCommandHistory } from '../../../hooks/useCommandHistory'
 import { useCommands } from '../../../hooks/useCommands'
 import { useMobileDetect } from '../../../hooks/useMobileDetect'
+import { useFilesystem } from '../../../hooks/useFilesystem'
+import { setGlobalFilesystem } from '../../../context/FilesystemContext'
 import { 
   registerCommand,
   helpCommand,
   clearCommand,
   themeCommand,
   setThemeToggle,
-  writingsCommand,
-  projectsCommand,
-  viewCommand,
-  aboutCommand,
+  lsCommand,
+  cdCommand,
+  pwdCommand,
+  treeCommand,
+  catCommand,
   spyonhimCommand,
 } from '../../../commands'
 import { useTheme } from '../../../hooks/useTheme'
@@ -40,10 +43,19 @@ export function Terminal({ className }: TerminalProps) {
   const terminalState = useTerminal()
   const commandHistory = useCommandHistory()
   const { isMobile } = useMobileDetect()
+  const filesystem = useFilesystem()
   const mainContentRef = useRef<HTMLElement>(null)
   const liveRegionRef = useRef<HTMLDivElement>(null)
   const latestOutputRef = useRef<HTMLDivElement>(null)
   const [commandsReady, setCommandsReady] = useState(false)
+
+  // Set global filesystem for commands to access
+  useEffect(() => {
+    if (!filesystem.loading) {
+      setGlobalFilesystem(filesystem)
+    }
+    return () => setGlobalFilesystem(null)
+  }, [filesystem, filesystem.loading])
 
   // Initialize commands on mount
   useEffect(() => {
@@ -53,15 +65,21 @@ export function Terminal({ className }: TerminalProps) {
     registerCommand(themeCommand)
     setThemeToggle(toggleTheme)
     
-    // Content commands
-    registerCommand(writingsCommand)
-    registerCommand(projectsCommand)
-    registerCommand(viewCommand)
-    registerCommand(aboutCommand)
+    // Filesystem commands
+    registerCommand(lsCommand)
+    registerCommand(cdCommand)
+    registerCommand(pwdCommand)
+    registerCommand(treeCommand)
+    registerCommand(catCommand)
     registerCommand(spyonhimCommand)
     
     setCommandsReady(true)
   }, [toggleTheme])
+
+  // Sync filesystem path with context
+  useEffect(() => {
+    terminalState.updateContext({ currentPath: filesystem.currentPath })
+  }, [filesystem.currentPath, terminalState.updateContext])
 
   // Update context theme when theme changes
   useEffect(() => {
@@ -125,12 +143,12 @@ export function Terminal({ className }: TerminalProps) {
     [execute, commandHistory, terminalState]
   )
 
-  // Auto-execute whoami on first load for immediate content
+  // Auto-execute ls on first load to show home directory
   useEffect(() => {
-    if (commandsReady) {
-      handleCommand('whoami')
+    if (commandsReady && !filesystem.loading) {
+      handleCommand('ls')
     }
-  }, [commandsReady]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [commandsReady, filesystem.loading]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -156,7 +174,7 @@ export function Terminal({ className }: TerminalProps) {
       />
 
       {/* Sticky header */}
-      <StickyCommandBar />
+      <StickyCommandBar currentPath={filesystem.currentPath} />
 
       {/* Main content area */}
       <main 
@@ -172,7 +190,7 @@ export function Terminal({ className }: TerminalProps) {
           {terminalState.outputHistory.map((entry, index) => (
             <div 
               key={index} 
-              className="space-y-2"
+              className="space-y-2 scroll-mt-16"
               ref={index === terminalState.outputHistory.length - 1 ? latestOutputRef : null}
             >
               {/* Command line */}
@@ -231,6 +249,7 @@ export function Terminal({ className }: TerminalProps) {
             onSubmit={handleCommand}
             onHistoryUp={commandHistory.navigateUp}
             onHistoryDown={commandHistory.navigateDown}
+            currentPath={filesystem.currentPath}
             autoFocus
           />
         </div>

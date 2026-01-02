@@ -15,6 +15,8 @@ export interface CommandInputProps {
   onHistoryUp?: () => string | null
   /** Navigate down in history */
   onHistoryDown?: () => string | null
+  /** Current directory path */
+  currentPath?: string
   /** Whether input is disabled */
   disabled?: boolean
   /** Placeholder text */
@@ -32,8 +34,9 @@ export function CommandInput({
   onSubmit,
   onHistoryUp,
   onHistoryDown,
+  currentPath = '~',
   disabled = false,
-  placeholder = 'Type "help" for available commands...',
+  placeholder = 'Type "ls" to explore or "help" for commands...',
   autoFocus = true,
   className,
 }: CommandInputProps) {
@@ -100,7 +103,7 @@ export function CommandInput({
       )}
       style={{ backgroundColor: 'var(--color-bg-secondary)' }}
     >
-      <CommandPrompt isActive={isFocused} />
+      <CommandPrompt prompt={`${currentPath} $ >`} isActive={isFocused} />
       
       <div className="flex-1 flex items-center">
         <input

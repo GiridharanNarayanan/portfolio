@@ -21,6 +21,8 @@ export interface ParsedCommand {
  * Current navigation/execution context for commands
  */
 export interface CommandContext {
+  /** Current directory path in virtual filesystem */
+  currentPath: string
   /** Current content type being viewed */
   currentView: 'home' | 'writings' | 'projects' | 'about' | 'detail'
   /** ID of content being viewed (for detail views) */

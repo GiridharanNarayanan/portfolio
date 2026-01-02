@@ -11,4 +11,12 @@ export { projectsCommand } from './projects'
 export { viewCommand } from './view'
 export { aboutCommand } from './about'
 export { spyonhimCommand } from './spyonhim'
+
+// Filesystem commands
+export { lsCommand } from './ls'
+export { cdCommand } from './cd'
+export { pwdCommand } from './pwd'
+export { treeCommand } from './tree'
+export { catCommand } from './cat'
+
 export type * from './types'
