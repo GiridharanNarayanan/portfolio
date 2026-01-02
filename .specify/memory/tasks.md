@@ -238,24 +238,24 @@
 
 ### Sample Content
 
-- [ ] T059 [US4] Create `src/content/projects/sample-project.md` with tech stack and links
+- [X] T059 [US4] Create `src/content/projects/sample-project.md` with tech stack and links
 
 ### Implementation
 
-- [ ] T060 [US4] Create `src/commands/projects.ts`:
+- [X] T060 [US4] Create `src/commands/projects.ts`:
   - `projects` command → ProjectsList component
   - `view [name]` command → ProjectDetail component
-- [ ] T061 [US4] Create `src/components/atoms/Tag/Tag.tsx` - tech stack tag styling
-- [ ] T062 [US4] Create `src/components/organisms/ProjectsList/ProjectsList.tsx`:
+- [X] T061 [US4] Create `src/components/atoms/Tag/Tag.tsx` - tech stack tag styling
+- [X] T062 [US4] Create `src/components/organisms/ProjectsList/ProjectsList.tsx`:
   - Project cards with name, description, tech stack tags
-- [ ] T063 [US4] Create `src/components/organisms/ProjectDetail/ProjectDetail.tsx`:
+- [X] T063 [US4] Create `src/components/organisms/ProjectDetail/ProjectDetail.tsx`:
   - Full project info
   - External links (demo, repo) opening in new tabs
   - Images gallery
 
 ### E2E Test for User Story 4
 
-- [ ] T064 [US4] Create `e2e/specs/projects.spec.ts`:
+- [X] T064 [US4] Create `e2e/specs/projects.spec.ts`:
   - `projects` → verify list renders
   - `view sample-project` → verify details
   - Verify external links have target="_blank"
