@@ -144,7 +144,7 @@ export function Terminal({ className }: TerminalProps) {
       />
 
       {/* Sticky header */}
-      <StickyCommandBar commands={availableCommands} />
+      <StickyCommandBar />
 
       {/* Main content area */}
       <main 

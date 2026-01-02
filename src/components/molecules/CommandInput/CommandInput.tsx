@@ -33,7 +33,7 @@ export function CommandInput({
   onHistoryUp,
   onHistoryDown,
   disabled = false,
-  placeholder = 'Type a command...',
+  placeholder = 'Type "help" for available commands...',
   autoFocus = true,
   className,
 }: CommandInputProps) {
