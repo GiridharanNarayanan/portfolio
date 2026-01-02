@@ -272,22 +272,22 @@
 
 ### Sample Content
 
-- [ ] T065 [US5] Create `src/content/travel/sample-trip.md` with location and images
+- [X] T065 [US5] Create `src/content/travel/sample-trip.md` with location and images
 
 ### Implementation
 
-- [ ] T066 [US5] Create `src/commands/travel.ts`:
+- [X] T066 [US5] Create `src/commands/travel.ts`:
   - `travel` command → TravelList component
   - `explore [location]` command → TravelDetail component
-- [ ] T067 [US5] Create `src/components/organisms/TravelList/TravelList.tsx`:
+- [X] T067 [US5] Create `src/components/organisms/TravelList/TravelList.tsx`:
   - Travel entries with location, date, preview image
-- [ ] T068 [US5] Create `src/components/organisms/TravelDetail/TravelDetail.tsx`:
+- [X] T068 [US5] Create `src/components/organisms/TravelDetail/TravelDetail.tsx`:
   - Narrative content with images
   - Terminal-consistent image styling
 
 ### E2E Test for User Story 5
 
-- [ ] T069 [US5] Create `e2e/specs/travel.spec.ts`:
+- [X] T069 [US5] Create `e2e/specs/travel.spec.ts`:
   - `travel` → verify list renders
   - `explore sample-trip` → verify content
   - Verify images render
