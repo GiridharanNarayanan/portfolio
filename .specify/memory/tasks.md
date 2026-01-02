@@ -18,16 +18,16 @@
 
 **⚠️ CRITICAL**: All subsequent phases depend on this phase completing first
 
-- [ ] T001 [INFRA] Install Tailwind CSS and dependencies: `bun add -d tailwindcss postcss autoprefixer @tailwindcss/typography`
-- [ ] T002 [INFRA] Create `tailwind.config.js` with terminal theme colors from Figma design
-- [ ] T003 [INFRA] Create `postcss.config.js` for Tailwind processing
-- [ ] T004 [INFRA] Update `src/index.css` with Tailwind directives and CSS custom properties (dark/light theme)
-- [ ] T005 [P] [INFRA] Install production dependencies: `bun add react-markdown remark-gfm gray-matter class-variance-authority clsx openai`
-- [ ] T006 [P] [INFRA] Install testing dependencies: `bun add -d vitest @testing-library/react @testing-library/user-event jsdom @playwright/test`
-- [ ] T007 [INFRA] Create `vitest.config.ts` for unit/component testing
-- [ ] T008 [INFRA] Create `playwright.config.ts` for E2E testing
-- [ ] T009 [INFRA] Update `package.json` with test scripts: `test`, `test:e2e`, `test:coverage`
-- [ ] T010 [INFRA] Create project directory structure per plan.md:
+- [X] T001 [INFRA] Install Tailwind CSS and dependencies: `bun add -d tailwindcss postcss autoprefixer @tailwindcss/typography`
+- [X] T002 [INFRA] Create `tailwind.config.js` with terminal theme colors from Figma design
+- [X] T003 [INFRA] Create `postcss.config.js` for Tailwind processing
+- [X] T004 [INFRA] Update `src/index.css` with Tailwind directives and CSS custom properties (dark/light theme)
+- [X] T005 [P] [INFRA] Install production dependencies: `bun add react-markdown remark-gfm gray-matter class-variance-authority clsx openai`
+- [X] T006 [P] [INFRA] Install testing dependencies: `bun add -d vitest @testing-library/react @testing-library/user-event jsdom @playwright/test`
+- [X] T007 [INFRA] Create `vitest.config.ts` for unit/component testing
+- [X] T008 [INFRA] Create `playwright.config.ts` for E2E testing
+- [X] T009 [INFRA] Update `package.json` with test scripts: `test`, `test:e2e`, `test:coverage`
+- [X] T010 [INFRA] Create project directory structure per plan.md:
   - `src/components/{atoms,molecules,organisms,templates}/`
   - `src/hooks/`
   - `src/commands/`
@@ -35,10 +35,10 @@
   - `src/utils/`
   - `src/types/`
   - `e2e/{fixtures,specs}/`
-- [ ] T011 [P] [INFRA] Add monospace font (JetBrains Mono) to `public/fonts/` and configure in CSS
-- [ ] T012 [P] [INFRA] Create `.env.example` with `VITE_AZURE_OPENAI_ENDPOINT` and `VITE_AZURE_OPENAI_KEY` placeholders
-- [ ] T013 [P] [INFRA] Add Microsoft Clarity tracking script to `index.html` with project ID placeholder
-- [ ] T014 [P] [INFRA] Create `src/utils/clarity.ts` with Clarity initialization and custom event helpers
+- [X] T011 [P] [INFRA] Add monospace font (JetBrains Mono) to `public/fonts/` and configure in CSS
+- [X] T012 [P] [INFRA] Create `.env.example` with `VITE_AZURE_OPENAI_ENDPOINT` and `VITE_AZURE_OPENAI_KEY` placeholders
+- [X] T013 [P] [INFRA] Add Microsoft Clarity tracking script to `index.html` with project ID placeholder
+- [X] T014 [P] [INFRA] Create `src/utils/clarity.ts` with Clarity initialization and custom event helpers
 
 **Checkpoint**: ✅ Tailwind working, test runners configured, analytics ready, directory structure ready
 
@@ -48,14 +48,14 @@
 
 **Purpose**: Shared types and utility functions used across all features
 
-- [ ] T013 [P] [INFRA] Create `src/types/Command.types.ts` with Command, CommandContext, CommandResult interfaces
-- [ ] T014 [P] [INFRA] Create `src/types/Content.types.ts` with Writing, Project, Travel, Status frontmatter interfaces
-- [ ] T015 [P] [INFRA] Create `src/types/Theme.types.ts` with Theme type and context interface
-- [ ] T016 [INFRA] Create `src/utils/parseCommand.ts` - parse user input into command + args
-- [ ] T017 [INFRA] Create `src/utils/matchCommand.ts` - fuzzy match commands with suggestions
-- [ ] T018 [P] [INFRA] Create `src/utils/parseMarkdown.ts` - wrapper for gray-matter frontmatter parsing
-- [ ] T019 [P] [INFRA] Create `src/utils/formatDate.ts` - date formatting utilities
-- [ ] T020 [P] [INFRA] Create `src/utils/cn.ts` - clsx + tailwind-merge utility
+- [ ] T015 [P] [INFRA] Create `src/types/Command.types.ts` with Command, CommandContext, CommandResult interfaces
+- [ ] T016 [P] [INFRA] Create `src/types/Content.types.ts` with Writing, Project, Travel, Status frontmatter interfaces
+- [ ] T017 [P] [INFRA] Create `src/types/Theme.types.ts` with Theme type and context interface
+- [ ] T018 [INFRA] Create `src/utils/parseCommand.ts` - parse user input into command + args
+- [ ] T019 [INFRA] Create `src/utils/matchCommand.ts` - fuzzy match commands with suggestions
+- [ ] T020 [P] [INFRA] Create `src/utils/parseMarkdown.ts` - wrapper for gray-matter frontmatter parsing
+- [ ] T021 [P] [INFRA] Create `src/utils/formatDate.ts` - date formatting utilities
+- [ ] T022 [P] [INFRA] Create `src/utils/cn.ts` - clsx + tailwind-merge utility
 
 **Checkpoint**: ✅ Type-safe foundation ready for feature development
 
@@ -65,9 +65,9 @@
 
 **Purpose**: Dark/light theme infrastructure required by all UI components
 
-- [ ] T021 [INFRA] Create `src/hooks/useTheme.ts` - theme context and toggle hook
-- [ ] T022 [INFRA] Create `src/components/atoms/ThemeProvider/ThemeProvider.tsx` - context provider with class-based switching
-- [ ] T023 [INFRA] Create `src/components/atoms/ThemeProvider/index.ts` - barrel export
+- [ ] T023 [INFRA] Create `src/hooks/useTheme.ts` - theme context and toggle hook
+- [ ] T024 [INFRA] Create `src/components/atoms/ThemeProvider/ThemeProvider.tsx` - context provider with class-based switching
+- [ ] T025 [INFRA] Create `src/components/atoms/ThemeProvider/index.ts` - barrel export
 
 **Checkpoint**: ✅ Theme toggle working, CSS variables switch correctly
 

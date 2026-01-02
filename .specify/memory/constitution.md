@@ -140,6 +140,11 @@ e2e/
 
 ## Development Workflow
 
+
+### Version Control Principles
+- Commit granularity: **exactly one Git commit per phase/user story**.
+- Commit format: `{type}: [T###] {short summary}`; include references (link to spec section, plan step).
+
 ### Branch Strategy
 
 - `main` — production-ready, protected
