@@ -4,6 +4,18 @@
  */
 
 /**
+ * Contact link item
+ */
+export interface ContactLink {
+  /** Label for the link (e.g., 'Email', 'GitHub') */
+  label: string
+  /** URL or mailto link */
+  url: string
+  /** Icon name or emoji */
+  icon?: string
+}
+
+/**
  * Career entry for the timeline
  * Represents a job or education position
  */
@@ -36,6 +48,8 @@ export interface AboutContent {
   blurb: string
   /** Path to resume PDF (relative to /public) */
   resumeUrl: string
+  /** Contact links for reaching out */
+  contactLinks: ContactLink[]
   /** Career timeline entries (displayed in reverse chronological order) */
   careerTimeline: CareerEntry[]
 }

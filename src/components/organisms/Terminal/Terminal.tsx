@@ -24,7 +24,6 @@ import {
   projectsCommand,
   viewCommand,
   aboutCommand,
-  contactCommand,
   spyonhimCommand,
 } from '../../../commands'
 import { useTheme } from '../../../hooks/useTheme'
@@ -58,7 +57,6 @@ export function Terminal({ className }: TerminalProps) {
     registerCommand(projectsCommand)
     registerCommand(viewCommand)
     registerCommand(aboutCommand)
-    registerCommand(contactCommand)
     registerCommand(spyonhimCommand)
   }, [toggleTheme])
 

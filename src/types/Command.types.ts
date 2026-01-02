@@ -22,7 +22,7 @@ export interface ParsedCommand {
  */
 export interface CommandContext {
   /** Current content type being viewed */
-  currentView: 'home' | 'writings' | 'projects' | 'about' | 'contact' | 'detail'
+  currentView: 'home' | 'writings' | 'projects' | 'about' | 'detail'
   /** ID of content being viewed (for detail views) */
   contentId?: string
   /** Navigation history stack */

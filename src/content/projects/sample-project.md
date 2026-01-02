@@ -40,8 +40,7 @@ Navigate through the portfolio by typing commands like:
 - `help` - View available commands
 - `writings` - Browse blog posts
 - `projects` - View projects
-- `about` - Learn more about me
-- `contact` - Get in touch
+- `about` - Learn more about me and get in touch
 
 ### Dark/Light Theme Support
 

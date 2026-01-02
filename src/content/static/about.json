@@ -61,5 +61,27 @@
       "logo": "/logos/university.svg",
       "type": "education"
     }
+  ],
+  "contactLinks": [
+    {
+      "label": "Email",
+      "url": "mailto:hello@girid.dev",
+      "icon": "📧"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/girid",
+      "icon": "🐙"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/girid",
+      "icon": "💼"
+    },
+    {
+      "label": "Twitter/X",
+      "url": "https://twitter.com/girid_dev",
+      "icon": "🐦"
+    }
   ]
 }

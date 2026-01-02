@@ -74,6 +74,51 @@ export function AboutView({ content }: AboutViewProps) {
         <ResumeDownload url={content.resumeUrl} />
       </section>
 
+      {/* Contact Section */}
+      {content.contactLinks && content.contactLinks.length > 0 && (
+        <section className="mb-12" aria-labelledby="contact-section">
+          <h2 
+            id="contact-section" 
+            className="text-xl font-bold text-terminal-text mb-4 flex items-center gap-2"
+          >
+            <span className="text-terminal-accent">$</span> Get in Touch
+          </h2>
+          <p className="text-terminal-muted text-sm mb-4">
+            I'm always open to interesting conversations and collaboration opportunities.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            {content.contactLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.url}
+                target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+                rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                className="flex items-center gap-2 px-4 py-2 border border-terminal-border rounded hover:bg-terminal-muted/20 transition-colors text-terminal-text hover:text-terminal-accent"
+              >
+                {link.icon && <span>{link.icon}</span>}
+                <span>{link.label}</span>
+                {!link.url.startsWith('mailto:') && (
+                  <svg
+                    className="w-3 h-3 text-terminal-muted"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                )}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Career Timeline Section */}
       <section aria-labelledby="career-section">
         <h2 
