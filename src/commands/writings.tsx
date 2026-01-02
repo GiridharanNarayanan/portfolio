@@ -11,7 +11,6 @@ export const writingsCommand: Command = {
   handler: () => ({
     success: true,
     output: <WritingsList />,
-    clearOutput: true,
   }),
 };
 

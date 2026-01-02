@@ -13,6 +13,5 @@ export const aboutCommand: Command = {
   handler: () => ({
     success: true,
     output: <AboutView content={aboutContent as AboutContent} />,
-    clearOutput: true,
   }),
 }

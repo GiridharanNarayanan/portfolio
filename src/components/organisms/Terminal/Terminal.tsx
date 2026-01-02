@@ -42,6 +42,7 @@ export function Terminal({ className }: TerminalProps) {
   const { isMobile } = useMobileDetect()
   const mainContentRef = useRef<HTMLElement>(null)
   const liveRegionRef = useRef<HTMLDivElement>(null)
+  const latestOutputRef = useRef<HTMLDivElement>(null)
   const [commandsReady, setCommandsReady] = useState(false)
 
   // Initialize commands on mount
@@ -113,13 +114,13 @@ export function Terminal({ className }: TerminalProps) {
         })
       }
 
-      // Scroll to new content
+      // Scroll to the latest command entry
       setTimeout(() => {
-        mainContentRef.current?.scrollTo({
-          top: mainContentRef.current.scrollHeight,
+        latestOutputRef.current?.scrollIntoView({
           behavior: 'smooth',
+          block: 'start',
         })
-      }, 100)
+      }, 150)
     },
     [execute, commandHistory, terminalState]
   )
@@ -169,7 +170,11 @@ export function Terminal({ className }: TerminalProps) {
         {/* Output history */}
         <div className="space-y-4 mb-4">
           {terminalState.outputHistory.map((entry, index) => (
-            <div key={index} className="space-y-2">
+            <div 
+              key={index} 
+              className="space-y-2"
+              ref={index === terminalState.outputHistory.length - 1 ? latestOutputRef : null}
+            >
               {/* Command line */}
               <div className="font-mono flex items-center gap-2">
                 <span style={{ color: 'var(--color-accent-secondary)' }}>

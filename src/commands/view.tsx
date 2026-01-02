@@ -36,7 +36,6 @@ export const viewCommand: Command = {
     return {
       success: true,
       output: <UnifiedContentView identifier={identifier} />,
-      clearOutput: true,
       newContext: { currentView: 'detail', contentId: identifier },
     };
   },

@@ -11,7 +11,6 @@ export const projectsCommand: Command = {
   handler: () => ({
     success: true,
     output: <ProjectsList />,
-    clearOutput: true,
   }),
 };
 
