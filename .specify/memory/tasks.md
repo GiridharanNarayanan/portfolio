@@ -48,14 +48,14 @@
 
 **Purpose**: Shared types and utility functions used across all features
 
-- [ ] T015 [P] [INFRA] Create `src/types/Command.types.ts` with Command, CommandContext, CommandResult interfaces
-- [ ] T016 [P] [INFRA] Create `src/types/Content.types.ts` with Writing, Project, Travel, Status frontmatter interfaces
-- [ ] T017 [P] [INFRA] Create `src/types/Theme.types.ts` with Theme type and context interface
-- [ ] T018 [INFRA] Create `src/utils/parseCommand.ts` - parse user input into command + args
-- [ ] T019 [INFRA] Create `src/utils/matchCommand.ts` - fuzzy match commands with suggestions
-- [ ] T020 [P] [INFRA] Create `src/utils/parseMarkdown.ts` - wrapper for gray-matter frontmatter parsing
-- [ ] T021 [P] [INFRA] Create `src/utils/formatDate.ts` - date formatting utilities
-- [ ] T022 [P] [INFRA] Create `src/utils/cn.ts` - clsx + tailwind-merge utility
+- [X] T015 [P] [INFRA] Create `src/types/Command.types.ts` with Command, CommandContext, CommandResult interfaces
+- [X] T016 [P] [INFRA] Create `src/types/Content.types.ts` with Writing, Project, Travel, Status frontmatter interfaces
+- [X] T017 [P] [INFRA] Create `src/types/Theme.types.ts` with Theme type and context interface
+- [X] T018 [INFRA] Create `src/utils/parseCommand.ts` - parse user input into command + args
+- [X] T019 [INFRA] Create `src/utils/matchCommand.ts` - fuzzy match commands with suggestions
+- [X] T020 [P] [INFRA] Create `src/utils/parseMarkdown.ts` - wrapper for gray-matter frontmatter parsing
+- [X] T021 [P] [INFRA] Create `src/utils/formatDate.ts` - date formatting utilities
+- [X] T022 [P] [INFRA] Create `src/utils/cn.ts` - clsx + tailwind-merge utility
 
 **Checkpoint**: ✅ Type-safe foundation ready for feature development
 
