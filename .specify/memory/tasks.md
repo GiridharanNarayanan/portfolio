@@ -36,9 +36,11 @@
   - `src/types/`
   - `e2e/{fixtures,specs}/`
 - [ ] T011 [P] [INFRA] Add monospace font (JetBrains Mono) to `public/fonts/` and configure in CSS
-- [ ] T012 [P] [INFRA] Create `.env.example` with `VITE_OPENAI_API_KEY` placeholder
+- [ ] T012 [P] [INFRA] Create `.env.example` with `VITE_AZURE_OPENAI_ENDPOINT` and `VITE_AZURE_OPENAI_KEY` placeholders
+- [ ] T013 [P] [INFRA] Add Microsoft Clarity tracking script to `index.html` with project ID placeholder
+- [ ] T014 [P] [INFRA] Create `src/utils/clarity.ts` with Clarity initialization and custom event helpers
 
-**Checkpoint**: ✅ Tailwind working, test runners configured, directory structure ready
+**Checkpoint**: ✅ Tailwind working, test runners configured, analytics ready, directory structure ready
 
 ---
 
@@ -421,24 +423,24 @@
 
 ### Content
 
-- [ ] T083 [POLISH] Create `src/content/status.md` with initial status frontmatter template
+- [ ] T092 [POLISH] Create `src/content/status.md` with initial status frontmatter template
 
 ### Implementation
 
-- [ ] T084 [POLISH] Create `src/commands/spyonhim.ts`:
+- [ ] T093 [POLISH] Create `src/commands/spyonhim.ts`:
   - Read `status.md` content
-  - Call OpenAI API with spy-report prompt
+  - Call Azure OpenAI API with spy-report prompt
   - 5-minute cache to reduce API calls
   - Fallback to raw status if API unavailable
-- [ ] T085 [POLISH] Create `src/components/organisms/SpyReport/SpyReport.tsx`:
+- [ ] T094 [POLISH] Create `src/components/organisms/SpyReport/SpyReport.tsx`:
   - Typing animation effect for dramatic reveal
   - Spy-report styled output
   - Terminal aesthetic maintained
-- [ ] T086 [POLISH] Create `src/utils/llmClient.ts` - OpenAI API wrapper with error handling
+- [ ] T095 [POLISH] Create `src/utils/azureOpenAI.ts` - Azure OpenAI API wrapper with error handling
 
 ### E2E Test for Easter Egg
 
-- [ ] T087 [POLISH] Create `e2e/specs/easter-egg.spec.ts`:
+- [ ] T096 [POLISH] Create `e2e/specs/easter-egg.spec.ts`:
   - `spyonhim` → verify response renders
   - Verify typing animation plays
 
@@ -452,24 +454,24 @@
 
 ### Accessibility
 
-- [ ] T088 [POLISH] Add ARIA labels to all interactive components
-- [ ] T089 [POLISH] Add ARIA live region for command output announcements
-- [ ] T090 [POLISH] Verify keyboard navigation through all commands
-- [ ] T091 [POLISH] Add focus management for command input
-- [ ] T092 [POLISH] Test with screen reader (manual)
+- [ ] T097 [POLISH] Add ARIA labels to all interactive components
+- [ ] T098 [POLISH] Add ARIA live region for command output announcements
+- [ ] T099 [POLISH] Verify keyboard navigation through all commands
+- [ ] T100 [POLISH] Add focus management for command input
+- [ ] T101 [POLISH] Test with screen reader (manual)
 
 ### Performance
 
-- [ ] T093 [P] [POLISH] Optimize images: convert to WebP, add lazy loading
-- [ ] T094 [P] [POLISH] Verify code splitting for routes/content
-- [ ] T095 [POLISH] Run Lighthouse audit, fix any issues below 90
-- [ ] T096 [POLISH] Run bundle analyzer, remove unused dependencies
+- [ ] T102 [P] [POLISH] Optimize images: convert to WebP, add lazy loading
+- [ ] T103 [P] [POLISH] Verify code splitting for routes/content
+- [ ] T104 [POLISH] Run Lighthouse audit, fix any issues below 90
+- [ ] T105 [POLISH] Run bundle analyzer, remove unused dependencies
 
 ### Error Handling
 
-- [ ] T097 [POLISH] Add error boundary component
-- [ ] T098 [POLISH] Add image fallback placeholders
-- [ ] T099 [POLISH] Add loading states for content
+- [ ] T106 [POLISH] Add error boundary component
+- [ ] T107 [POLISH] Add image fallback placeholders
+- [ ] T108 [POLISH] Add loading states for content
 
 **Checkpoint**: ✅ Lighthouse Performance ≥90, Accessibility ≥90
 
@@ -481,20 +483,20 @@
 
 ### Unit Tests
 
-- [ ] T100 [P] [TEST] Unit tests for `parseCommand.ts`
-- [ ] T101 [P] [TEST] Unit tests for `matchCommand.ts`
-- [ ] T102 [P] [TEST] Unit tests for `formatDate.ts`
-- [ ] T103 [P] [TEST] Unit tests for all command handlers
+- [ ] T109 [P] [TEST] Unit tests for `parseCommand.ts`
+- [ ] T110 [P] [TEST] Unit tests for `matchCommand.ts`
+- [ ] T111 [P] [TEST] Unit tests for `formatDate.ts`
+- [ ] T112 [P] [TEST] Unit tests for all command handlers
 
 ### Component Tests
 
-- [ ] T104 [P] [TEST] Component tests for ThemeProvider
-- [ ] T105 [P] [TEST] Component tests for ContentViewer
-- [ ] T106 [TEST] Component tests for Terminal state management
+- [ ] T113 [P] [TEST] Component tests for ThemeProvider
+- [ ] T114 [P] [TEST] Component tests for ContentViewer
+- [ ] T115 [TEST] Component tests for Terminal state management
 
 ### E2E Full Flow
 
-- [ ] T107 [TEST] Create `e2e/specs/full-flow.spec.ts`:
+- [ ] T116 [TEST] Create `e2e/specs/full-flow.spec.ts`:
   - Complete user journey from startup to content browsing
   - Theme toggle persistence within session
   - Cross-browser testing (Chrome, Firefox, Safari)
@@ -534,14 +536,6 @@ Phase 3 (Theme) ─────────────────────�
                                    ▼                         │
                               Phase 11                       │
                               (US7:About)                    │
-                                   │                         │
-                                   ▼                         │
-                              Phase 12                       │
-                              (Easter Egg)                   │
-                                   │                         │
-                                   ▼                         │
-                              Phase 13                       │
-                              (Polish)                       │
                                    │                         │
                                    ▼                         │
                               Phase 11b                      │
@@ -592,18 +586,18 @@ For fastest time-to-demo, complete in order:
 
 | Phase | Tasks | Priority |
 |-------|-------|----------|
-| Setup & Infrastructure | T001-T012 | P0 (Blocking) |
-| Types & Utilities | T013-T020 | P0 (Blocking) |
-| Theme System | T021-T023 | P0 (Blocking) |
-| US1: Startup | T024-T029 | P1 |
-| US2: Desktop Nav | T030-T049 | P1 |
-| Content Infrastructure | T050-T053 | P1 |
-| US3: Writings | T054-T058 | P1 |
-| US4: Projects | T059-T064 | P2 |
-| US5: Travel | T065-T069 | P2 |
-| US6: Mobile | T070-T076 | P1 |
-| US7: About | T077-T087 | P2 |
-| US8: Contact | T088-T091 | P2 |
+| Setup & Infrastructure | T001-T014 | P0 (Blocking) |
+| Types & Utilities | T015-T022 | P0 (Blocking) |
+| Theme System | T023-T025 | P0 (Blocking) |
+| US1: Startup | T026-T031 | P1 |
+| US2: Desktop Nav | T032-T051 | P1 |
+| Content Infrastructure | T052-T055 | P1 |
+| US3: Writings | T056-T060 | P1 |
+| US4: Projects | T061-T066 | P2 |
+| US5: Travel | T067-T071 | P2 |
+| US6: Mobile | T072-T078 | P1 |
+| US7: About | T079-T089 | P2 |
+| US8: Contact | T090-T091 | P2 |
 | Easter Egg | T092-T096 | P3 |
 | Polish | T097-T108 | P2 |
 | Testing | T109-T116 | P1 |

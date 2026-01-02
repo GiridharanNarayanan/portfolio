@@ -19,6 +19,9 @@ Build an immersive terminal-styled portfolio website showcasing writings, projec
 | **E2E Testing** | Playwright |
 | **Unit Testing** | Vitest + React Testing Library |
 | **Content** | Markdown files with YAML frontmatter |
+| **Analytics** | Microsoft Clarity (free, session recordings + heatmaps) |
+| **LLM Provider** | Azure OpenAI |
+| **Hosting** | Azure Static Web Apps |
 | **Target Platform** | Modern browsers (Chrome, Firefox, Safari, Edge) |
 | **Performance Goals** | Lighthouse 90+, <2s initial load, <200ms command response |
 | **Constraints** | WCAG AA accessibility, keyboard navigable, mobile responsive |
@@ -259,17 +262,16 @@ interface StatusData {
   funFact?: string;
 }
 
-// Career Entry (for About page timeline)
+// Career Entry (for About page timeline - professional work since 2013)
 interface CareerEntry {
-  type: 'education' | 'work';
   organization: string;
-  role: string;           // Job title or degree name
-  startDate: string;      // ISO 8601 or "YYYY-MM"
-  endDate?: string;       // Optional, null = "Present"
+  role: string;           // Job title
+  startDate: string;      // "YYYY-MM" format
+  endDate?: string;       // Optional, null = "Current"
   location: string;
   description: string;
-  highlights: string[];   // Key achievements/courses
-  logo?: string;          // Relative path to org logo
+  highlights: [string, string, string];  // Exactly 3 highlights
+  logo: string;           // Required - relative path to org logo
 }
 
 // About Content
@@ -382,27 +384,31 @@ interface CommandResult {
 
 ### CareerTimeline
 
-**Purpose**: Visual timeline of education and work experience  
+**Purpose**: Visual timeline of professional work experience (since 2013)  
 **Props**: `entries: CareerEntry[]`  
+**Layout**: Vertical alternating (zigzag) — entries alternate left/right of center line  
 **Behavior**:
 - Renders entries in reverse chronological order
-- Visual connector line between entries
-- Entry cards show: logo, org, role, dates, location
-- Distinct styling for `education` vs `work` types (icons/colors)
-- Desktop: Hover expands to show description + highlights
-- Mobile: Tap toggles expanded state
-- Current position (no endDate) shows "Present" badge
+- Vertical connector line down the center
+- Entry cards alternate: odd entries left, even entries right
+- All entries expanded by default (no collapsed state)
+- Entry cards show: logo, org, role, dates, location, description, 3 highlights
+- Current position (no endDate) shows "Current" badge
+- Cards physically expand inline on hover (desktop) or tap (mobile) for emphasis
 
 ### CareerTimelineEntry
 
 **Purpose**: Individual entry in the career timeline  
-**Props**: `entry: CareerEntry, isExpanded: boolean, onToggle: () => void`  
-**States**: Collapsed (default), Expanded (shows description + highlights)  
+**Props**: `entry: CareerEntry, position: 'left' | 'right', isHovered: boolean`  
+**States**: Always expanded (default), Emphasized (on hover/tap)  
 **Visual Elements**:
-- Type indicator icon (🎓 education / 💼 work)
-- Organization logo (fallback to styled initials)
-- Date range with duration calculation
-- Expandable description with bullet highlights
+- Organization logo (required)
+- Role title and organization name
+- Date range with "Current" badge if no endDate
+- Location indicator
+- Description paragraph
+- 3 bullet highlights
+- Connector dot on center timeline
 
 ### ResumeDownload
 

@@ -123,9 +123,9 @@ A visitor accesses a rich "About" page that tells the story of the portfolio own
 
 1. **Given** the user executes `about`, **When** the content renders, **Then** a personal blurb/introduction displays at the top in terminal-styled format
 2. **Given** the about page is displayed, **When** viewing the resume section, **Then** a clearly visible download button/link allows downloading the resume as PDF
-3. **Given** the about page is displayed, **When** viewing the career timeline, **Then** an interactive history graph displays showing both education and work experience
-4. **Given** the career timeline is displayed, **When** viewing entries, **Then** each entry shows: organization name, role/degree, date range, location, and brief description
-5. **Given** the career timeline is displayed, **When** entries are arranged, **Then** they appear in reverse chronological order with clear visual distinction between education and work
+3. **Given** the about page is displayed, **When** viewing the career timeline, **Then** an interactive history graph displays showing professional work experience since 2013
+4. **Given** the career timeline is displayed, **When** viewing entries, **Then** each entry shows: organization name, role, date range, location, description, and 3 highlights
+5. **Given** the career timeline is displayed, **When** entries are arranged, **Then** they appear in reverse chronological order in a vertical alternating (zigzag) layout
 6. **Given** the career timeline on desktop, **When** hovering over an entry, **Then** additional details or highlights appear
 7. **Given** the career timeline on mobile, **When** tapping an entry, **Then** it expands to show full details
 
@@ -166,10 +166,6 @@ A visitor accesses contact methods to reach the portfolio owner.
 - **FR-005**: System MUST NOT display browser-style window controls (minimize, maximize, close)
 - **FR-006**: System MUST support the following core commands: `help`, `writings`, `projects`, `travel`, `about`, `contact`, `back`, `clear`, `theme`
 - **FR-007**: System MUST support parameterized commands: `read [id]`, `view [name]`, `explore [location]`
-- **FR-015**: System MUST support both dark and light themes with a `theme` command to toggle
-- **FR-016**: System MUST include an easter egg command `spyonhim` that reads from a `status.md` file and uses an LLM to generate a quirky, personalized summary of Giri's current status/location/activities
-- **FR-017**: Content MUST be stored as Markdown files with frontmatter for metadata
-- **FR-018**: Command history within a session MUST be navigable via arrow keys but MUST NOT persist across browser sessions
 - **FR-008**: Writings MUST display one featured image by default
 - **FR-009**: Writings MUST support inline images within content body
 - **FR-010**: System MUST detect mobile viewport and switch to touch-based interaction model
@@ -177,12 +173,18 @@ A visitor accesses contact methods to reach the portfolio owner.
 - **FR-012**: Mobile command list MUST be contextual to current application state
 - **FR-013**: System MUST support keyboard navigation on desktop (arrow keys for history, tab for autocomplete)
 - **FR-014**: System MUST maintain terminal aesthetic across all content types and interactions
+- **FR-015**: System MUST support both dark and light themes with a `theme` command to toggle
+- **FR-016**: System MUST include an easter egg command `spyonhim` that reads from a `status.md` file (in repo) and uses Azure OpenAI to generate a quirky, personalized summary of Giri's current status/location/activities
+- **FR-017**: Content MUST be stored as Markdown files with frontmatter for metadata
+- **FR-018**: Command history within a session MUST be navigable via arrow keys but MUST NOT persist across browser sessions
 - **FR-019**: About page MUST display a personal blurb/introduction section at the top
 - **FR-020**: About page MUST provide a resume download option in PDF format
-- **FR-021**: About page MUST display an interactive career timeline showing education and work experience
-- **FR-022**: Career timeline entries MUST include: organization, role/degree, date range, location, and description
-- **FR-023**: Career timeline MUST visually distinguish between education and work experience entries
+- **FR-021**: About page MUST display an interactive career timeline showing professional work experience (since 2013)
+- **FR-022**: Career timeline entries MUST include: organization, role, date range, location, description, and 3 highlights
+- **FR-023**: Career timeline MUST use vertical alternating (zigzag) layout with all entries expanded
 - **FR-024**: Career timeline MUST support hover (desktop) and tap (mobile) interactions for expanded details
+- **FR-025**: System MUST integrate Microsoft Clarity for usage analytics and session recordings
+- **FR-026**: Clarity tracking MUST be initialized on page load and capture all user interactions
 
 ### Non-Functional Requirements
 
@@ -192,6 +194,7 @@ A visitor accesses contact methods to reach the portfolio owner.
 - **NFR-004**: System MUST be accessible via keyboard-only navigation on desktop
 - **NFR-005**: Color contrast MUST meet WCAG AA standards
 - **NFR-006**: System MUST work on latest versions of Chrome, Firefox, Safari, and Edge
+- **NFR-007**: Analytics MUST NOT collect personally identifiable information (PII) beyond Clarity defaults
 
 ### Key Entities
 
@@ -199,7 +202,7 @@ A visitor accesses contact methods to reach the portfolio owner.
 - **Project**: Name, slug, description, tech stack (array), images, external links (demo, repo), date
 - **Travel Entry**: Location, date, title, narrative content, images (array)
 - **Command**: Name, aliases, description, parameters (optional), handler function, contexts (where available)
-- **Career Entry**: Type (education|work), organization, role/degree, startDate, endDate, location, description, highlights (array), logo (optional)
+- **Career Entry**: Type (work only, since 2013), organization, role, startDate, endDate, location, description, highlights (exactly 3 per entry), logo (required)
 - **About Content**: Blurb (markdown), resumeUrl, careerTimeline (array of Career Entries)
 
 ## Visual Design Requirements
@@ -262,6 +265,19 @@ The design features:
 
 1. **Theme toggle**: Yes — support both dark and light themes via `theme` command
 2. **Command history persistence**: No — history available within session only, not persisted to localStorage
-3. **Easter egg command**: Yes — `spyonhim` reads from `status.md` and uses LLM to summarize what Giri is currently doing
+3. **Easter egg command**: Yes — `spyonhim` reads from `status.md` (in repo) and uses Azure OpenAI to generate quirky summary
 4. **Content management**: Markdown files with YAML frontmatter for metadata
 5. **Sound effects**: No — not implementing sound effects at this time
+6. **Bio blurb format**: Single short paragraph
+7. **Career timeline scope**: Professional experience only, starting from 2013
+8. **Resume format**: Single PDF file
+9. **Career highlights**: 3 highlights per entry
+10. **Timeline layout**: Vertical alternating (zigzag pattern, entries alternate left/right)
+11. **Organization logos**: Required for all entries
+12. **Current job indicator**: Show "Current" for entries without end date
+13. **Timeline default state**: All entries expanded by default (no collapsed state)
+14. **Expansion interaction**: Card physically expands inline (not tooltip overlay)
+15. **LLM provider**: Azure OpenAI service (hosted in Azure)
+16. **Status.md location**: Lives in the repository (public folder)
+17. **Analytics provider**: Microsoft Clarity (free, Azure-hosted compatible)
+18. **Analytics scope**: Session recordings, heatmaps, user journey tracking
