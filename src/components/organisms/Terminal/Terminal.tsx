@@ -95,15 +95,13 @@ export function Terminal({ className }: TerminalProps) {
       } else {
         // For regular commands, add to history (don't set currentOutput to avoid duplication)
         terminalState.setOutput(null)
-        if (result.success) {
-          terminalState.setError(null)
-        } else {
-          terminalState.setError(result.error || 'Unknown error')
-          // Announce error for screen readers
-          if (liveRegionRef.current) {
-            liveRegionRef.current.textContent = `Error: ${result.error || 'Unknown error'}`
-          }
+        terminalState.setError(null)
+        
+        // Announce error for screen readers
+        if (!result.success && liveRegionRef.current) {
+          liveRegionRef.current.textContent = `Error: ${result.error || 'Unknown error'}`
         }
+        
         terminalState.addOutput({
           input,
           timestamp: Date.now(),
