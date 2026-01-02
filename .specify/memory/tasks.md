@@ -401,16 +401,16 @@
 
 ### Content
 
-- [ ] T088 [US8] Create `src/content/static/contact.md` with contact methods
+- [X] T088 [US8] Create `src/content/static/contact.md` with contact methods
 
 ### Implementation
 
-- [ ] T089 [US8] Create `src/commands/contact.ts` - render contact with clickable links
-- [ ] T090 [US8] Create `src/components/atoms/Link/Link.tsx` - terminal-styled external link
+- [X] T089 [US8] Create `src/commands/contact.ts` - render contact with clickable links
+- [X] T090 [US8] Create `src/components/atoms/Link/Link.tsx` - terminal-styled external link
 
 ### E2E Test for User Story 8
 
-- [ ] T091 [US8] Create `e2e/specs/contact.spec.ts`:
+- [X] T091 [US8] Create `e2e/specs/contact.spec.ts`:
   - `contact` → verify links are clickable
 
 **Checkpoint**: ✅ US8 Complete - Contact page working
