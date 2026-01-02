@@ -343,47 +343,47 @@
 
 ### Content & Data
 
-- [ ] T077 [US7] Create `src/content/static/about.json` with AboutContent structure:
+- [X] T077 [US7] Create `src/content/static/about.json` with AboutContent structure:
   - `blurb`: Markdown-formatted personal introduction
   - `resumeUrl`: Path to PDF (e.g., `/resume.pdf`)
   - `careerTimeline`: Array of CareerEntry objects
-- [ ] T078 [US7] Add resume PDF to `public/resume.pdf`
-- [ ] T079 [US7] Define `src/types/about.ts` with CareerEntry and AboutContent interfaces
+- [X] T078 [US7] Add resume PDF to `public/resume.pdf`
+- [X] T079 [US7] Define `src/types/about.ts` with CareerEntry and AboutContent interfaces
 
 ### Components
 
-- [ ] T080 [US7] Create `src/components/organisms/AboutView/AboutView.tsx`:
+- [X] T080 [US7] Create `src/components/organisms/AboutView/AboutView.tsx`:
   - Bio blurb section at top
   - Resume download section
   - Career timeline section
-- [ ] T081 [US7] Create `src/components/molecules/CareerTimeline/CareerTimeline.tsx`:
+- [X] T081 [US7] Create `src/components/molecules/CareerTimeline/CareerTimeline.tsx`:
   - Renders entries in reverse chronological order
   - Visual connector line between entries
   - Distinct styling for education vs work (icons/colors)
-- [ ] T082 [US7] Create `src/components/molecules/CareerTimeline/CareerTimelineEntry.tsx`:
+- [X] T082 [US7] Create `src/components/molecules/CareerTimeline/CareerTimelineEntry.tsx`:
   - Collapsed/expanded states
   - Logo + org + role + dates display
   - Expandable description with highlights
   - Desktop hover / mobile tap interactions
-- [ ] T083 [US7] Create `src/components/atoms/ResumeDownload/ResumeDownload.tsx`:
+- [X] T083 [US7] Create `src/components/atoms/ResumeDownload/ResumeDownload.tsx`:
   - Terminal-styled download button
   - Triggers browser PDF download
 
 ### Command
 
-- [ ] T084 [US7] Create `src/commands/about.ts` - render AboutView with loaded content
+- [X] T084 [US7] Create `src/commands/about.ts` - render AboutView with loaded content
 
 ### Tests
 
-- [ ] T085 [US7] Create `src/components/molecules/CareerTimeline/CareerTimeline.test.tsx`:
+- [X] T085 [US7] Create `src/components/molecules/CareerTimeline/CareerTimeline.test.tsx`:
   - Renders all entries
   - Education vs work styling differs
   - Entries sorted reverse chronologically
-- [ ] T086 [US7] Create `src/components/molecules/CareerTimeline/CareerTimelineEntry.test.tsx`:
+- [X] T086 [US7] Create `src/components/molecules/CareerTimeline/CareerTimelineEntry.test.tsx`:
   - Collapsed by default
   - Expands on interaction
   - Shows highlights when expanded
-- [ ] T087 [US7] Create `e2e/specs/about.spec.ts`:
+- [X] T087 [US7] Create `e2e/specs/about.spec.ts`:
   - `about` → verify bio blurb displays
   - Verify resume download button works
   - Verify career timeline renders

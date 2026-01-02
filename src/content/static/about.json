@@ -1,0 +1,65 @@
+{
+  "blurb": "# Hello, I'm Giri 👋\n\nI'm a software engineer passionate about building elegant solutions to complex problems. With over a decade of experience spanning startups to enterprise, I specialize in crafting performant, user-centric applications.\n\nWhen I'm not coding, you'll find me exploring new places, capturing moments through photography, or diving deep into the latest tech trends. I believe in continuous learning and sharing knowledge with the community.\n\n> \"The best way to predict the future is to create it.\" - Peter Drucker",
+  "resumeUrl": "/resume.pdf",
+  "careerTimeline": [
+    {
+      "organization": "TechCorp Inc.",
+      "role": "Senior Software Engineer",
+      "startDate": "2022-03",
+      "location": "San Francisco, CA",
+      "description": "Leading frontend architecture and developer experience initiatives for a B2B SaaS platform serving 500K+ users.",
+      "highlights": [
+        "Architected micro-frontend system reducing deployment time by 60%",
+        "Led team of 5 engineers delivering major product redesign",
+        "Established testing practices achieving 90% coverage"
+      ],
+      "logo": "/logos/techcorp.svg",
+      "type": "work"
+    },
+    {
+      "organization": "StartupXYZ",
+      "role": "Full Stack Developer",
+      "startDate": "2019-06",
+      "endDate": "2022-02",
+      "location": "Austin, TX",
+      "description": "Full-stack development for a real-time collaboration platform, from MVP to Series B.",
+      "highlights": [
+        "Built real-time sync engine handling 10K concurrent connections",
+        "Reduced API response times by 40% through optimization",
+        "Implemented CI/CD pipeline cutting release cycles in half"
+      ],
+      "logo": "/logos/startupxyz.svg",
+      "type": "work"
+    },
+    {
+      "organization": "Digital Agency Co.",
+      "role": "Frontend Developer",
+      "startDate": "2016-01",
+      "endDate": "2019-05",
+      "location": "Seattle, WA",
+      "description": "Developed responsive web applications for diverse clients across e-commerce, media, and fintech sectors.",
+      "highlights": [
+        "Delivered 20+ client projects on time and within budget",
+        "Introduced component library reducing development time by 30%",
+        "Mentored 3 junior developers into mid-level roles"
+      ],
+      "logo": "/logos/agency.svg",
+      "type": "work"
+    },
+    {
+      "organization": "University of Technology",
+      "role": "B.S. Computer Science",
+      "startDate": "2012-09",
+      "endDate": "2016-05",
+      "location": "Boston, MA",
+      "description": "Graduated with honors, focusing on software engineering and human-computer interaction.",
+      "highlights": [
+        "Dean's List all semesters with 3.8 GPA",
+        "Led university hackathon team to regional finals",
+        "Published research on UI accessibility patterns"
+      ],
+      "logo": "/logos/university.svg",
+      "type": "education"
+    }
+  ]
+}
