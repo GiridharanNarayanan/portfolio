@@ -81,7 +81,7 @@
 
 ### Implementation for User Story 1
 
-- [ ] T024 [US1] Create `src/components/organisms/StartupScreen/StartupScreen.tsx`:
+- [X] T026 [US1] Create `src/components/organisms/StartupScreen/StartupScreen.tsx`:
   - Full-screen terminal-styled container
   - ASCII art "GIRID" with yellow/gold color (#c5a93c)
   - Retro terminal border (box-drawing characters)
@@ -89,14 +89,14 @@
   - Keypress/tap listener for activation
   - 3-second idle prompt "Press any key to continue..."
   - Fade transition on activation
-- [ ] T025 [P] [US1] Create `src/components/organisms/StartupScreen/StartupScreen.test.tsx` - render and interaction tests
-- [ ] T026 [P] [US1] Create `src/components/organisms/StartupScreen/useStartupScreen.ts` - keyboard/touch detection hook
-- [ ] T027 [US1] Create `src/components/organisms/StartupScreen/index.ts` - barrel export
-- [ ] T028 [US1] Create ASCII art constant in `src/components/organisms/StartupScreen/asciiArt.ts`
+- [X] T027 [P] [US1] Create `src/components/organisms/StartupScreen/StartupScreen.test.tsx` - render and interaction tests
+- [X] T028 [P] [US1] Create `src/components/organisms/StartupScreen/useStartupScreen.ts` - keyboard/touch detection hook
+- [X] T029 [US1] Create `src/components/organisms/StartupScreen/index.ts` - barrel export
+- [X] T030 [US1] Create ASCII art constant in `src/components/organisms/StartupScreen/asciiArt.ts`
 
 ### E2E Test for User Story 1
 
-- [ ] T029 [US1] Create `e2e/specs/startup.spec.ts`:
+- [X] T031 [US1] Create `e2e/specs/startup.spec.ts`:
   - Verify ASCII art renders on load
   - Verify subtext displays
   - Verify keypress triggers transition
