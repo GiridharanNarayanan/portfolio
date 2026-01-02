@@ -3,7 +3,7 @@
  * Main application shell with command input and output
  */
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '../../../utils/cn'
 import { CommandInput } from '../../molecules/CommandInput'
 import { StickyCommandBar } from '../StickyCommandBar'
@@ -42,6 +42,7 @@ export function Terminal({ className }: TerminalProps) {
   const { isMobile } = useMobileDetect()
   const mainContentRef = useRef<HTMLElement>(null)
   const liveRegionRef = useRef<HTMLDivElement>(null)
+  const [commandsReady, setCommandsReady] = useState(false)
 
   // Initialize commands on mount
   useEffect(() => {
@@ -57,6 +58,8 @@ export function Terminal({ className }: TerminalProps) {
     registerCommand(viewCommand)
     registerCommand(aboutCommand)
     registerCommand(spyonhimCommand)
+    
+    setCommandsReady(true)
   }, [toggleTheme])
 
   // Update context theme when theme changes
@@ -84,13 +87,17 @@ export function Terminal({ className }: TerminalProps) {
       // Clear previous output if requested
       if (result.clearOutput) {
         terminalState.clearOutput()
-        // For clearOutput commands, set the new output directly
+        // For clearOutput commands, still add to history to show the command entry
         if (result.success) {
-          terminalState.setOutput(result.output || null)
           terminalState.setError(null)
+          terminalState.addOutput({
+            input,
+            timestamp: Date.now(),
+            result,
+          })
         }
       } else {
-        // For regular commands, add to history (don't set currentOutput to avoid duplication)
+        // For regular commands, add to history
         terminalState.setOutput(null)
         terminalState.setError(null)
         
@@ -116,6 +123,13 @@ export function Terminal({ className }: TerminalProps) {
     },
     [execute, commandHistory, terminalState]
   )
+
+  // Auto-execute whoami on first load for immediate content
+  useEffect(() => {
+    if (commandsReady) {
+      handleCommand('whoami')
+    }
+  }, [commandsReady]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

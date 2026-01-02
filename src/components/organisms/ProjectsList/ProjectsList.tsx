@@ -63,7 +63,7 @@ export function ProjectsList() {
             key={item.slug}
             item={item}
             index={idx + 1}
-            commandHint={`view ${idx + 1}`}
+            commandHint={`read ${idx + 1}`}
           />
         ))}
       </div>
@@ -71,8 +71,8 @@ export function ProjectsList() {
       {/* Help hint */}
       <div className="mt-6 pt-4 border-t border-terminal-border text-sm text-terminal-muted">
         <span className="text-terminal-secondary">Tip:</span> Type{' '}
-        <code className="px-1 bg-terminal-muted/30 rounded">view &lt;#&gt;</code>{' '}
-        to view project details (e.g., <code className="px-1 bg-terminal-muted/30 rounded">view 1</code>)
+        <code className="px-1 bg-terminal-muted/30 rounded">read &lt;#&gt;</code>{' '}
+        to read project details (e.g., <code className="px-1 bg-terminal-muted/30 rounded">read 1</code>)
       </div>
     </div>
   );
