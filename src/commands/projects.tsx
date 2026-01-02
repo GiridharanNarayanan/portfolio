@@ -1,4 +1,3 @@
-import { registerCommand } from './registry';
 import type { Command } from '../types/Command.types';
 import { ProjectsList } from '../components/organisms/ProjectsList';
 
@@ -15,8 +14,5 @@ export const projectsCommand: Command = {
     clearOutput: true,
   }),
 };
-
-// Register command
-registerCommand(projectsCommand);
 
 export { projectsCommand as default };

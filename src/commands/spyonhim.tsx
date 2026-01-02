@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { registerCommand } from './registry'
 import type { Command } from '../types/Command.types'
 import { SpyReport } from '../components/organisms/SpyReport'
 import { generateSpyReport, parseStatusMarkdown } from '../utils/azureOpenAI'
@@ -59,6 +58,3 @@ export const spyonhimCommand: Command = {
     clearOutput: true,
   }),
 }
-
-// Register command
-registerCommand(spyonhimCommand)

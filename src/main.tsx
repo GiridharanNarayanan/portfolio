@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
 // Polyfill Buffer for browser (required by gray-matter)
-window.Buffer = Buffer;
+(window as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
 
 import React from "react";
 import ReactDOM from "react-dom/client";

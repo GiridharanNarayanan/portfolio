@@ -80,6 +80,5 @@ export function initializeCommands(): void {
   // These will be imported dynamically to avoid circular dependencies
   import('./help').then(({ helpCommand }) => registerCommand(helpCommand))
   import('./clear').then(({ clearCommand }) => registerCommand(clearCommand))
-  import('./back').then(({ backCommand }) => registerCommand(backCommand))
   import('./theme').then(({ themeCommand }) => registerCommand(themeCommand))
 }

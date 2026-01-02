@@ -5,7 +5,6 @@
 export { registerCommand, getCommand, getAllCommands, getAvailableCommands, hasCommand, clearRegistry, initializeCommands } from './registry'
 export { helpCommand } from './help'
 export { clearCommand } from './clear'
-export { backCommand } from './back'
 export { themeCommand, setThemeToggle } from './theme'
 export { writingsCommand } from './writings'
 export { projectsCommand } from './projects'

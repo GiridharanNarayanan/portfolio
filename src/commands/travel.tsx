@@ -1,4 +1,3 @@
-import { registerCommand } from './registry';
 import type { Command } from '../types/Command.types';
 import { TravelList } from '../components/organisms/TravelList';
 
@@ -15,8 +14,5 @@ export const travelCommand: Command = {
     clearOutput: true,
   }),
 };
-
-// Register command
-registerCommand(travelCommand);
 
 export { travelCommand as default };

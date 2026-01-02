@@ -1,4 +1,3 @@
-import { registerCommand } from './registry'
 import type { Command } from '../types/Command.types'
 import { AboutView } from '../components/organisms/AboutView'
 import aboutContent from '../content/static/about.json'
@@ -17,6 +16,3 @@ export const aboutCommand: Command = {
     clearOutput: true,
   }),
 }
-
-// Register command
-registerCommand(aboutCommand)

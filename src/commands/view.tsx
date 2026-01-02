@@ -1,4 +1,3 @@
-import { registerCommand } from './registry';
 import type { Command } from '../types/Command.types';
 import { WritingDetail } from '../components/organisms/WritingDetail';
 import { ProjectDetail } from '../components/organisms/ProjectDetail';
@@ -85,8 +84,5 @@ function UnifiedContentView({ slug }: { slug: string }) {
     </div>
   );
 }
-
-// Register command
-registerCommand(viewCommand);
 
 export { viewCommand as default };

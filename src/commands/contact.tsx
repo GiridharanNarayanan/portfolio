@@ -1,4 +1,3 @@
-import { registerCommand } from './registry'
 import type { Command } from '../types/Command.types'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -102,6 +101,3 @@ export const contactCommand: Command = {
     clearOutput: true,
   }),
 }
-
-// Register command
-registerCommand(contactCommand)

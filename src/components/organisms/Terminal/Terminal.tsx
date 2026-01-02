@@ -18,7 +18,6 @@ import {
   registerCommand,
   helpCommand,
   clearCommand,
-  backCommand,
   themeCommand,
   setThemeToggle,
   writingsCommand,
@@ -52,7 +51,6 @@ export function Terminal({ className }: TerminalProps) {
     // Core commands
     registerCommand(helpCommand)
     registerCommand(clearCommand)
-    registerCommand(backCommand)
     registerCommand(themeCommand)
     setThemeToggle(toggleTheme)
     
@@ -91,22 +89,23 @@ export function Terminal({ className }: TerminalProps) {
       // Clear previous output if requested
       if (result.clearOutput) {
         terminalState.clearOutput()
-      }
-
-      if (result.success) {
-        terminalState.setOutput(result.output || null)
-        terminalState.setError(null)
-      } else {
-        terminalState.setError(result.error || 'Unknown error')
-        terminalState.setOutput(null)
-        // Announce error for screen readers
-        if (liveRegionRef.current) {
-          liveRegionRef.current.textContent = `Error: ${result.error || 'Unknown error'}`
+        // For clearOutput commands, set the new output directly
+        if (result.success) {
+          terminalState.setOutput(result.output || null)
+          terminalState.setError(null)
         }
-      }
-
-      // Add to output history (only if not clearing)
-      if (!result.clearOutput) {
+      } else {
+        // For regular commands, add to history (don't set currentOutput to avoid duplication)
+        terminalState.setOutput(null)
+        if (result.success) {
+          terminalState.setError(null)
+        } else {
+          terminalState.setError(result.error || 'Unknown error')
+          // Announce error for screen readers
+          if (liveRegionRef.current) {
+            liveRegionRef.current.textContent = `Error: ${result.error || 'Unknown error'}`
+          }
+        }
         terminalState.addOutput({
           input,
           timestamp: Date.now(),
