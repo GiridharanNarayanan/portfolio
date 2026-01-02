@@ -109,3 +109,50 @@ export interface ContentCollection<T extends BaseContentMeta> {
   /** Total count */
   count: number
 }
+
+/**
+ * Content type categories
+ */
+export type ContentType = 'writings' | 'projects' | 'travel'
+
+/**
+ * Unified content frontmatter for parsing
+ */
+export interface ContentFrontmatter {
+  title?: string
+  date?: string
+  excerpt?: string
+  slug?: string
+  published?: boolean
+  featuredImage?: string
+  tags?: string[]
+  techStack?: string[]
+  location?: string
+  links?: {
+    demo?: string
+    repo?: string
+  }
+  gallery?: string[]
+}
+
+/**
+ * Unified content item used by hooks and components
+ */
+export interface ContentItem {
+  slug: string
+  type: ContentType
+  title: string
+  date: string
+  excerpt: string
+  content: string
+  featuredImage?: string
+  tags?: string[]
+  techStack?: string[]
+  links?: {
+    demo?: string
+    repo?: string
+  }
+  location?: string
+  gallery?: string[]
+  published: boolean
+}

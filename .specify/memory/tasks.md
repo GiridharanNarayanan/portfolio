@@ -173,19 +173,19 @@
 
 **Purpose**: Markdown loading system used by writings, projects, and travel
 
-- [ ] T050 [INFRA] Create `src/hooks/useMarkdownContent.ts`:
+- [X] T050 [INFRA] Create `src/hooks/useMarkdownContent.ts`:
   - Vite `import.meta.glob` for markdown files
   - Frontmatter parsing with gray-matter
   - Type-safe content loading by category
-- [ ] T051 [INFRA] Create `src/components/organisms/ContentViewer/ContentViewer.tsx`:
+- [X] T051 [INFRA] Create `src/components/organisms/ContentViewer/ContentViewer.tsx`:
   - react-markdown rendering
   - remark-gfm for GitHub Flavored Markdown
   - Featured image at top
   - Inline image support
   - Terminal-styled typography
   - Scrollable content area
-- [ ] T052 [P] [INFRA] Create `src/components/organisms/ContentViewer/ContentViewer.test.tsx`
-- [ ] T053 [INFRA] Create `src/components/molecules/ContentCard/ContentCard.tsx`:
+- [X] T052 [P] [INFRA] Create `src/components/organisms/ContentViewer/ContentViewer.test.tsx`
+- [X] T053 [INFRA] Create `src/components/molecules/ContentCard/ContentCard.tsx`:
   - Title, date, excerpt display
   - Terminal-styled card (muted background from Figma)
   - Click/command to view detail
