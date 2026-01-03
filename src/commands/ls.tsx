@@ -4,6 +4,7 @@
 
 import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
+import { CorruptedFile } from '../components/atoms/CorruptedFile'
 
 export const lsCommand: Command = {
   name: 'ls',
@@ -43,9 +44,12 @@ export const lsCommand: Command = {
             const isLast = i === items.length - 1
             const connector = isLast ? '└── ' : '├── '
             const isDir = item.endsWith('/')
+            const isCorrupted = item.startsWith('.')
+            
             return (
               <div key={i} className={isDir ? 'text-terminal-accent' : 'text-terminal-text'}>
-                {connector}{item}
+                {connector}
+                {isCorrupted ? <CorruptedFile name={item} /> : item}
               </div>
             )
           })}
@@ -54,4 +58,3 @@ export const lsCommand: Command = {
     }
   },
 }
-

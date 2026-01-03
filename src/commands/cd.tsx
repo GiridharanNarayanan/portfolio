@@ -4,6 +4,8 @@
 
 import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
+import { CorruptedFile } from '../components/atoms/CorruptedFile'
+import { isEasterEggRevealed } from '../utils/easterEggState'
 
 export const cdCommand: Command = {
   name: 'cd',
@@ -25,7 +27,13 @@ export const cdCommand: Command = {
 
     // After cd, show ls output of the NEW directory (pass the new path explicitly)
     const lsResult = fs.ls(result.newPath)
-    const items = lsResult.items || []
+    let items = lsResult.items || []
+    
+    // If we just revealed the easter egg and we're at home, add the corrupted file
+    const justRevealed = isEasterEggRevealed() && result.newPath === '~' && !items.some(i => i.startsWith('.'))
+    if (justRevealed) {
+      items = [...items, '.c0rrupt3d']
+    }
 
     return {
       success: true,
@@ -39,9 +47,11 @@ export const cdCommand: Command = {
                 const isLast = i === items.length - 1
                 const connector = isLast ? '└── ' : '├── '
                 const isDir = item.endsWith('/')
+                const isCorrupted = item.startsWith('.')
                 return (
                   <div key={i} className={isDir ? 'text-terminal-accent' : 'text-terminal-text'}>
-                    {connector}{item}
+                    {connector}
+                    {isCorrupted ? <CorruptedFile name={item} /> : item}
                   </div>
                 )
               })}

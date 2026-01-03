@@ -7,6 +7,8 @@ import { getGlobalFilesystem } from '../context/FilesystemContext'
 import { WritingDetail } from '../components/organisms/WritingDetail'
 import { ProjectDetail } from '../components/organisms/ProjectDetail'
 import { AboutView } from '../components/organisms/AboutView'
+import { SpyReportLoader } from '../components/organisms/SpyReport'
+import { consumeEasterEgg } from '../utils/easterEggState'
 import aboutContent from '../content/static/about.json'
 import type { AboutContent } from '../types/About.types'
 
@@ -30,6 +32,16 @@ export const catCommand: Command = {
 
     const path = args[0]
     const node = fs.getNode(path)
+
+    // Special handling for easter egg file (check by path since node may not exist after consumed)
+    if (path === '.c0rrupt3d' || path === '~/.c0rrupt3d') {
+      // Mark as consumed so it won't show again
+      consumeEasterEgg()
+      return {
+        success: true,
+        output: <SpyReportLoader />,
+      }
+    }
 
     if (!node) {
       return {
@@ -78,6 +90,14 @@ export const catCommand: Command = {
           ),
         }
 
+      case 'easter-egg':
+        // The secret spy report! Mark as consumed
+        consumeEasterEgg()
+        return {
+          success: true,
+          output: <SpyReportLoader />,
+        }
+
       default:
         return {
           success: false,
@@ -86,3 +106,4 @@ export const catCommand: Command = {
     }
   },
 }
+

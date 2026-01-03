@@ -15,6 +15,11 @@ import {
   type FileNode,
 } from '../utils/filesystem'
 import { useMarkdownContent } from './useMarkdownContent'
+import { 
+  isEasterEggRevealed, 
+  trackLsCommand, 
+  trackHomeVisit 
+} from '../utils/easterEggState'
 
 export interface FilesystemState {
   currentPath: string
@@ -24,6 +29,7 @@ export interface FilesystemState {
 
 export function useFilesystem() {
   const [currentPath, setCurrentPath] = useState('~')
+  const [easterEggRevealed, setEasterEggRevealed] = useState(isEasterEggRevealed())
   
   // Load content to build filesystem
   const { items: writings, loading: writingsLoading } = useMarkdownContent('writings')
@@ -31,14 +37,15 @@ export function useFilesystem() {
 
   const loading = writingsLoading || projectsLoading
 
-  // Build filesystem from content
+  // Build filesystem from content (includes easter egg when revealed)
   const filesystem = useMemo(() => {
     if (loading) return null
     return buildFilesystem(
       writings.map((w) => ({ slug: w.slug, title: w.title })),
-      projects.map((p) => ({ slug: p.slug, title: p.title }))
+      projects.map((p) => ({ slug: p.slug, title: p.title })),
+      easterEggRevealed
     )
-  }, [writings, projects, loading])
+  }, [writings, projects, loading, easterEggRevealed])
 
   // Change directory
   const cd = useCallback(
@@ -57,6 +64,12 @@ export function useFilesystem() {
         return { success: false, error: `cd: no such file or directory: ${path}` }
       }
 
+      // Track home visits for easter egg
+      if (resolvedPath === '~') {
+        trackHomeVisit()
+        setEasterEggRevealed(isEasterEggRevealed())
+      }
+
       setCurrentPath(resolvedPath)
       return { success: true, newPath: resolvedPath }
     },
@@ -65,10 +78,15 @@ export function useFilesystem() {
 
   // List directory contents
   const ls = useCallback(
-    (path?: string): { success: boolean; items?: string[]; error?: string } => {
+    (path?: string): { success: boolean; items?: string[]; error?: string; hasHiddenFile?: boolean } => {
       if (!filesystem) {
         return { success: false, error: 'Filesystem not ready' }
       }
+
+      // Track ls usage for easter egg
+      trackLsCommand()
+      const wasRevealed = easterEggRevealed
+      setEasterEggRevealed(isEasterEggRevealed())
 
       // If path starts with ~, treat it as absolute, otherwise resolve relative to currentPath
       const targetPath = path 
@@ -80,9 +98,16 @@ export function useFilesystem() {
         return { success: false, error: `ls: cannot access '${path || '.'}': No such file or directory` }
       }
 
-      return { success: true, items: formatListing(contents) }
+      // Check if we just revealed the easter egg
+      const justRevealed = !wasRevealed && isEasterEggRevealed()
+
+      return { 
+        success: true, 
+        items: formatListing(contents),
+        hasHiddenFile: justRevealed && targetPath === '~',
+      }
     },
-    [filesystem, currentPath]
+    [filesystem, currentPath, easterEggRevealed]
   )
 
   // Get current directory

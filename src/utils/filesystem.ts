@@ -7,7 +7,8 @@ export interface FileNode {
   name: string
   type: 'file' | 'directory'
   content?: string // For files: the slug or content identifier
-  contentType?: 'writing' | 'project' | 'about' | 'contact' // Type of content
+  contentType?: 'writing' | 'project' | 'about' | 'contact' | 'easter-egg' // Type of content
+  hidden?: boolean // Hidden/corrupt file styling
   children?: FileNode[]
 }
 
@@ -17,45 +18,53 @@ export interface FileNode {
  */
 export function buildFilesystem(
   writings: { slug: string; title: string }[],
-  projects: { slug: string; title: string }[]
+  projects: { slug: string; title: string }[],
+  showHiddenEasterEgg: boolean = false
 ): FileNode {
+  const children: FileNode[] = [
+    {
+      name: 'whoami.md',
+      type: 'file',
+      content: 'about',
+      contentType: 'about',
+    },
+    {
+      name: 'writings',
+      type: 'directory',
+      children: writings.map((w) => ({
+        name: `${w.slug}.md`,
+        type: 'file' as const,
+        content: w.slug,
+        contentType: 'writing' as const,
+      })),
+    },
+    {
+      name: 'projects',
+      type: 'directory',
+      children: projects.map((p) => ({
+        name: `${p.slug}.md`,
+        type: 'file' as const,
+        content: p.slug,
+        contentType: 'project' as const,
+      })),
+    },
+  ]
+
+  // Add hidden easter egg file when revealed
+  if (showHiddenEasterEgg) {
+    children.push({
+      name: '.c0rrupt3d',
+      type: 'file',
+      content: 'spyonhim',
+      contentType: 'easter-egg',
+      hidden: true,
+    })
+  }
+
   return {
     name: '~',
     type: 'directory',
-    children: [
-      {
-        name: 'whoami.md',
-        type: 'file',
-        content: 'about',
-        contentType: 'about',
-      },
-      {
-        name: 'contact.md',
-        type: 'file',
-        content: 'contact',
-        contentType: 'contact',
-      },
-      {
-        name: 'writings',
-        type: 'directory',
-        children: writings.map((w) => ({
-          name: `${w.slug}.md`,
-          type: 'file' as const,
-          content: w.slug,
-          contentType: 'writing' as const,
-        })),
-      },
-      {
-        name: 'projects',
-        type: 'directory',
-        children: projects.map((p) => ({
-          name: `${p.slug}.md`,
-          type: 'file' as const,
-          content: p.slug,
-          contentType: 'project' as const,
-        })),
-      },
-    ],
+    children,
   }
 }
 
