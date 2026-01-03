@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 export interface SpyReportProps {
-  /** The spy report text to display */
+  /** The terminal status text to display */
   report: string
   /** Whether the report was from cache */
   cached: boolean
@@ -13,36 +13,59 @@ export interface SpyReportProps {
 
 /**
  * SpyReport
- * Displays a spy report with typing animation effect
+ * Displays a terminal-style status report with typing animation
  */
 export function SpyReport({ report, cached, loading, error }: SpyReportProps) {
-  const [displayedText, setDisplayedText] = useState('')
+  const [displayedLines, setDisplayedLines] = useState<string[]>([])
+  const [currentLineIndex, setCurrentLineIndex] = useState(0)
+  const [currentCharIndex, setCurrentCharIndex] = useState(0)
   const [isTyping, setIsTyping] = useState(true)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  // Filter out empty lines and dedupe
+  const lines = report.split('\n').filter(line => line.trim() !== '')
+
   useEffect(() => {
     if (loading) {
-      setDisplayedText('')
+      setDisplayedLines([])
+      setCurrentLineIndex(0)
+      setCurrentCharIndex(0)
       setIsTyping(true)
       return
     }
 
     // Reset when report changes
-    setDisplayedText('')
+    setDisplayedLines([])
+    setCurrentLineIndex(0)
+    setCurrentCharIndex(0)
     setIsTyping(true)
 
-    let currentIndex = 0
-    const typingSpeed = 30 // ms per character
+    let lineIdx = 0
+    let charIdx = 0
+
+    const typingSpeed = 20 // ms per character
 
     intervalRef.current = setInterval(() => {
-      if (currentIndex < report.length) {
-        setDisplayedText(report.slice(0, currentIndex + 1))
-        currentIndex++
-      } else {
+      if (lineIdx >= lines.length) {
         setIsTyping(false)
         if (intervalRef.current) {
           clearInterval(intervalRef.current)
         }
+        return
+      }
+
+      const currentLine = lines[lineIdx]
+      
+      if (charIdx >= currentLine.length) {
+        // Line complete, add to displayed and move to next
+        setDisplayedLines(prev => [...prev, currentLine])
+        lineIdx++
+        charIdx = 0
+        setCurrentLineIndex(lineIdx)
+        setCurrentCharIndex(0)
+      } else {
+        charIdx++
+        setCurrentCharIndex(charIdx)
       }
     }, typingSpeed)
 
@@ -53,68 +76,94 @@ export function SpyReport({ report, cached, loading, error }: SpyReportProps) {
     }
   }, [report, loading])
 
+  // Get the currently typing line
+  const currentTypingLine = currentLineIndex < lines.length 
+    ? lines[currentLineIndex].slice(0, currentCharIndex)
+    : ''
+
   return (
     <div 
       className="max-w-2xl mx-auto py-6 px-4" 
       data-testid="spy-report"
       role="region"
-      aria-label="Spy Report"
+      aria-label="System Status"
       aria-live="polite"
     >
       {/* Header */}
-      <header className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-terminal-accent mb-2">
-          🕵️ CLASSIFIED TRANSMISSION
-        </h1>
-        <div className="text-sm text-terminal-muted">
+      <header className="mb-4">
+        <div className="flex items-center gap-2 text-terminal-accent font-mono text-sm">
+          <span className="opacity-60">$</span>
+          <span>./status --verbose</span>
+        </div>
+        <div className="text-xs text-terminal-muted mt-1">
           {loading ? (
-            <span className="animate-pulse">Decrypting transmission...</span>
+            <span className="animate-pulse">Fetching system status...</span>
           ) : cached ? (
-            <span>📡 Cached intel retrieved</span>
+            <span>📦 Cached response</span>
           ) : (
-            <span>🔒 Fresh intel acquired</span>
+            <span>🔄 Live status</span>
           )}
         </div>
       </header>
 
-      {/* Report Content */}
-      <div className="bg-terminal-bg-secondary border border-terminal-border rounded-lg p-6">
+      {/* Terminal Output */}
+      <div 
+        className="bg-black/40 border border-terminal-border rounded-lg p-4 font-mono text-sm"
+        style={{ minHeight: '200px' }}
+      >
         {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <div className="flex space-x-2">
-              <div className="w-2 h-2 bg-terminal-accent rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="w-2 h-2 bg-terminal-accent rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-2 h-2 bg-terminal-accent rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-            </div>
+          <div className="flex items-center gap-2 text-terminal-muted">
+            <span className="animate-pulse">▋</span>
+            <span>Connecting to status feed...</span>
           </div>
         ) : (
-          <div className="font-mono text-terminal-text leading-relaxed">
-            <span data-testid="spy-report-text">{displayedText}</span>
-            {isTyping && (
-              <span 
-                className="inline-block w-2 h-4 bg-terminal-accent ml-0.5 animate-pulse"
-                aria-hidden="true"
-              />
+          <pre className="whitespace-pre-wrap leading-relaxed">
+            {/* Already displayed lines */}
+            {displayedLines.map((line, i) => (
+              <div key={i} className={getLineStyle(line)}>
+                {line}
+              </div>
+            ))}
+            {/* Currently typing line */}
+            {isTyping && currentLineIndex < lines.length && (
+              <div className={getLineStyle(lines[currentLineIndex])}>
+                {currentTypingLine}
+                <span 
+                  className="inline-block w-2 h-4 bg-terminal-accent ml-0.5 animate-pulse"
+                  aria-hidden="true"
+                />
+              </div>
             )}
-          </div>
+          </pre>
         )}
       </div>
 
-      {/* Error/Debug Info */}
-      {error && !loading && (
-        <div className="mt-4 text-xs text-terminal-muted text-center">
-          <span className="opacity-50">ℹ️ {error}</span>
-        </div>
-      )}
-
       {/* Footer */}
-      <footer className="mt-6 text-center text-xs text-terminal-muted">
-        <p>
-          <span className="text-terminal-secondary">SECRET CLEARANCE REQUIRED</span>
-          {' • '}
-          This message will self-destruct in... just kidding 😄
+      <footer className="mt-4 text-center text-xs text-terminal-muted">
+        <p className="opacity-60">
+          Last sync: {new Date().toLocaleTimeString()}
+          {error && <span className="ml-2">• {error}</span>}
         </p>
       </footer>
     </div>
   )
+}
+
+/**
+ * Get styling class based on line content
+ */
+function getLineStyle(line: string): string {
+  if (line.startsWith('$')) {
+    return 'text-terminal-accent'
+  }
+  if (line.includes('████') || line.includes('██')) {
+    return 'text-terminal-success'
+  }
+  if (line.includes('░░')) {
+    return 'text-terminal-muted'
+  }
+  if (line.startsWith('  ') && line.includes('PID')) {
+    return 'text-terminal-secondary font-semibold'
+  }
+  return 'text-terminal-text'
 }

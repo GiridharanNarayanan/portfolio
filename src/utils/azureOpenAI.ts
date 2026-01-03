@@ -1,16 +1,12 @@
 /**
  * Azure OpenAI API Wrapper
- * For generating quirky spy reports from status data
+ * For generating terminal-style status reports from casual status updates
  */
 
 interface StatusData {
-  lastUpdated: string
   location: string
-  activity: string
-  mood: string
-  currentProject: string
-  funFact?: string
-  additionalContext?: string
+  updated: string
+  notes: string
 }
 
 interface SpyReportResponse {
@@ -21,38 +17,82 @@ interface SpyReportResponse {
 
 // Cache for API responses
 let cachedReport: { report: string; timestamp: number } | null = null
+let pendingRequest: Promise<SpyReportResponse> | null = null
 const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes in ms
 
 /**
- * Generate a spy report prompt for the LLM
+ * Get current time of day for context
  */
-function generateSpyPrompt(status: StatusData): string {
-  return `You are a quirky secret agent delivering a status report about a developer. 
-Your report should be:
-- Written in a playful spy/secret agent style
-- Include some spy terminology and dramatic flair
-- Be concise (3-4 sentences max)
-- Maintain a friendly, humorous tone
-- Reference the actual status data provided
-
-Current Status:
-- Location: ${status.location}
-- Activity: ${status.activity}
-- Mood: ${status.mood}
-- Current Project: ${status.currentProject}
-${status.funFact ? `- Fun Fact: ${status.funFact}` : ''}
-${status.additionalContext ? `- Additional Intel: ${status.additionalContext}` : ''}
-
-Generate a spy report now:`
+function getTimeOfDay(): string {
+  const hour = new Date().getHours()
+  if (hour >= 5 && hour < 9) return 'early morning'
+  if (hour >= 9 && hour < 12) return 'morning'
+  if (hour >= 12 && hour < 14) return 'midday'
+  if (hour >= 14 && hour < 17) return 'afternoon'
+  if (hour >= 17 && hour < 21) return 'evening'
+  return 'late night'
 }
 
 /**
- * Call Azure OpenAI API to generate spy report
+ * Generate the terminal status prompt for the LLM
+ */
+function generateTerminalPrompt(status: StatusData): string {
+  const timeOfDay = getTimeOfDay()
+  const dayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'long' })
+  const timeString = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+  
+  return `Generate a terminal-style status report. You MUST use the real data provided below.
+
+=== DEVELOPER'S ACTUAL STATUS ===
+Location: ${status.location}
+Updated: ${status.updated}
+Current time: ${timeString} on ${dayOfWeek} (${timeOfDay})
+
+Their notes:
+${status.notes}
+=== END STATUS ===
+
+Generate output in THIS EXACT FORMAT (fill in with real data above):
+
+$ uptime
+ ${timeString} up X days, focus_mode: [mode based on their notes]
+
+$ top -projects
+  PID  PROJECT              CPU%   STATUS
+  001  [main project]       ████   active
+  002  [secondary focus]    ██     background
+  003  [learning/reading]   █      paused
+
+$ free -mental
+       total   used   available
+Mind:  100%    XX%    XX% ([witty note about coffee/energy from their notes])
+
+$ who
+[name] @ ${status.location} since [time]
+mood: [from notes] | music: [from notes]
+
+$ cat /dev/status
+"[one witty summary line from their notes]"
+
+Rules:
+- Use ████ ███ ██ █ for progress bars (more bars = more focus)
+- Extract REAL projects/activities from their notes
+- Keep the exact format above
+- No markdown, no extra explanation`
+}
+
+/**
+ * Call Azure OpenAI API to generate terminal status
  */
 export async function generateSpyReport(status: StatusData): Promise<SpyReportResponse> {
   // Check cache first
   if (cachedReport && Date.now() - cachedReport.timestamp < CACHE_DURATION) {
     return { report: cachedReport.report, cached: true }
+  }
+
+  // Dedupe concurrent requests (React StrictMode fires twice)
+  if (pendingRequest) {
+    return pendingRequest
   }
 
   const endpoint = import.meta.env.VITE_AZURE_OPENAI_ENDPOINT
@@ -64,64 +104,88 @@ export async function generateSpyReport(status: StatusData): Promise<SpyReportRe
     return generateFallbackReport(status)
   }
 
-  try {
-    const response = await fetch(
-      `${endpoint}/openai/deployments/${deployment}/chat/completions?api-version=2024-02-15-preview`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'api-key': apiKey,
-        },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a witty secret agent delivering status reports.',
-            },
-            {
-              role: 'user',
-              content: generateSpyPrompt(status),
-            },
-          ],
-          max_tokens: 200,
-          temperature: 0.8,
-        }),
+  pendingRequest = (async () => {
+    try {
+      const response = await fetch(
+        `${endpoint}/openai/deployments/${deployment}/chat/completions?api-version=2024-02-15-preview`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': apiKey,
+          },
+          body: JSON.stringify({
+            messages: [
+              {
+                role: 'system',
+                content: 'You are a terminal system generating creative status outputs. Be witty and concise.',
+              },
+              {
+                role: 'user',
+                content: generateTerminalPrompt(status),
+              },
+            ],
+            max_tokens: 300,
+            temperature: 0.8,
+          }),
+        }
+      )
+
+      if (!response.ok) {
+        console.error('Azure OpenAI API error:', response.statusText)
+        return generateFallbackReport(status)
       }
-    )
 
-    if (!response.ok) {
-      console.error('Azure OpenAI API error:', response.statusText)
+      const data = await response.json()
+      const report = data.choices?.[0]?.message?.content?.trim() || ''
+
+      if (report) {
+        // Cache the response
+        cachedReport = { report, timestamp: Date.now() }
+        return { report, cached: false }
+      }
+
       return generateFallbackReport(status)
+    } catch (error) {
+      console.error('Azure OpenAI API error:', error)
+      return generateFallbackReport(status)
+    } finally {
+      pendingRequest = null
     }
+  })()
 
-    const data = await response.json()
-    const report = data.choices?.[0]?.message?.content?.trim() || ''
-
-    if (report) {
-      // Cache the response
-      cachedReport = { report, timestamp: Date.now() }
-      return { report, cached: false }
-    }
-
-    return generateFallbackReport(status)
-  } catch (error) {
-    console.error('Azure OpenAI API error:', error)
-    return generateFallbackReport(status)
-  }
+  return pendingRequest
 }
 
 /**
- * Generate a fallback spy report without LLM
+ * Generate a fallback terminal status without LLM
  */
 function generateFallbackReport(status: StatusData): SpyReportResponse {
-  const templates = [
-    `🕵️ CLASSIFIED INTEL: Target spotted at ${status.location}. Current status: ${status.mood}. They appear to be ${status.activity.toLowerCase()}. ${status.funFact ? `Side note: ${status.funFact}` : ''} Over and out.`,
-    `📡 TRANSMISSION RECEIVED: Our operative is currently ${status.activity.toLowerCase()} from ${status.location}. Mood assessment: ${status.mood}. ${status.funFact ? `Bonus intel: ${status.funFact}` : ''} Mission ongoing.`,
-    `🔍 SURVEILLANCE REPORT: Subject located in ${status.location}. Engaging in ${status.activity.toLowerCase()}. Psychological profile: ${status.mood}. ${status.funFact ? `Fun observation: ${status.funFact}` : ''} Awaiting further orders.`,
-  ]
+  const timeString = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+  const hour = new Date().getHours()
+  const coffeeCount = Math.floor(hour / 3) + 1
+  const focusMode = hour >= 9 && hour < 17 ? 'deep' : 'idle'
+  
+  const report = `$ uptime
+ ${timeString} up 7 days, focus_mode: ${focusMode}
 
-  const report = templates[Math.floor(Math.random() * templates.length)]
+$ top -projects
+  PID  PROJECT              CPU%   STATUS
+  001  Portfolio Terminal   ████   active
+  002  Side Projects        ██     background
+  003  Learning             █      queued
+
+$ free -mental
+       total   used   available
+Mind:  100%    ${60 + coffeeCount * 5}%    ${40 - coffeeCount * 5}% (${coffeeCount} coffees deep)
+
+$ who
+giri @ ${status.location} since 09:00
+mood: caffeinated | music: lo-fi beats
+
+$ cat /dev/status
+"Shipping code, one commit at a time."`
+
   return { report, cached: false, error: 'Using fallback report (no API configured)' }
 }
 
@@ -136,8 +200,11 @@ export function clearReportCache(): void {
  * Parse status frontmatter from markdown
  */
 export function parseStatusMarkdown(content: string): StatusData {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
-  const bodyMatch = content.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/)
+  // Normalize line endings to \n
+  const normalized = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+  
+  const frontmatterMatch = normalized.match(/^---\n([\s\S]*?)\n---/)
+  const bodyMatch = normalized.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/)
 
   const frontmatter: Record<string, string> = {}
   
@@ -151,12 +218,8 @@ export function parseStatusMarkdown(content: string): StatusData {
   }
 
   return {
-    lastUpdated: frontmatter.lastUpdated || new Date().toISOString(),
     location: frontmatter.location || 'Unknown Location',
-    activity: frontmatter.activity || 'Status unknown',
-    mood: frontmatter.mood || 'Mysterious',
-    currentProject: frontmatter.currentProject || 'Classified',
-    funFact: frontmatter.funFact,
-    additionalContext: bodyMatch?.[1]?.trim(),
+    updated: frontmatter.updated || new Date().toISOString().split('T')[0],
+    notes: bodyMatch?.[1]?.trim() || 'Status unknown',
   }
 }

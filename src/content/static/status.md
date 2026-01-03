@@ -1,14 +1,10 @@
 ---
-lastUpdated: 2025-01-15T10:00:00Z
-location: San Francisco, CA
-activity: Building a terminal-styled portfolio
-mood: Caffeinated and shipping features
-currentProject: GiriD Portfolio Website
-funFact: Currently on my 4th cup of coffee today
+location: New Jersey
+updated: 2026-01-03
 ---
 
-Currently deep in the zone, listening to lo-fi beats and shipping features.
-The weather outside is perfect coding weather - overcast and cozy.
-
-Just finished implementing the contact page and feeling productive.
-Next up: making this easter egg extra fun with some LLM magic.
+In New Jersey, last cheat day of the holiday season. Munching almond croissant and sipping Mocha.
+Gearing up for the workout + work routine.
+Deep into rebuilding my portfolio as a terminal - excited to ship it soon.
+Starting a painting for wifey on the side. 
+Excited about what the new year brings. 

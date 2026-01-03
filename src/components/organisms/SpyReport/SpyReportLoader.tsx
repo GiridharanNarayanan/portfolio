@@ -39,10 +39,12 @@ export function SpyReportLoader() {
   return (
     <div>
       {/* Glitchy intro text */}
-      <div className="font-mono text-sm mb-4" style={{ color: 'var(--color-error)' }}>
-        <span className="opacity-60">cat: warning: attempting to read corrupted file...</span>
+      <div className="font-mono text-sm mb-2" style={{ color: 'var(--color-text-muted)' }}>
+        <span className="opacity-60">$ cat .c0rrupt3d</span>
         <br />
-        <span className="opacity-80">cat: decrypting contents...</span>
+        <span style={{ color: 'var(--color-error)' }} className="opacity-80">
+          warning: file recovered from corrupted sector
+        </span>
       </div>
       
       <SpyReport
