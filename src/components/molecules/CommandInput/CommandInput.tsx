@@ -178,7 +178,7 @@ export function CommandInput({
         <div className="flex-1 flex items-center relative">
           {/* Ghost text overlay */}
           <div 
-            className="absolute inset-0 flex items-center pointer-events-none font-mono"
+            className="absolute inset-0 flex items-center pointer-events-none font-mono whitespace-pre"
             aria-hidden="true"
           >
             <span style={{ color: 'transparent' }}>{value}</span>
