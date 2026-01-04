@@ -158,12 +158,12 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
     
     // Handle hidden files (starting with .)
     if (itemName.startsWith('.')) {
-      // User must type a dot to see hidden files
-      if (!filePrefix.startsWith('.')) {
-        return false
+      // Special case: .c0rrupt3d shows when easter egg is revealed (even without typing .)
+      if (itemName === '.c0rrupt3d') {
+        return isEasterEggRevealed() && itemName.toLowerCase().startsWith(filePrefix.toLowerCase())
       }
-      // Special case: .c0rrupt3d only shows when easter egg is revealed
-      if (itemName === '.c0rrupt3d' && !isEasterEggRevealed()) {
+      // Other hidden files: user must type a dot to see them
+      if (!filePrefix.startsWith('.')) {
         return false
       }
     }
