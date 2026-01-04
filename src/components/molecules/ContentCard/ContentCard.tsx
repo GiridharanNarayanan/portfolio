@@ -120,7 +120,7 @@ export function ContentCard({ item, index, onClick, commandHint, className }: Co
         {/* Command hint */}
         {commandHint && (
           <span className="ml-auto text-xs text-terminal-muted font-mono">
-            → {commandHint}
+            {'[>]'} {commandHint}
           </span>
         )}
       </div>

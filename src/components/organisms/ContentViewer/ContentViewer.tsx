@@ -252,7 +252,7 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
                 rel="noopener noreferrer"
                 className="px-4 py-2 bg-terminal-accent text-terminal-bg rounded hover:opacity-90 transition-opacity font-mono text-sm"
               >
-                🔗 Live Demo
+                [#] Live Demo
               </a>
             )}
             {content.links.repo && (
@@ -262,7 +262,7 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
                 rel="noopener noreferrer"
                 className="px-4 py-2 border border-terminal-accent text-terminal-accent rounded hover:bg-terminal-accent hover:text-terminal-bg transition-colors font-mono text-sm"
               >
-                📂 Repository
+                {'[>]'} Repository
               </a>
             )}
           </div>

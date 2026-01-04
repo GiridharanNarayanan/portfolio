@@ -70,10 +70,10 @@ export function TappableFileItem({
     >
       <span className="pointer-events-none">{name}</span>
       <span 
-        className="text-terminal-muted/60 text-xs ml-1 pointer-events-none"
+        className="text-terminal-muted/60 text-xs ml-1 pointer-events-none font-mono"
         aria-hidden="true"
       >
-        {isDirectory ? '↵' : '→'}
+        {isDirectory ? '[>]' : '[+]'}
       </span>
     </button>
   )

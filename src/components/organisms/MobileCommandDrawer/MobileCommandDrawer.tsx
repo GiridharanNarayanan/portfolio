@@ -52,7 +52,7 @@ export function MobileCommandItem({ command, onSelect, className }: MobileComman
           {command.description}
         </p>
       </div>
-      <span className="text-terminal-secondary text-lg shrink-0">→</span>
+      <span className="text-terminal-secondary text-lg shrink-0 font-mono">{'[>]'}</span>
     </button>
   );
 }

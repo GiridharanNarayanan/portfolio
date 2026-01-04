@@ -24,11 +24,11 @@ export interface QuickCommandBarProps {
 }
 
 const DEFAULT_QUICK_COMMANDS: QuickCommand[] = [
-  { label: 'ls', command: 'ls', icon: '📂' },
-  { label: '..', command: 'cd ..', icon: '⬆' },
-  { label: '~', command: 'cd ~', icon: '🏠' },
-  { label: 'help', command: 'help', icon: '❓' },
-  { label: 'theme', command: 'theme', icon: '🎨' },
+  { label: 'ls', command: 'ls', icon: '[>]' },
+  { label: '..', command: 'cd ..', icon: '[^]' },
+  { label: '~', command: 'cd ~', icon: '[~]' },
+  { label: 'help', command: 'help', icon: '[?]' },
+  { label: 'theme', command: 'theme', icon: '[*]' },
 ]
 
 /**
@@ -82,7 +82,7 @@ export function QuickCommandBar({
             )}
             aria-label={`Run ${cmd.command}`}
           >
-            <span className="text-base mb-0.5" aria-hidden="true">
+            <span className="text-sm text-terminal-accent-secondary font-mono" aria-hidden="true">
               {cmd.icon}
             </span>
             <span className="text-terminal-accent font-bold">{cmd.label}</span>

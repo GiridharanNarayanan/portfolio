@@ -101,10 +101,10 @@ export function CorruptedFile({ name }: CorruptedFileProps) {
       <span className="pointer-events-none">{displayName}</span>
       {isMobile && (
         <span
-          className="text-terminal-muted/60 text-xs ml-1 pointer-events-none"
+          className="text-terminal-muted/60 text-xs ml-1 pointer-events-none font-mono"
           aria-hidden="true"
         >
-          →
+          [+]
         </span>
       )}
     </>
