@@ -185,13 +185,6 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
     return { value: partial, suggestions: [], isUnique: false, ghostText: '' }
   }
 
-  // Filter out .c0rrupt3d from displayed suggestions (keep it secret)
-  // But still allow it for completion if user types enough of the name
-  const displaySuggestions = matches.filter(item => {
-    const itemName = item.replace(/\/$/, '')
-    return itemName !== '.c0rrupt3d'
-  })
-
   if (matches.length === 1) {
     const match = matches[0]
     const completed = dirPath + match
@@ -199,9 +192,7 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
     const suffix = match.endsWith('/') ? '' : ' '
     // Ghost text is the remaining part of the match
     const ghostText = match.slice(filePrefix.length) + suffix
-    // Don't show ghost text for easter egg file - keep it mysterious
-    const showGhost = match !== '.c0rrupt3d'
-    return { value: completed + suffix, suggestions: displaySuggestions, isUnique: true, ghostText: showGhost ? ghostText : '' }
+    return { value: completed + suffix, suggestions: matches, isUnique: true, ghostText }
   }
 
   // Find common prefix among matches
@@ -215,7 +206,7 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
 
   return {
     value: dirPath + commonPrefix,
-    suggestions: displaySuggestions.sort(),
+    suggestions: matches.sort(),
     isUnique: false,
     ghostText,
   }
