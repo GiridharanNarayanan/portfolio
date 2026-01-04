@@ -82,10 +82,23 @@ export function QuickCommandBar({
             )}
             aria-label={`Run ${cmd.command}`}
           >
-            <span className="text-sm text-terminal-accent-secondary font-mono" aria-hidden="true">
+            <span 
+              className={cn(
+                "text-sm font-mono",
+                isDisabled 
+                  ? "text-terminal-muted/30" 
+                  : "text-terminal-accent-secondary"
+              )} 
+              aria-hidden="true"
+            >
               {cmd.icon}
             </span>
-            <span className="text-terminal-accent font-bold">{cmd.label}</span>
+            <span className={cn(
+              "font-bold",
+              isDisabled ? "text-terminal-muted/40" : "text-terminal-accent"
+            )}>
+              {cmd.label}
+            </span>
           </button>
         )
       })}
