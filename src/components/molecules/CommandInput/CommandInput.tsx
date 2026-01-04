@@ -128,24 +128,15 @@ export function CommandInput({
     // Update ghost text with autocomplete suggestion
     if (newValue.trim()) {
       const result = getAutocompleteSuggestions(newValue)
-      // Show the part of the suggestion that extends beyond current input
-      if (result.value.length > newValue.length && result.value.startsWith(newValue)) {
-        setGhostText(result.value.slice(newValue.length))
-      } else if (result.suggestions.length === 1) {
-        // Single match - show completion
-        const suggestion = result.suggestions[0]
-        const parts = newValue.split(/\s+/)
-        const lastPart = parts[parts.length - 1]
-        if (suggestion.toLowerCase().startsWith(lastPart.toLowerCase()) && suggestion.length > lastPart.length) {
-          setGhostText(suggestion.slice(lastPart.length))
-        } else {
-          setGhostText('')
-        }
-      } else {
-        setGhostText('')
-      }
+      
+      // Use the ghost text directly from autocomplete result
+      setGhostText(result.ghostText || '')
+      
+      // Clear suggestions dropdown (only show on Tab press)
+      setSuggestions([])
     } else {
       setGhostText('')
+      setSuggestions([])
     }
   }, [])
 

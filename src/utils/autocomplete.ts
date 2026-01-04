@@ -12,6 +12,8 @@ export interface AutocompleteResult {
   suggestions: string[]
   /** Whether there was a unique match */
   isUnique: boolean
+  /** Ghost text to display (shows what would be completed) */
+  ghostText: string
 }
 
 /**
@@ -21,7 +23,7 @@ export function getAutocompleteSuggestions(input: string): AutocompleteResult {
   const trimmed = input.trim()
   
   if (!trimmed) {
-    return { value: '', suggestions: [], isUnique: false }
+    return { value: '', suggestions: [], isUnique: false, ghostText: '' }
   }
 
   const parts = trimmed.split(/\s+/)
@@ -39,24 +41,36 @@ export function getAutocompleteSuggestions(input: string): AutocompleteResult {
     
     // Commands that take file/directory paths
     if (['cd', 'cat', 'read', 'open', 'view', 'ls'].includes(command)) {
-      const pathResult = autocompletePath(currentArg, command === 'cd')
+      const directoriesOnly = command === 'cd'
+      const pathResult = autocompletePath(currentArg, directoriesOnly, command)
+      
+      // Build the completed command
+      const baseCommand = args.length > 1 
+        ? `${command} ${args.slice(0, -1).join(' ')} `
+        : `${command} `
+      
+      // If user just typed command + space, show available options
+      if (currentArg === '' && input.endsWith(' ')) {
+        return {
+          value: input,
+          suggestions: pathResult.suggestions,
+          isUnique: pathResult.isUnique,
+          ghostText: pathResult.ghostText,
+        }
+      }
       
       if (pathResult.suggestions.length > 0) {
-        // Build the completed command
-        const baseCommand = args.length > 1 
-          ? `${command} ${args.slice(0, -1).join(' ')} `
-          : `${command} `
-        
         return {
           value: baseCommand + pathResult.value,
           suggestions: pathResult.suggestions,
           isUnique: pathResult.isUnique,
+          ghostText: pathResult.ghostText,
         }
       }
     }
   }
 
-  return { value: input, suggestions: [], isUnique: false }
+  return { value: input, suggestions: [], isUnique: false, ghostText: '' }
 }
 
 /**
@@ -80,30 +94,39 @@ function autocompleteCommand(partial: string): AutocompleteResult {
   )
 
   if (matches.length === 0) {
-    return { value: partial, suggestions: [], isUnique: false }
+    return { value: partial, suggestions: [], isUnique: false, ghostText: '' }
   }
 
   if (matches.length === 1) {
-    return { value: matches[0] + ' ', suggestions: matches, isUnique: true }
+    const ghostText = matches[0].slice(partial.length) + ' '
+    return { value: matches[0] + ' ', suggestions: matches, isUnique: true, ghostText }
   }
 
   // Find common prefix
   const commonPrefix = findCommonPrefix(matches)
+  // Ghost text shows the common prefix completion
+  const ghostText = commonPrefix.length > partial.length 
+    ? commonPrefix.slice(partial.length) 
+    : ''
   
   return {
     value: commonPrefix,
     suggestions: matches.sort(),
     isUnique: false,
+    ghostText,
   }
 }
 
 /**
  * Autocomplete file/directory paths
+ * @param partial - The partial path typed by user
+ * @param directoriesOnly - Whether to only show directories (for cd)
+ * @param command - The command being used (for context-aware suggestions)
  */
-function autocompletePath(partial: string, directoriesOnly: boolean): AutocompleteResult {
+function autocompletePath(partial: string, directoriesOnly: boolean, command: string): AutocompleteResult {
   const fs = getGlobalFilesystem()
   if (!fs) {
-    return { value: partial, suggestions: [], isUnique: false }
+    return { value: partial, suggestions: [], isUnique: false, ghostText: '' }
   }
 
   // Split path into directory and filename parts
@@ -116,7 +139,7 @@ function autocompletePath(partial: string, directoriesOnly: boolean): Autocomple
   const lsResult = fs.ls(searchDir)
   
   if (!lsResult.success || !lsResult.items) {
-    return { value: partial, suggestions: [], isUnique: false }
+    return { value: partial, suggestions: [], isUnique: false, ghostText: '' }
   }
 
   // Filter items that match the prefix
@@ -129,9 +152,14 @@ function autocompletePath(partial: string, directoriesOnly: boolean): Autocomple
   if (directoriesOnly) {
     matches = matches.filter(item => item.endsWith('/'))
   }
+  
+  // For cat/read commands, filter to only files (not directories)
+  if (['cat', 'read'].includes(command)) {
+    matches = matches.filter(item => !item.endsWith('/'))
+  }
 
   if (matches.length === 0) {
-    return { value: partial, suggestions: [], isUnique: false }
+    return { value: partial, suggestions: [], isUnique: false, ghostText: '' }
   }
 
   if (matches.length === 1) {
@@ -139,17 +167,25 @@ function autocompletePath(partial: string, directoriesOnly: boolean): Autocomple
     const completed = dirPath + match
     // Don't add space after directory (user might want to continue path)
     const suffix = match.endsWith('/') ? '' : ' '
-    return { value: completed + suffix, suggestions: matches, isUnique: true }
+    // Ghost text is the remaining part of the match
+    const ghostText = match.slice(filePrefix.length) + suffix
+    return { value: completed + suffix, suggestions: matches, isUnique: true, ghostText }
   }
 
   // Find common prefix among matches
   const matchNames = matches.map(m => m.replace(/\/$/, ''))
   const commonPrefix = findCommonPrefix(matchNames)
   
+  // Ghost text shows what would be auto-completed
+  const ghostText = commonPrefix.length > filePrefix.length 
+    ? commonPrefix.slice(filePrefix.length)
+    : ''
+
   return {
     value: dirPath + commonPrefix,
     suggestions: matches.sort(),
     isUnique: false,
+    ghostText,
   }
 }
 
