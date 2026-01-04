@@ -113,12 +113,14 @@ describe('matchCommand', () => {
       const globalContext: CommandContext = { 
         currentView: 'home', 
         history: [],
-        theme: 'dark'
+        theme: 'dark',
+        currentPath: '/home/girid'
       }
       const detailContext: CommandContext = { 
         currentView: 'detail', 
         history: [],
-        theme: 'dark'
+        theme: 'dark',
+        currentPath: '/home/girid'
       }
 
       const globalResult = matchCommand('detail-only', contextCommands, globalContext)

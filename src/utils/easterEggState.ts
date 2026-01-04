@@ -80,5 +80,6 @@ export function resetEasterEggState(): void {
     lsCount: 0,
     homeVisits: 1,
     revealed: false,
+    consumed: false,
   }
 }
