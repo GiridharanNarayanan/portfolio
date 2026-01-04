@@ -4,7 +4,7 @@
 
 import { getGlobalFilesystem } from '../context/FilesystemContext'
 import { getAllCommands } from '../commands/registry'
-import { isEasterEggRevealed } from './easterEggState'
+import { hasSeenEasterEgg } from './easterEggState'
 
 export interface AutocompleteResult {
   /** The completed value */
@@ -158,9 +158,9 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
     
     // Handle hidden files (starting with .)
     if (itemName.startsWith('.')) {
-      // Special case: .c0rrupt3d shows when easter egg is revealed (even without typing .)
+      // Special case: .c0rrupt3d shows only after user has seen it in ls/tree/cd output
       if (itemName === '.c0rrupt3d') {
-        return isEasterEggRevealed() && itemName.toLowerCase().startsWith(filePrefix.toLowerCase())
+        return hasSeenEasterEgg() && itemName.toLowerCase().startsWith(filePrefix.toLowerCase())
       }
       // Other hidden files: user must type a dot to see them
       if (!filePrefix.startsWith('.')) {

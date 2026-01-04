@@ -4,6 +4,7 @@
 
 import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
+import { markEasterEggSeen } from '../utils/easterEggState'
 
 export const treeCommand: Command = {
   name: 'tree',
@@ -17,6 +18,11 @@ export const treeCommand: Command = {
     }
 
     const lines = fs.tree()
+    
+    // Mark easter egg as seen if .c0rrupt3d is in the tree output
+    if (lines.some(line => line.includes('.c0rrupt3d'))) {
+      markEasterEggSeen()
+    }
 
     return {
       success: true,

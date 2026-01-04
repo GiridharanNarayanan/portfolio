@@ -7,6 +7,7 @@ interface EasterEggState {
   lsCount: number
   homeVisits: number
   revealed: boolean
+  seen: boolean      // True after user has seen .c0rrupt3d in ls/tree/cd output
   consumed: boolean  // True after user has viewed the easter egg
 }
 
@@ -15,6 +16,7 @@ let state: EasterEggState = {
   lsCount: 0,
   homeVisits: 0, // Start at 0, first cd ~ will trigger
   revealed: false,
+  seen: false,
   consumed: false,
 }
 
@@ -59,6 +61,20 @@ export function isEasterEggRevealed(): boolean {
 }
 
 /**
+ * Mark that the user has seen .c0rrupt3d in ls/tree/cd output
+ */
+export function markEasterEggSeen(): void {
+  state.seen = true
+}
+
+/**
+ * Check if user has seen .c0rrupt3d (for autocomplete)
+ */
+export function hasSeenEasterEgg(): boolean {
+  return state.seen && !state.consumed
+}
+
+/**
  * Mark the easter egg as consumed (user has viewed it)
  */
 export function consumeEasterEgg(): void {
@@ -80,6 +96,7 @@ export function resetEasterEggState(): void {
     lsCount: 0,
     homeVisits: 1,
     revealed: false,
+    seen: false,
     consumed: false,
   }
 }

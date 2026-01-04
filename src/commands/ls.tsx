@@ -6,6 +6,7 @@ import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
 import { CorruptedFile } from '../components/atoms/CorruptedFile'
 import { TappableFileItem } from '../components/atoms/TappableFileItem'
+import { markEasterEggSeen } from '../utils/easterEggState'
 
 export const lsCommand: Command = {
   name: 'ls',
@@ -25,6 +26,11 @@ export const lsCommand: Command = {
     }
 
     const items = result.items || []
+    
+    // Mark easter egg as seen if .c0rrupt3d is in the listing
+    if (items.some(item => item === '.c0rrupt3d')) {
+      markEasterEggSeen()
+    }
     
     if (items.length === 0) {
       return {
