@@ -145,6 +145,12 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
   // Filter items that match the prefix
   let matches = lsResult.items.filter(item => {
     const itemName = item.replace(/\/$/, '') // Remove trailing slash for comparison
+    
+    // Hide hidden files (starting with .) unless user explicitly typed a dot
+    if (itemName.startsWith('.') && !filePrefix.startsWith('.')) {
+      return false
+    }
+    
     return itemName.toLowerCase().startsWith(filePrefix.toLowerCase())
   })
 
