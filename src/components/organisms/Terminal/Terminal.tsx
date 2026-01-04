@@ -9,6 +9,7 @@ import { CommandInput } from '../../molecules/CommandInput'
 import { StickyCommandBar } from '../StickyCommandBar'
 import { MobileNavigation } from '../MobileNavigation'
 import { ErrorBoundary } from '../../atoms/ErrorBoundary'
+import { MobileCommandProvider } from '../../../context/MobileCommandContext'
 import { useTerminal } from './useTerminal'
 import { useCommandHistory } from '../../../hooks/useCommandHistory'
 import { useCommands } from '../../../hooks/useCommands'
@@ -176,7 +177,8 @@ export function Terminal({ className }: TerminalProps) {
       {/* Sticky header */}
       <StickyCommandBar currentPath={filesystem.currentPath} />
 
-      {/* Main content area */}
+      {/* Main content area - wrapped with MobileCommandProvider for tappable items */}
+      <MobileCommandProvider isMobile={isMobile} onCommandExecute={handleCommand}>
       <main 
         id="main-content"
         ref={mainContentRef}
@@ -233,10 +235,14 @@ export function Terminal({ className }: TerminalProps) {
         )}
         </ErrorBoundary>
       </main>
+      </MobileCommandProvider>
 
       {/* Command input - desktop vs mobile */}
       {isMobile ? (
-        <MobileNavigation onCommandExecute={handleCommand} />
+        <MobileNavigation 
+          onCommandExecute={handleCommand} 
+          currentPath={filesystem.currentPath}
+        />
       ) : (
         <div
           className="sticky bottom-0 border-t"

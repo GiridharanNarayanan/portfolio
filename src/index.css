@@ -88,6 +88,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Mobile-first responsive font sizes */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
@@ -201,5 +208,57 @@
 
   .safe-area-inset-top {
     padding-top: env(safe-area-inset-top, 0);
+  }
+
+  /* Touch-friendly tap targets */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  /* Mobile navigation animation */
+  @keyframes slide-in-from-bottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-in {
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+  }
+
+  .slide-in-from-bottom {
+    animation-name: slide-in-from-bottom;
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 640px) {
+  /* Larger touch targets on mobile */
+  .tappable-file-item {
+    min-height: 36px;
+    padding: 6px 10px;
+    margin: 2px -10px;
+  }
+
+  /* Better spacing for mobile terminal output */
+  .space-y-4 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  /* Prevent text selection on tap elements */
+  .touch-manipulation {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Mobile-optimized scrolling */
+  main {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 }

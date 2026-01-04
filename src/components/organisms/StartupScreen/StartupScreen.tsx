@@ -6,6 +6,7 @@
 import { cn } from '../../../utils/cn'
 import { GIRID_ASCII } from './asciiArt'
 import { useStartupScreen } from './useStartupScreen'
+import { useMobileDetect } from '../../../hooks/useMobileDetect'
 
 export interface StartupScreenProps {
   /** Callback when user activates (dismisses) the startup screen */
@@ -32,6 +33,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
     onActivate,
     idlePromptDelay: 500,
   })
+  const { isMobile } = useMobileDetect()
 
   if (!isActive) {
     return null
@@ -133,7 +135,11 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
               ))}
             </div>
             <p className="mt-3 text-xs" style={{ color: 'var(--color-text-muted)' }}>
-              Tip: Use <span style={{ color: 'var(--color-accent)' }}>Tab</span> to autocomplete commands and paths
+              {isMobile ? (
+                <>Tip: <span style={{ color: 'var(--color-accent)' }}>Tap</span> on folders and files to navigate</>
+              ) : (
+                <>Tip: Use <span style={{ color: 'var(--color-accent)' }}>Tab</span> to autocomplete commands and paths</>
+              )}
             </p>
           </div>
 
@@ -142,7 +148,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
             className="animate-pulse"
             style={{ color: 'var(--color-accent-secondary)' }}
           >
-            {'>'} Press any key to continue...
+            {isMobile ? '> Tap anywhere to continue...' : '> Press any key to continue...'}
           </span>
         </div>
       </div>

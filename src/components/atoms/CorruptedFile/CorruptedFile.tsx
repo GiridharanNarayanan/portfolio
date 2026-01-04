@@ -3,7 +3,9 @@
  * Displays a file with glitchy/corrupted visual effect
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { useMobileCommand } from '../../../context/MobileCommandContext'
+import { cn } from '../../../utils/cn'
 
 interface CorruptedFileProps {
   name: string
@@ -34,7 +36,23 @@ function corruptText(text: string): string {
 export function CorruptedFile({ name }: CorruptedFileProps) {
   const [displayName, setDisplayName] = useState(name)
   const [isGlitching, setIsGlitching] = useState(true)
-  
+  const { isMobile, executeCommand } = useMobileCommand()
+  const lastTapRef = useRef<number>(0)
+
+  // Get the base filename for the command
+  const baseName = name.replace(/\/$/, '')
+  const command = `cat ${baseName}`
+
+  const handleTap = useCallback(() => {
+    // Debounce to prevent double-firing from touch + click
+    const now = Date.now()
+    if (now - lastTapRef.current < 300) {
+      return
+    }
+    lastTapRef.current = now
+    executeCommand(command)
+  }, [command, executeCommand])
+
   useEffect(() => {
     if (!isGlitching) return
     
@@ -72,8 +90,61 @@ export function CorruptedFile({ name }: CorruptedFileProps) {
     return () => clearInterval(flickerInterval)
   }, [name, isGlitching])
 
+  const content = (
+    <>
+      <style>{`
+        @keyframes corrupted-flicker {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+      `}</style>
+      <span className="pointer-events-none">{displayName}</span>
+      {isMobile && (
+        <span
+          className="text-terminal-muted/60 text-xs ml-1 pointer-events-none"
+          aria-hidden="true"
+        >
+          →
+        </span>
+      )}
+    </>
+  )
+
+  // On mobile, make it tappable
+  if (isMobile) {
+    return (
+      <button
+        type="button"
+        onClick={handleTap}
+        className={cn(
+          'inline-flex items-center gap-1',
+          'min-h-[44px] px-3 py-2 -mx-2',
+          'rounded-md',
+          'bg-transparent',
+          'hover:bg-terminal-error/10',
+          'active:bg-terminal-error/20',
+          'touch-manipulation',
+          'select-none',
+          'transition-colors duration-150',
+          'text-left',
+          'cursor-pointer'
+        )}
+        style={{
+          color: 'var(--color-error)',
+          textShadow: '0 0 4px var(--color-error)',
+          WebkitTapHighlightColor: 'transparent',
+          animation: isGlitching ? 'corrupted-flicker 0.1s infinite' : undefined,
+        }}
+        aria-label={`View corrupted file ${name}`}
+      >
+        {content}
+      </button>
+    )
+  }
+
+  // On desktop, just render the span
   return (
-    <span 
+    <span
       className="inline-block"
       style={{
         color: 'var(--color-error)',
@@ -81,13 +152,7 @@ export function CorruptedFile({ name }: CorruptedFileProps) {
         animation: isGlitching ? 'corrupted-flicker 0.1s infinite' : undefined,
       }}
     >
-      <style>{`
-        @keyframes corrupted-flicker {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-      `}</style>
-      {displayName}
+      {content}
     </span>
   )
 }

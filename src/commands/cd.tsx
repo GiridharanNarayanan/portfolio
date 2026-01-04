@@ -5,6 +5,7 @@
 import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
 import { CorruptedFile } from '../components/atoms/CorruptedFile'
+import { TappableFileItem } from '../components/atoms/TappableFileItem'
 import { isEasterEggRevealed } from '../utils/easterEggState'
 
 export const cdCommand: Command = {
@@ -38,7 +39,7 @@ export const cdCommand: Command = {
     return {
       success: true,
       output: (
-        <pre className="font-mono whitespace-pre">
+        <div className="font-mono">
           {items.length === 0 ? (
             <div className="text-terminal-muted">(empty directory)</div>
           ) : (
@@ -48,16 +49,40 @@ export const cdCommand: Command = {
                 const connector = isLast ? '└── ' : '├── '
                 const isDir = item.endsWith('/')
                 const isCorrupted = item.startsWith('.')
+                const isParentDir = item === '../'
+                const itemName = isDir ? item.slice(0, -1) : item
+                
+                // Determine the command to run
+                let command: string
+                if (isParentDir) {
+                  command = 'cd ..'
+                } else if (isDir) {
+                  command = `cd ${itemName}`
+                } else {
+                  command = `cat ${itemName}`
+                }
+                
                 return (
-                  <div key={i} className={isDir ? 'text-terminal-accent' : 'text-terminal-text'}>
-                    {connector}
-                    {isCorrupted ? <CorruptedFile name={item} /> : item}
+                  <div 
+                    key={i} 
+                    className={`flex items-center ${isDir ? 'text-terminal-accent' : 'text-terminal-text'}`}
+                  >
+                    <span className="text-terminal-muted whitespace-pre">{connector}</span>
+                    {isCorrupted ? (
+                      <CorruptedFile name={item} />
+                    ) : (
+                      <TappableFileItem 
+                        name={item} 
+                        isDirectory={isDir}
+                        command={command}
+                      />
+                    )}
                   </div>
                 )
               })}
             </>
           )}
-        </pre>
+        </div>
       ),
       newContext: { currentPath: result.newPath },
     }
