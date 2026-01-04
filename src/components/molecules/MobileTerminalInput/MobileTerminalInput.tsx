@@ -100,7 +100,7 @@ export function MobileTerminalInput({
             'flex-1',
             'min-h-[44px]',
             'py-3 pr-2',
-            'font-mono text-sm',
+            'font-mono text-base', // 16px prevents iOS auto-zoom on focus
             'text-terminal-text',
             'bg-transparent',
             'outline-none',
