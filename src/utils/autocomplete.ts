@@ -4,6 +4,7 @@
 
 import { getGlobalFilesystem } from '../context/FilesystemContext'
 import { getAllCommands } from '../commands/registry'
+import { isEasterEggRevealed } from './easterEggState'
 
 export interface AutocompleteResult {
   /** The completed value */
@@ -51,6 +52,15 @@ export function getAutocompleteSuggestions(input: string): AutocompleteResult {
       
       // If user just typed command + space, show available options
       if (currentArg === '' && input.endsWith(' ')) {
+        // If there's a unique match, return the completed value for Tab
+        if (pathResult.isUnique && pathResult.suggestions.length === 1) {
+          return {
+            value: baseCommand + pathResult.value,
+            suggestions: pathResult.suggestions,
+            isUnique: true,
+            ghostText: pathResult.ghostText,
+          }
+        }
         return {
           value: input,
           suggestions: pathResult.suggestions,
@@ -146,9 +156,16 @@ function autocompletePath(partial: string, directoriesOnly: boolean, command: st
   let matches = lsResult.items.filter(item => {
     const itemName = item.replace(/\/$/, '') // Remove trailing slash for comparison
     
-    // Hide hidden files (starting with .) unless user explicitly typed a dot
-    if (itemName.startsWith('.') && !filePrefix.startsWith('.')) {
-      return false
+    // Handle hidden files (starting with .)
+    if (itemName.startsWith('.')) {
+      // User must type a dot to see hidden files
+      if (!filePrefix.startsWith('.')) {
+        return false
+      }
+      // Special case: .c0rrupt3d only shows when easter egg is revealed
+      if (itemName === '.c0rrupt3d' && !isEasterEggRevealed()) {
+        return false
+      }
     }
     
     return itemName.toLowerCase().startsWith(filePrefix.toLowerCase())
