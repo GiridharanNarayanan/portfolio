@@ -1,9 +1,12 @@
-import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
+/**
+ * Azure Function: generate-report
+ * Proxies requests to Azure OpenAI to keep API keys secure
+ */
 
 /**
  * Get current time of day for context
  */
-function getTimeOfDay(): string {
+function getTimeOfDay() {
   const hour = new Date().getHours();
   if (hour >= 5 && hour < 9) return 'early morning';
   if (hour >= 9 && hour < 12) return 'morning';
@@ -16,7 +19,7 @@ function getTimeOfDay(): string {
 /**
  * Generate the terminal status prompt for the LLM
  */
-function generateTerminalPrompt(status: { location: string; updated: string; notes: string }): string {
+function generateTerminalPrompt(status) {
   const timeOfDay = getTimeOfDay();
   const dayOfWeek = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const timeString = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -64,7 +67,7 @@ Rules:
 /**
  * Generate fallback report when API is unavailable
  */
-function generateFallbackReport(status: { location: string; updated: string; notes: string }): string {
+function generateFallbackReport(status) {
   const timeString = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
   const hour = new Date().getHours();
   const coffeeCount = Math.floor(hour / 3) + 1;
@@ -91,19 +94,24 @@ $ cat /dev/status
 "Shipping code, one commit at a time."`;
 }
 
-export async function generateReport(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
+module.exports = async function (context, req) {
   context.log('Generate report function triggered');
 
-  // Only allow POST
-  if (request.method !== 'POST') {
-    return {
-      status: 405,
-      jsonBody: { error: 'Method not allowed' }
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    context.res = {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
     };
+    return;
   }
 
   try {
-    const body = await request.json() as { location?: string; updated?: string; notes?: string };
+    const body = req.body || {};
     
     const status = {
       location: body.location || 'Unknown Location',
@@ -118,14 +126,16 @@ export async function generateReport(request: HttpRequest, context: InvocationCo
     // If no API configuration, return fallback
     if (!endpoint || !apiKey) {
       context.log('No API configuration, returning fallback');
-      return {
+      context.res = {
         status: 200,
-        jsonBody: {
+        headers: { 'Content-Type': 'application/json' },
+        body: {
           report: generateFallbackReport(status),
           cached: false,
           error: 'Using fallback report (no API configured)'
         }
       };
+      return;
     }
 
     const response = await fetch(
@@ -155,29 +165,34 @@ export async function generateReport(request: HttpRequest, context: InvocationCo
 
     if (!response.ok) {
       context.log(`Azure OpenAI API error: ${response.statusText}`);
-      return {
+      context.res = {
         status: 200,
-        jsonBody: {
+        headers: { 'Content-Type': 'application/json' },
+        body: {
           report: generateFallbackReport(status),
           cached: false,
           error: `API error: ${response.statusText}`
         }
       };
+      return;
     }
 
-    const data = await response.json() as { choices?: Array<{ message?: { content?: string } }> };
+    const data = await response.json();
     const report = data.choices?.[0]?.message?.content?.trim() || '';
 
     if (report) {
-      return {
+      context.res = {
         status: 200,
-        jsonBody: { report, cached: false }
+        headers: { 'Content-Type': 'application/json' },
+        body: { report, cached: false }
       };
+      return;
     }
 
-    return {
+    context.res = {
       status: 200,
-      jsonBody: {
+      headers: { 'Content-Type': 'application/json' },
+      body: {
         report: generateFallbackReport(status),
         cached: false,
         error: 'Empty response from API'
@@ -186,15 +201,10 @@ export async function generateReport(request: HttpRequest, context: InvocationCo
 
   } catch (error) {
     context.log(`Error generating report: ${error}`);
-    return {
+    context.res = {
       status: 500,
-      jsonBody: { error: 'Internal server error' }
+      headers: { 'Content-Type': 'application/json' },
+      body: { error: 'Internal server error' }
     };
   }
-}
-
-app.http('generate-report', {
-  methods: ['POST'],
-  authLevel: 'anonymous',
-  handler: generateReport
-});
+};
