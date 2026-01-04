@@ -11,8 +11,8 @@ import { getAvailableCommands } from './registry'
  */
 function renderHelpOutput(context: CommandContext): React.ReactNode {
   const commands = getAvailableCommands(context)
-  // Filter out help, clear, and easter eggs
-  const filteredCommands = commands.filter(cmd => !['help', 'clear', 'spyonhim'].includes(cmd.name))
+  // Filter out help and clear from the list
+  const filteredCommands = commands.filter(cmd => !['help', 'clear'].includes(cmd.name))
   
   // Sort in specific order - filesystem commands first, then utilities
   const commandOrder = ['ls', 'cd', 'cat', 'pwd', 'tree', 'theme']

@@ -10,7 +10,6 @@ export { writingsCommand } from './writings'
 export { projectsCommand } from './projects'
 export { viewCommand } from './view'
 export { aboutCommand } from './about'
-export { spyonhimCommand } from './spyonhim'
 
 // Filesystem commands
 export { lsCommand } from './ls'

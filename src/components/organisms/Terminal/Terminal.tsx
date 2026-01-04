@@ -27,7 +27,6 @@ import {
   pwdCommand,
   treeCommand,
   catCommand,
-  spyonhimCommand,
 } from '../../../commands'
 import { useTheme } from '../../../hooks/useTheme'
 
@@ -72,7 +71,6 @@ export function Terminal({ className }: TerminalProps) {
     registerCommand(pwdCommand)
     registerCommand(treeCommand)
     registerCommand(catCommand)
-    registerCommand(spyonhimCommand)
     
     setCommandsReady(true)
   }, [toggleTheme])

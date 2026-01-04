@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for portfolio",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "dist/src/functions/*.js",
+  "scripts": {
+    "start": "npm run build && func start",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
