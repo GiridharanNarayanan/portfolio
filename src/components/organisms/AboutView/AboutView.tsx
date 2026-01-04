@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm'
 import type { AboutContent } from '../../../types/About.types'
 import { CareerTimeline } from '../../molecules/CareerTimeline'
 import { ResumeDownload } from '../../atoms/ResumeDownload'
+import { BrandIcon } from '../../atoms/BrandIcon'
 
 export interface AboutViewProps {
   /** About page content */
@@ -95,7 +96,7 @@ export function AboutView({ content }: AboutViewProps) {
                 rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                 className="flex items-center gap-2 px-4 py-2 border border-terminal-border rounded hover:bg-terminal-muted/20 transition-colors text-terminal-text hover:text-terminal-accent"
               >
-                {link.icon && <span>{link.icon}</span>}
+                <BrandIcon name={link.label} className="w-5 h-5" />
                 <span>{link.label}</span>
                 {!link.url.startsWith('mailto:') && (
                   <svg
