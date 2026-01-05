@@ -16,6 +16,7 @@ import { useCommands } from '../../../hooks/useCommands'
 import { useMobileDetect } from '../../../hooks/useMobileDetect'
 import { useFilesystem } from '../../../hooks/useFilesystem'
 import { setGlobalFilesystem } from '../../../context/FilesystemContext'
+import { clearDeepLinkFromUrl } from '../../../hooks/useDeepLink'
 import { 
   registerCommand,
   helpCommand,
@@ -33,12 +34,21 @@ import { useTheme } from '../../../hooks/useTheme'
 export interface TerminalProps {
   /** Custom class name */
   className?: string
+  /** Initial command to execute with typing animation (for deep links) */
+  initialCommand?: string | null
+}
+
+/** Typing animation state */
+interface TypingState {
+  isTyping: boolean
+  displayedText: string
+  fullCommand: string
 }
 
 /**
  * Main terminal component
  */
-export function Terminal({ className }: TerminalProps) {
+export function Terminal({ className, initialCommand }: TerminalProps) {
   const { theme, toggleTheme } = useTheme()
   const terminalState = useTerminal()
   const commandHistory = useCommandHistory()
@@ -48,6 +58,14 @@ export function Terminal({ className }: TerminalProps) {
   const liveRegionRef = useRef<HTMLDivElement>(null)
   const latestOutputRef = useRef<HTMLDivElement>(null)
   const [commandsReady, setCommandsReady] = useState(false)
+  
+  // Typing animation state for deep links
+  const [typingState, setTypingState] = useState<TypingState>({
+    isTyping: false,
+    displayedText: '',
+    fullCommand: '',
+  })
+  const [initialCommandExecuted, setInitialCommandExecuted] = useState(false)
 
   // Set global filesystem for commands to access
   useEffect(() => {
@@ -143,11 +161,52 @@ export function Terminal({ className }: TerminalProps) {
   )
 
   // Auto-execute ls on first load to show home directory
+  // OR execute initial command from deep link with typing animation
   useEffect(() => {
-    if (commandsReady && !filesystem.loading) {
-      handleCommand('ls')
+    if (commandsReady && !filesystem.loading && !initialCommandExecuted) {
+      if (initialCommand) {
+        // Start typing animation for deep link command
+        setTypingState({
+          isTyping: true,
+          displayedText: '',
+          fullCommand: initialCommand,
+        })
+        setInitialCommandExecuted(true)
+      } else {
+        // Normal startup - just run ls
+        handleCommand('ls')
+        setInitialCommandExecuted(true)
+      }
     }
-  }, [commandsReady, filesystem.loading]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [commandsReady, filesystem.loading, initialCommand, initialCommandExecuted]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Typing animation effect
+  useEffect(() => {
+    if (!typingState.isTyping || !typingState.fullCommand) return
+
+    const { displayedText, fullCommand } = typingState
+    
+    if (displayedText.length < fullCommand.length) {
+      // Continue typing - random delay for realistic effect
+      const delay = 15 + Math.random() * 25
+      const timer = setTimeout(() => {
+        setTypingState(prev => ({
+          ...prev,
+          displayedText: fullCommand.slice(0, prev.displayedText.length + 1),
+        }))
+      }, delay)
+      return () => clearTimeout(timer)
+    } else {
+      // Typing complete - execute command after brief pause
+      const timer = setTimeout(() => {
+        setTypingState({ isTyping: false, displayedText: '', fullCommand: '' })
+        handleCommand(fullCommand)
+        // Clear the URL after command executes
+        clearDeepLinkFromUrl()
+      }, 200)
+      return () => clearTimeout(timer)
+    }
+  }, [typingState]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -219,6 +278,24 @@ export function Terminal({ className }: TerminalProps) {
         {/* Current output */}
         {terminalState.currentOutput && (
           <div className="mb-4">{terminalState.currentOutput}</div>
+        )}
+
+        {/* Typing animation for deep links */}
+        {typingState.isTyping && (
+          <div className="mb-4 font-mono flex items-center gap-2">
+            <span style={{ color: 'var(--color-accent-secondary)' }}>
+              $ &gt;
+            </span>
+            <span style={{ color: 'var(--color-text)' }}>
+              {typingState.displayedText}
+            </span>
+            <span 
+              className="animate-pulse"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              █
+            </span>
+          </div>
         )}
 
         {/* Error message */}

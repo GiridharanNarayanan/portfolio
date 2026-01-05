@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { ThemeProvider } from './components/atoms/ThemeProvider'
 import { ErrorBoundary } from './components/atoms/ErrorBoundary'
 import { StartupScreen } from './components/organisms/StartupScreen'
 import { Terminal } from './components/organisms/Terminal'
+import { parseDeepLink } from './hooks/useDeepLink'
 
 function App() {
-  const [isStarted, setIsStarted] = useState(false)
+  // Check for deep link on initial load
+  const deepLink = useMemo(() => parseDeepLink(window.location.pathname), [])
+  
+  // Skip startup screen if we have a deep link
+  const [isStarted, setIsStarted] = useState(deepLink.hasDeepLink)
 
   return (
     <ErrorBoundary>
@@ -13,7 +18,9 @@ function App() {
         {!isStarted && (
           <StartupScreen onActivate={() => setIsStarted(true)} />
         )}
-        {isStarted && <Terminal />}
+        {isStarted && (
+          <Terminal initialCommand={deepLink.hasDeepLink ? deepLink.command : null} />
+        )}
       </ThemeProvider>
     </ErrorBoundary>
   )
