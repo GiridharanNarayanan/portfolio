@@ -1,10 +1,10 @@
 ---
 location: New Jersey
-updated: 2026-01-03
+updated: 2026-01-06
 ---
 
-In New Jersey, last cheat day of the holiday season. Munching almond croissant and sipping Mocha.
-Gearing up for the workout + work routine.
-Deep into rebuilding my portfolio as a terminal - excited to ship it soon.
-Starting a painting for wifey on the side. 
-Excited about what the new year brings. 
+Body and mind orienting to work & focus. 
+Getting into the routine of workout + work.
+Still prioritizing some learning & building in the side. 
+Continuing the painting for my wife.
+
