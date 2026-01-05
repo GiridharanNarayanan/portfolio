@@ -33,9 +33,9 @@ export function CareerTimeline({ entries }: CareerTimelineProps) {
 
   return (
     <div className="relative py-8" data-testid="career-timeline">
-      {/* Center vertical line */}
+      {/* Center vertical line - moves to left on mobile */}
       <div
-        className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-terminal-border"
+        className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 bg-terminal-border"
         aria-hidden="true"
       />
 
@@ -52,7 +52,7 @@ export function CareerTimeline({ entries }: CareerTimelineProps) {
 
       {/* Timeline start indicator */}
       <div
-        className="absolute left-1/2 bottom-0 -translate-x-1/2 w-3 h-3 rounded-full bg-terminal-border"
+        className="absolute left-4 md:left-1/2 bottom-0 md:-translate-x-1/2 w-3 h-3 rounded-full bg-terminal-border"
         aria-hidden="true"
       />
     </div>

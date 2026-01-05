@@ -30,11 +30,14 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
     ? `${formatDate(entry.startDate)} - Current`
     : `${formatDate(entry.startDate)} - ${formatDate(entry.endDate!)}`
 
+  // Mobile: always left-aligned. Desktop: alternating
+  const isLeftOnDesktop = position === 'left'
+
   return (
     <div
       className={`
-        relative flex items-center
-        ${position === 'left' ? 'flex-row' : 'flex-row-reverse'}
+        relative flex items-center flex-row
+        ${isLeftOnDesktop ? 'md:flex-row' : 'md:flex-row-reverse'}
       `}
       data-testid="career-timeline-entry"
       data-position={position}
@@ -43,11 +46,13 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
       {/* Entry Card */}
       <div
         className={`
-          w-[calc(50%-2rem)] p-4 
+          w-[calc(100%-3rem)] p-4 ml-8
+          md:w-[calc(50%-2rem)] md:ml-0
+          ${isLeftOnDesktop ? 'md:mr-8 md:text-right' : 'md:ml-8 md:text-left'}
           bg-terminal-bg-secondary border rounded-lg
           transition-all duration-300 ease-in-out
+          text-left
           ${isHovered ? 'border-terminal-accent scale-[1.02] shadow-lg shadow-terminal-accent/20' : 'border-terminal-border'}
-          ${position === 'left' ? 'mr-8 text-right' : 'ml-8 text-left'}
         `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -56,14 +61,14 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
         aria-label={`${entry.role} at ${entry.organization}`}
       >
         {/* Header with Logo */}
-        <div className={`flex items-center gap-3 mb-3 ${position === 'left' ? 'flex-row-reverse' : ''}`}>
+        <div className={`flex items-center gap-3 mb-3 ${isLeftOnDesktop ? 'md:flex-row-reverse' : ''}`}>
           <img
             src={entry.logo}
             alt={`${entry.organization} logo`}
             className="w-10 h-10 rounded object-contain bg-terminal-bg p-1"
             loading="lazy"
           />
-          <div className={position === 'left' ? 'text-right' : 'text-left'}>
+          <div className={`text-left ${isLeftOnDesktop ? 'md:text-right' : ''}`}>
             <h3 className="font-bold text-terminal-text text-lg leading-tight">
               {entry.role}
             </h3>
@@ -74,7 +79,7 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
         </div>
 
         {/* Date and Location */}
-        <div className={`flex items-center gap-2 text-xs text-terminal-muted mb-2 ${position === 'left' ? 'justify-end' : ''}`}>
+        <div className={`flex flex-wrap items-center gap-2 text-xs text-terminal-muted mb-2 ${isLeftOnDesktop ? 'md:justify-end' : ''}`}>
           <span>{dateRange}</span>
           {isCurrent && (
             <span className="px-1.5 py-0.5 bg-terminal-accent/20 text-terminal-accent rounded text-[10px] font-semibold">
@@ -91,11 +96,11 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
         </p>
 
         {/* Highlights */}
-        <ul className={`space-y-1 ${position === 'left' ? 'text-right' : 'text-left'}`}>
+        <ul className={`space-y-1 text-left ${isLeftOnDesktop ? 'md:text-right' : ''}`}>
           {entry.highlights.map((highlight, idx) => (
             <li
               key={idx}
-              className={`text-xs text-terminal-muted flex items-start gap-2 ${position === 'left' ? 'flex-row-reverse' : ''}`}
+              className={`text-xs text-terminal-muted flex items-start gap-2 ${isLeftOnDesktop ? 'md:flex-row-reverse' : ''}`}
             >
               <span className={isEducation ? 'text-terminal-secondary' : 'text-terminal-accent'}>
                 {isEducation ? '◆' : '▸'}
@@ -109,7 +114,7 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
       {/* Timeline Connector Dot */}
       <div
         className={`
-          absolute left-1/2 -translate-x-1/2
+          absolute left-4 md:left-1/2 md:-translate-x-1/2
           w-4 h-4 rounded-full border-2
           ${isEducation ? 'bg-terminal-secondary border-terminal-secondary' : 'bg-terminal-accent border-terminal-accent'}
           ${isHovered ? 'scale-125' : ''}
