@@ -11,8 +11,6 @@ tags:
   - reflection
 ---
 
-# Heads-up
-
 For a long time, I've been proud of how heads-down I could be.
 
 Not in the performative sense. Not in the "always busy" way. The quieter kind of focus. The kind where attention narrows, context deepens, and the work in front of you holds most of your thinking. That posture suited me, and for a long time, it worked.
@@ -65,9 +63,9 @@ The heads-down phase was not a mistake. It built judgment. It created clarity. I
 
 What changed is not the value of focus, but the environment around it.
 
-Realizing that has been unexpectedly liberating.
+*Realizing that has been unexpectedly liberating.*
 
-> There is relief in acknowledging that the strategy that worked before does not need to be defended forever. Not because it failed, but because the terrain changed.
+There is relief in acknowledging that the strategy that worked before does not need to be defended forever. Not because it failed, but because the terrain changed.
 
 ---
 
@@ -109,9 +107,7 @@ A heads-up to what was changing around me. To where conversations were happening
 
 This post is also that, in the most literal sense.
 
-A heads-up that I will be writing more here. Sharing thoughts, learnings, and observations as I go. Some of it will be directly applicable. Some of it may not be, at least not right away.
-
-*That is intentional.*
+A heads-up that I will be writing more here. Sharing thoughts, learnings, and observations as I go. Some of it will be directly applicable. Some of it may not be, at least not right away. That is intentional.
 
 If the previous phase was about going deep, this one includes looking up more often. About staying aware while continuing to build. About adjusting posture, not changing direction.
 
