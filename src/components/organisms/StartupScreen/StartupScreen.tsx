@@ -96,7 +96,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
             className="font-mono text-lg md:text-xl"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            I build software and teams
+            Engineering leader. Creator.
           </p>
         </div>
 
@@ -148,7 +148,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
             className="animate-pulse"
             style={{ color: 'var(--color-accent-secondary)' }}
           >
-            {isMobile ? '> Tap anywhere to continue...' : '> Press any key to continue...'}
+            {isMobile ? '> Tap anywhere to explore my portfolio...' : '> Press any key to explore my portfolio...'}
           </span>
         </div>
       </div>
