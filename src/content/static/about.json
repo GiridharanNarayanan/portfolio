@@ -3,11 +3,24 @@
   "resumeUrl": "/resume.pdf",
   "careerTimeline": [
     {
+      "organization": "PSG College of Technology",
+      "role": "B.Tech Information Technology",
+      "startDate": "2009-07",
+      "endDate": "2013-05",
+      "location": "Tamil Nadu, India",
+      "description": "Graduated with distinction in Information Technology.",
+      "highlights": [
+        "CGPA: 9.8/10"
+      ],
+      "logo": "/logos/psgtech.png",
+      "type": "education"
+    },
+    {
       "organization": "Microsoft",
       "role": "Principal Software Engineering Manager",
       "startDate": "2024-07",
       "location": "NY, United States",
-      "description": "Leading development of Copilot Analytics",
+      "description": "Leading development of Copilot Analytics.",
       "highlights": [
         "Building an analytics platform to measure AI adoption and ROI across organizations",
         "Defining product vision for enterprise AI measurement"

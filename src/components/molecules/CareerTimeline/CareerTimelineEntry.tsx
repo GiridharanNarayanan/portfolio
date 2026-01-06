@@ -65,7 +65,7 @@ export function CareerTimelineEntry({ entry }: CareerTimelineEntryProps) {
           <img
             src={entry.logo}
             alt={`${entry.organization} logo`}
-            className="w-10 h-10 rounded object-contain bg-terminal-bg p-1"
+            className="w-10 h-10 rounded object-contain bg-white p-1"
             loading="lazy"
           />
           <div>
