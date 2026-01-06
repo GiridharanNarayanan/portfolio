@@ -1,7 +1,7 @@
 ---
 title: "Heads-Up"
 date: "2025-01-05"
-excerpt: "A reflection on the importance of lifting your head, looking outward, and staying present in a world full of distractions."
+excerpt: "A reflection on recalibrating how I learn and stay aware in a fast-changing industry."
 published: true
 featuredImage: "/images/writings/heads-up.svg"
 readTime: "4 min read"
@@ -12,7 +12,7 @@ tags:
   - reflection
 ---
 
-For a long time, I've been proud of how heads-down I could be.
+For a long time, I've been proud of how head-down I could be.
 
 Not in the performative sense. Not in the "always busy" way. The quieter kind of focus. The kind where attention narrows, context deepens, and the work in front of you holds most of your thinking. That posture suited me, and for a long time, it worked.
 
@@ -30,7 +30,7 @@ Focus is not accidental in tech and product. It is learned, practiced, and often
 
 I leaned into that depth. Ask me about something I built four years ago, and I can still tell you where the edges were. What broke. What surprised us. What tradeoffs we made and why.
 
-Knowing the weeds helped me design products at a higher level. It sharpened my judgment and made abstraction honest. That depth also made the transition from individual contributor to engineering manager feel natural. I wasn't stepping away from the work so much as zooming out on it.
+Being in the weeds helped me design products at a higher level. It sharpened my judgment and made abstraction honest. That depth also made the transition from individual contributor to engineering manager feel natural. I wasn't stepping away from the work so much as zooming out on it.
 
 Being deeply grounded in the system made it easier to reason about outcomes, not just implementations.
 
@@ -42,7 +42,7 @@ The need to look beyond immediate work was always there. But it stayed mediated 
 
 Learning happened when a decision needed more grounding. When a product evolved. When the surface area of responsibility widened. That model worked because the environment was relatively stable.
 
-*That stability is gone.*
+**That stability is gone.**
 
 AI did not introduce a new topic. It changed the slope.
 
@@ -64,7 +64,7 @@ The heads-down phase was not a mistake. It built judgment. It created clarity. I
 
 What changed is not the value of focus, but the environment around it.
 
-*Realizing that has been unexpectedly liberating.*
+**Realizing that has been unexpectedly liberating.**
 
 There is relief in acknowledging that the strategy that worked before does not need to be defended forever. Not because it failed, but because the terrain changed.
 
@@ -78,7 +78,7 @@ For me, it means loosening the coupling between learning and immediate utility.
 
 Some learning now needs to happen without a clear outcome attached. Without certainty about when or where it will be applied. The return is slower and less direct, but it compounds differently.
 
-*Looking up is about:*
+**Looking up is about:**
 
 - Noticing shifts before they surface as decisions
 - Building intuition ahead of plans
@@ -94,7 +94,7 @@ This pattern extended beyond work as well.
 
 When most of your energy goes into shaping outcomes and maintaining momentum, everything else becomes quieter by default. Not ignored. Just less prominent.
 
-Lately, I have been creating more space to read differently, observe more broadly, and think without immediately asking how something will be used. That shift has reduced urgency without reducing clarity.
+Lately, I've been creating more space to read differently, observe more broadly, and think without immediately asking how something will be used. That shift has reduced urgency without reducing clarity.
 
 *It feels less like falling behind and more like staying oriented.*
 
@@ -102,15 +102,13 @@ Lately, I have been creating more space to read differently, observe more broadl
 
 ## A heads-up
 
-This shift did not start as a strategy. It started with the simple act of lifting my head up and paying attention again.
+This shift did not start as a strategy. It started with the simple act of lifting my head and paying attention again.
 
-A heads-up to what was changing around me. To where conversations were happening earlier than before. To ideas forming outside the immediate boundaries of the products and plans I own.
+A heads-up about what was changing around me. About where conversations were happening earlier than before. About ideas forming outside the immediate boundaries of the products and plans I own.
 
-This post is also that, in the most literal sense.
+This post is also that. A heads-up that I'll be writing more here. Sharing thoughts, learnings, and observations as I go. Some of it will be directly applicable. Some of it may not be, at least not right away. That is intentional.
 
-A heads-up that I will be writing more here. Sharing thoughts, learnings, and observations as I go. Some of it will be directly applicable. Some of it may not be, at least not right away. That is intentional.
-
-If the previous phase was about going deep, this one includes looking up more often. About staying aware while continuing to build. About adjusting posture, not changing direction.
+If the previous phase was about going deep, this one includes looking up more often. Staying aware while continuing to build. Adjusting posture, not changing direction.
 
 No panic. No pivot. Just a recalibration.
 
