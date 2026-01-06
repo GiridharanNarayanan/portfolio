@@ -26,12 +26,12 @@ test.describe('Full User Journey', () => {
     // 6. Navigate to writings
     await page.fill('[data-testid="command-input"] input', 'writings')
     await page.keyboard.press('Enter')
-    await expect(page.getByText(/sample-post/i)).toBeVisible()
+    await expect(page.getByText(/heads-up/i)).toBeVisible()
 
     // 7. Read a post
-    await page.fill('[data-testid="command-input"] input', 'read sample-post')
+    await page.fill('[data-testid="command-input"] input', 'read heads-up')
     await page.keyboard.press('Enter')
-    await expect(page.getByText(/Getting Started/i)).toBeVisible()
+    await expect(page.getByText(/Heads-Up/i)).toBeVisible()
 
     // 8. Go back
     await page.fill('[data-testid="command-input"] input', 'back')

@@ -3,13 +3,13 @@
  * Parses URL paths to enable shareable links to specific content
  * 
  * Supported URL patterns:
- * - /writings/sample-post → cat writings/sample-post
+ * - /writings/heads-up → cat writings/heads-up
  * - /projects/my-project → cat projects/my-project
  * - /about → about page
  */
 
 import { useMemo } from 'react'
-import type { CommandResult } from '../types/Command.types'
+import type { CommandResult, CommandContext } from '../types/Command.types'
 
 export interface DeepLinkResult {
   /** Whether a deep link was detected */
@@ -86,10 +86,18 @@ export function clearDeepLinkFromUrl(): void {
 }
 
 /**
- * Update the URL based on command result
+ * Update the URL based on command result and context
  * This enables shareable URLs as users navigate
+ * 
+ * @param input - The command that was executed
+ * @param result - The result of the command execution
+ * @param context - The terminal context AFTER command execution (includes updated currentPath)
  */
-export function updateUrlFromCommand(input: string, result: CommandResult): void {
+export function updateUrlFromCommand(
+  input: string, 
+  result: CommandResult, 
+  context: CommandContext
+): void {
   // Don't update URL for failed commands
   if (!result.success) {
     return
@@ -98,35 +106,64 @@ export function updateUrlFromCommand(input: string, result: CommandResult): void
   const trimmedInput = input.trim().toLowerCase()
   let newPath = '/'
 
+  // Normalize current path (remove leading/trailing slashes, handle ~)
+  const currentDir = context.currentPath
+    .replace(/^[~/]+|\/+$/g, '')
+    .replace(/^\/+/, '')
+
   // Handle 'cat' commands for content viewing
-  const catMatch = trimmedInput.match(/^cat\s+(writings|projects)\/([^.]+)(\.md)?$/i)
+  const catMatch = trimmedInput.match(/^cat\s+(.+?)(\.md)?$/i)
   if (catMatch) {
-    const [, contentType, slug] = catMatch
-    newPath = `/${contentType}/${slug}`
+    const filePath = catMatch[1]
+    
+    // Check if it's an absolute path (contains directory)
+    if (filePath.includes('/')) {
+      // Absolute path like "writings/heads-up"
+      const parts = filePath.split('/')
+      if (parts[0] === 'writings' || parts[0] === 'projects') {
+        newPath = `/${parts[0]}/${parts.slice(1).join('/')}`
+      } else {
+        newPath = `/${filePath}`
+      }
+    } else if (filePath === 'whoami') {
+      // Special case for whoami
+      newPath = '/whoami'
+    } else if (currentDir === 'writings' || currentDir === 'projects') {
+      // Relative path within a directory - combine with current dir
+      newPath = `/${currentDir}/${filePath}`
+    } else {
+      // File in root directory
+      newPath = `/${filePath}`
+    }
   }
-  // Handle cat whoami.md
-  else if (trimmedInput === 'cat whoami.md') {
-    newPath = '/whoami'
-  }
-  // Handle direct navigation commands
+  // Handle direct navigation commands (whoami, about)
   else if (trimmedInput === 'about' || trimmedInput === 'whoami') {
     newPath = '/whoami'
   }
+  // Handle directory listing commands
   else if (trimmedInput === 'writings' || trimmedInput === 'ls writings') {
     newPath = '/writings'
   }
   else if (trimmedInput === 'projects' || trimmedInput === 'ls projects') {
     newPath = '/projects'
   }
+  // Handle ls command - use current directory from context
+  else if (trimmedInput === 'ls' || trimmedInput === 'ls .') {
+    if (currentDir === 'writings' || currentDir === 'projects') {
+      newPath = `/${currentDir}`
+    } else {
+      newPath = '/'
+    }
+  }
+  // Handle navigation to home
   else if (trimmedInput === 'cd ~' || trimmedInput === 'cd' || trimmedInput === 'home' || trimmedInput === 'clear') {
     newPath = '/'
   }
-  // Handle cd into directories
+  // Handle cd commands - derive from updated context
   else if (trimmedInput.startsWith('cd ')) {
-    const dir = trimmedInput.replace('cd ', '').trim()
-    if (dir === 'writings' || dir === 'projects') {
-      newPath = `/${dir}`
-    } else if (dir === '..' || dir === '~' || dir === '/') {
+    if (currentDir === 'writings' || currentDir === 'projects') {
+      newPath = `/${currentDir}`
+    } else {
       newPath = '/'
     }
   }

@@ -24,17 +24,17 @@ test.describe('US3 - Browse Writings', () => {
     await input.fill('writings');
     await input.press('Enter');
 
-    // Should show at least 1 article (the sample post)
+    // Should show at least 1 article (heads-up)
     await expect(page.locator('text=/\\d+ articles? found/')).toBeVisible();
   });
 
-  test('displays sample post in writings list', async ({ page }) => {
+  test('displays heads-up post in writings list', async ({ page }) => {
     const input = page.locator('input[type="text"]');
     await input.fill('writings');
     await input.press('Enter');
 
-    // Verify the sample post appears
-    await expect(page.locator('text=Building a Terminal-Style Portfolio')).toBeVisible();
+    // Verify the heads-up post appears
+    await expect(page.locator('text=Heads-Up')).toBeVisible();
   });
 
   test('shows command hint for reading articles', async ({ page }) => {
@@ -43,25 +43,25 @@ test.describe('US3 - Browse Writings', () => {
     await input.press('Enter');
 
     // Verify the read command hint appears
-    await expect(page.locator('text=read sample-post')).toBeVisible();
+    await expect(page.locator('text=read heads-up')).toBeVisible();
   });
 
   test('displays article content when "read <slug>" command is entered', async ({ page }) => {
     const input = page.locator('input[type="text"]');
-    await input.fill('read sample-post');
+    await input.fill('read heads-up');
     await input.press('Enter');
 
     // Verify the article title appears
-    await expect(page.locator('h1:has-text("Building a Terminal-Style Portfolio")')).toBeVisible();
+    await expect(page.locator('h1:has-text("Heads-Up")')).toBeVisible();
   });
 
   test('displays featured image in article view', async ({ page }) => {
     const input = page.locator('input[type="text"]');
-    await input.fill('read sample-post');
+    await input.fill('read heads-up');
     await input.press('Enter');
 
     // Verify a featured image is present
-    const featuredImage = page.locator('img[alt="Building a Terminal-Style Portfolio"]');
+    const featuredImage = page.locator('img[alt="Heads-Up"]');
     await expect(featuredImage).toBeVisible();
   });
 
@@ -87,11 +87,11 @@ test.describe('US3 - Browse Writings', () => {
   test('returns to writings list with "back" command', async ({ page }) => {
     // Navigate to article
     const input = page.locator('input[type="text"]');
-    await input.fill('read sample-post');
+    await input.fill('read heads-up');
     await input.press('Enter');
 
     // Verify article is shown
-    await expect(page.locator('h1:has-text("Building a Terminal-Style Portfolio")')).toBeVisible();
+    await expect(page.locator('h1:has-text("Heads-Up")')).toBeVisible();
 
     // Use back command
     await input.fill('back');
@@ -115,7 +115,7 @@ test.describe('US3 - Browse Writings', () => {
     await input.fill('writings');
     await input.press('Enter');
 
-    // Verify tags are shown (the sample post has tags like react, typescript)
-    await expect(page.locator('text=#react').first()).toBeVisible();
+    // Verify tags are shown (heads-up has tags like leadership, mindfulness)
+    await expect(page.locator('text=#leadership').first()).toBeVisible();
   });
 });

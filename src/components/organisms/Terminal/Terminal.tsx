@@ -116,7 +116,12 @@ export function Terminal({ className, initialCommand }: TerminalProps) {
       const result = await execute(input)
 
       // Update URL for shareable links
-      updateUrlFromCommand(input, result)
+      // Merge current context with any updates from the command result
+      const effectiveContext = {
+        ...terminalState.context,
+        ...result.newContext,
+      }
+      updateUrlFromCommand(input, result, effectiveContext)
 
       // Announce command execution for screen readers
       if (liveRegionRef.current) {

@@ -22,7 +22,7 @@ export const viewCommand: Command = {
           <div className="text-terminal-error font-mono">
             <p>Usage: view &lt;#&gt; or view &lt;slug&gt;</p>
             <p className="text-terminal-muted mt-2">
-              Example: <code className="text-terminal-accent">view 1</code> or <code className="text-terminal-accent">view sample-post</code>
+              Example: <code className="text-terminal-accent">view 1</code> or <code className="text-terminal-accent">view heads-up</code>
             </p>
             <p className="text-terminal-muted mt-1">
               Tip: Type <code className="text-terminal-accent">writings</code> or <code className="text-terminal-accent">projects</code> to see available content with index numbers.
