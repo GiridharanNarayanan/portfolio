@@ -85,7 +85,7 @@ export function AboutView({ content }: AboutViewProps) {
             <span className="text-terminal-accent">$</span> Get in Touch
           </h2>
           <p className="text-terminal-muted text-sm mb-4">
-            I'm always open to interesting conversations and collaboration opportunities.
+            Open to conversations.
           </p>
           <div className="flex flex-wrap gap-4">
             {content.contactLinks.map((link) => (
