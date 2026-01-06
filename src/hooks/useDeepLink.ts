@@ -104,6 +104,10 @@ export function updateUrlFromCommand(input: string, result: CommandResult): void
     const [, contentType, slug] = catMatch
     newPath = `/${contentType}/${slug}`
   }
+  // Handle cat whoami.md or cat about.md
+  else if (trimmedInput === 'cat whoami.md' || trimmedInput === 'cat about.md') {
+    newPath = '/about'
+  }
   // Handle direct navigation commands
   else if (trimmedInput === 'about' || trimmedInput === 'whoami') {
     newPath = '/about'
