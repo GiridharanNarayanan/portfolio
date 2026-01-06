@@ -5,9 +5,11 @@
  * Supported URL patterns:
  * - /writings/sample-post → cat writings/sample-post
  * - /projects/my-project → cat projects/my-project
+ * - /about → about page
  */
 
 import { useMemo } from 'react'
+import type { CommandResult } from '../types/Command.types'
 
 export interface DeepLinkResult {
   /** Whether a deep link was detected */
@@ -81,4 +83,60 @@ export function clearDeepLinkFromUrl(): void {
   if (window.location.pathname !== '/') {
     window.history.replaceState({}, '', '/')
   }
+}
+
+/**
+ * Update the URL based on command result
+ * This enables shareable URLs as users navigate
+ */
+export function updateUrlFromCommand(input: string, result: CommandResult): void {
+  // Don't update URL for failed commands
+  if (!result.success) {
+    return
+  }
+
+  const trimmedInput = input.trim().toLowerCase()
+  let newPath = '/'
+
+  // Handle 'cat' commands for content viewing
+  const catMatch = trimmedInput.match(/^cat\s+(writings|projects)\/([^.]+)(\.md)?$/i)
+  if (catMatch) {
+    const [, contentType, slug] = catMatch
+    newPath = `/${contentType}/${slug}`
+  }
+  // Handle direct navigation commands
+  else if (trimmedInput === 'about' || trimmedInput === 'whoami') {
+    newPath = '/about'
+  }
+  else if (trimmedInput === 'writings' || trimmedInput === 'ls writings') {
+    newPath = '/writings'
+  }
+  else if (trimmedInput === 'projects' || trimmedInput === 'ls projects') {
+    newPath = '/projects'
+  }
+  else if (trimmedInput === 'cd ~' || trimmedInput === 'cd' || trimmedInput === 'home' || trimmedInput === 'clear') {
+    newPath = '/'
+  }
+  // Handle cd into directories
+  else if (trimmedInput.startsWith('cd ')) {
+    const dir = trimmedInput.replace('cd ', '').trim()
+    if (dir === 'writings' || dir === 'projects') {
+      newPath = `/${dir}`
+    } else if (dir === '..' || dir === '~' || dir === '/') {
+      newPath = '/'
+    }
+  }
+
+  // Only update if path changed
+  if (window.location.pathname !== newPath) {
+    window.history.pushState({}, '', newPath)
+  }
+}
+
+/**
+ * Get command from URL path for browser back/forward navigation
+ */
+export function getCommandFromPath(pathname: string): string | null {
+  const result = parseDeepLink(pathname)
+  return result.hasDeepLink ? result.command : null
 }

@@ -16,7 +16,7 @@ import { useCommands } from '../../../hooks/useCommands'
 import { useMobileDetect } from '../../../hooks/useMobileDetect'
 import { useFilesystem } from '../../../hooks/useFilesystem'
 import { setGlobalFilesystem } from '../../../context/FilesystemContext'
-import { clearDeepLinkFromUrl } from '../../../hooks/useDeepLink'
+import { updateUrlFromCommand, getCommandFromPath } from '../../../hooks/useDeepLink'
 import { 
   registerCommand,
   helpCommand,
@@ -115,6 +115,9 @@ export function Terminal({ className, initialCommand }: TerminalProps) {
 
       const result = await execute(input)
 
+      // Update URL for shareable links
+      updateUrlFromCommand(input, result)
+
       // Announce command execution for screen readers
       if (liveRegionRef.current) {
         liveRegionRef.current.textContent = `Command ${input} executed`
@@ -201,12 +204,27 @@ export function Terminal({ className, initialCommand }: TerminalProps) {
       const timer = setTimeout(() => {
         setTypingState({ isTyping: false, displayedText: '', fullCommand: '' })
         handleCommand(fullCommand)
-        // Clear the URL after command executes
-        clearDeepLinkFromUrl()
+        // URL is now managed by updateUrlFromCommand in handleCommand
       }, 200)
       return () => clearTimeout(timer)
     }
   }, [typingState]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Handle browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const command = getCommandFromPath(window.location.pathname)
+      if (command) {
+        handleCommand(command)
+      } else {
+        // Back to home - show directory listing
+        handleCommand('ls')
+      }
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [handleCommand])
 
   return (
     <div
