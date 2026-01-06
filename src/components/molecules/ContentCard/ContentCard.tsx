@@ -117,6 +117,14 @@ export function ContentCard({ item, index, onClick, commandHint, className }: Co
           </>
         )}
 
+        {/* Read time indicator */}
+        {item.readTime && (
+          <span className="ml-auto text-xs text-terminal-muted flex items-center gap-1">
+            <span>⏱</span>
+            {item.readTime}
+          </span>
+        )}
+
         {/* Command hint */}
         {commandHint && (
           <span className="ml-auto text-xs text-terminal-muted font-mono">

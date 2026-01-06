@@ -4,6 +4,7 @@ date: "2025-01-05"
 excerpt: "A reflection on the importance of lifting your head, looking outward, and staying present in a world full of distractions."
 published: true
 featuredImage: "/images/writings/heads-up.svg"
+readTime: "4 min read"
 tags:
   - leadership
   - mindfulness

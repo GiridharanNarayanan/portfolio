@@ -104,6 +104,7 @@ export interface ContentFrontmatter {
   slug?: string
   published?: boolean
   featuredImage?: string
+  readTime?: string
   tags?: string[]
   techStack?: string[]
   location?: string
@@ -125,6 +126,7 @@ export interface ContentItem {
   excerpt: string
   content: string
   featuredImage?: string
+  readTime?: string
   tags?: string[]
   techStack?: string[]
   links?: {

@@ -61,10 +61,10 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
           )}
         </div>
 
-        {/* Tags */}
-        {content.tags && content.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-3">
-            {content.tags.map((tag: string) => (
+        {/* Tags and Read Time */}
+        {(content.tags?.length || content.readTime) && (
+          <div className="flex flex-wrap items-center gap-2 mt-3">
+            {content.tags?.map((tag: string) => (
               <span
                 key={tag}
                 className="px-2 py-0.5 text-xs bg-terminal-muted/20 text-terminal-secondary rounded"
@@ -72,6 +72,12 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
                 #{tag}
               </span>
             ))}
+            {content.readTime && (
+              <span className="ml-auto text-xs text-terminal-muted flex items-center gap-1">
+                <span>⏱</span>
+                {content.readTime}
+              </span>
+            )}
           </div>
         )}
 

@@ -36,6 +36,7 @@ function parseMarkdownFile(rawContent: string, slug: string, type: ContentType):
     excerpt: frontmatter.excerpt || content.slice(0, 150) + '...',
     content,
     featuredImage: frontmatter.featuredImage,
+    readTime: frontmatter.readTime,
     tags: frontmatter.tags || [],
     techStack: frontmatter.techStack || [],
     links: frontmatter.links,

@@ -4,6 +4,7 @@ date: "2024-01-01"
 excerpt: "A retro-styled portfolio website built with React and styled as an interactive terminal interface."
 published: true
 featuredImage: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800"
+readTime: "3 min read"
 techStack:
   - React
   - TypeScript
