@@ -61,8 +61,8 @@
     <text x="45" y="68" fill="#e6edf3" font-size="54" text-anchor="middle" font-weight="700">D</text>
   </g>
   
-  <!-- S tile -->
-  <g transform="translate(590, 262)">
+  <!-- S tile (with fade animation for wordplay) -->
+  <g transform="translate(590, 262)" class="fade-hyphen">
     <rect x="4" y="8" width="90" height="105" fill="#30363d"/>
     <rect x="0" y="0" width="90" height="105" fill="#2d2a26"/>
     <rect x="0" y="0" width="90" height="4" fill="#c5a93c"/>
