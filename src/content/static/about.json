@@ -6,10 +6,10 @@
       "organization": "Microsoft",
       "role": "Principal Software Engineering Manager",
       "startDate": "2024-07",
-      "location": "United States",
-      "description": "Leading development of Copilot Analytics—helping organizations measure adoption and business impact of their investment in Microsoft AI.",
+      "location": "NY, United States",
+      "description": "Leading development of Copilot Analytics",
       "highlights": [
-        "Building analytics platform to measure AI adoption and ROI across organizations",
+        "Building an analytics platform to measure AI adoption and ROI across organizations",
         "Defining product vision for enterprise AI measurement"
       ],
       "tags": ["Organizational AI Analytics"],
@@ -21,8 +21,8 @@
       "role": "Principal Software Engineering Manager",
       "startDate": "2023-04",
       "endDate": "2024-06",
-      "location": "United States",
-      "description": "Led development of Microsoft Viva Insights focused on organizational network analysis.",
+      "location": "NY, United States",
+      "description": "Led development of organizational network analysis features in Microsoft Viva Insights.",
       "highlights": [
         "Built features for understanding collaboration patterns across organizations",
         "Delivered change management analytics for enterprise customers"
@@ -36,8 +36,8 @@
       "role": "Principal Software Development Engineer",
       "startDate": "2022-09",
       "endDate": "2023-04",
-      "location": "United States",
-      "description": "Led development of Viva Insights and Viva Email focused on manager and team effectiveness.",
+      "location": "NY, United States",
+      "description": "Led development of Viva Insights focused on manager and team effectiveness.",
       "highlights": [
         "Built manager effectiveness insights and recommendations",
         "Shipped team productivity features for Viva platform"
@@ -49,13 +49,13 @@
     {
       "organization": "Microsoft",
       "role": "Senior Software Development Engineer",
-      "startDate": "2020-01",
+      "startDate": "2019-09",
       "endDate": "2022-09",
-      "location": "Redmond, WA",
-      "description": "Part of Microsoft Office MyAnalytics team, building actionable productivity insights for users.",
+      "location": "WA, United States",
+      "description": "Led development of the Viva Insights Briefing Email.",
       "highlights": [
-        "Built features helping users manage time, resources, and collaboration",
-        "Shipped assistive insights improving workplace productivity"
+        "Delivered a daily personalized productivity digest to hundreds of millions of M365 users",
+        "Built features focused on individual productivity and wellbeing"
       ],
       "tags": ["Individual Productivity"],
       "logo": "/logos/microsoft.svg",
@@ -66,11 +66,10 @@
       "role": "Senior Software Development Engineer",
       "startDate": "2018-02",
       "endDate": "2019-09",
-      "location": "Hyderabad, India",
-      "description": "Part of Azure DevOps Modern Interactions team, building intuitive developer experiences.",
+      "location": "Telangana, India",
+      "description": "Led the development of ChatOps integrations in Azure DevOps.",
       "highlights": [
-        "Built modern, fluid UX patterns for developer productivity",
-        "Shipped features serving millions of developers on Azure DevOps"
+        "Built modern, fluid UX integrations for developer productivity in chat clients like Teams and Slack"
       ],
       "tags": ["Developer Productivity"],
       "logo": "/logos/microsoft.svg",
@@ -81,7 +80,7 @@
       "role": "Software Development Engineer II",
       "startDate": "2015-02",
       "endDate": "2018-01",
-      "location": "Hyderabad, India",
+      "location": "Telangana, India",
       "description": "Built core Azure DevOps features across work item tracking, version control, and documentation.",
       "highlights": [
         "Shipped Kanban boards for agile work item planning",
@@ -97,11 +96,11 @@
       "role": "Software Development Engineer",
       "startDate": "2013-06",
       "endDate": "2015-01",
-      "location": "Hyderabad, India",
-      "description": "Built CodeLens—a developer collaboration tool shipped in Visual Studio IDE with scalable cloud backend.",
+      "location": "Telangana, India",
+      "description": "Built CodeLens in Visual Studio IDE.",
       "highlights": [
-        "Shipped CodeLens client in Visual Studio IDE",
-        "Built highly scalable cloud service powering CodeLens"
+        "Built CodeLens client in Visual Studio IDE",
+        "Built highly scalable cloud service powering CodeLens, serving millions of developers"
       ],
       "tags": ["Developer Productivity"],
       "logo": "/logos/microsoft.svg",
@@ -110,13 +109,12 @@
     {
       "organization": "Microsoft",
       "role": "Software Engineering Intern",
-      "startDate": "2013-01",
-      "endDate": "2013-05",
-      "location": "Hyderabad, India",
-      "description": "Interned at Microsoft, contributing to developer tools and gaining industry experience.",
+      "startDate": "2012-05",
+      "endDate": "2012-07",
+      "location": "Telangana, India",
+      "description": "Interned in the Microsoft Windows Servicing division.",
       "highlights": [
-        "First exposure to large-scale software development",
-        "Received full-time offer"
+        "Built support for in-the-flow testing of Windows image repair/refresh"
       ],
       "logo": "/logos/microsoft.svg",
       "type": "work"
@@ -125,22 +123,22 @@
   "contactLinks": [
     {
       "label": "Email",
-      "url": "mailto:hello@girid.dev",
+      "url": "mailto:giridharan.krish@gmail.com",
       "icon": "📧"
     },
     {
       "label": "GitHub",
-      "url": "https://github.com/girid",
+      "url": "https://github.com/GiridharanNarayanan",
       "icon": "🐙"
     },
     {
       "label": "LinkedIn",
-      "url": "https://linkedin.com/in/girid",
+      "url": "https://www.linkedin.com/in/giridharan-narayanan/",
       "icon": "💼"
     },
     {
       "label": "Twitter/X",
-      "url": "https://twitter.com/girid_dev",
+      "url": "https://twitter.com/Giridharan2112",
       "icon": "🐦"
     }
   ]

@@ -4,8 +4,6 @@ import type { CareerEntry } from '../../../types/About.types'
 export interface CareerTimelineEntryProps {
   /** Career entry data */
   entry: CareerEntry
-  /** Position in the alternating layout */
-  position: 'left' | 'right'
 }
 
 /**
@@ -21,7 +19,7 @@ function formatDate(dateStr: string): string {
  * CareerTimelineEntry
  * Individual entry in the career timeline with hover/tap emphasis effect
  */
-export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProps) {
+export function CareerTimelineEntry({ entry }: CareerTimelineEntryProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   const isEducation = entry.type === 'education'
@@ -30,29 +28,31 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
     ? `${formatDate(entry.startDate)} - Current`
     : `${formatDate(entry.startDate)} - ${formatDate(entry.endDate!)}`
 
-  // Mobile: always left-aligned. Desktop: alternating
-  const isLeftOnDesktop = position === 'left'
-
   return (
     <div
-      className={`
-        relative flex items-center flex-row
-        ${isLeftOnDesktop ? 'md:flex-row' : 'md:flex-row-reverse'}
-      `}
+      className="relative flex items-center"
       data-testid="career-timeline-entry"
-      data-position={position}
       data-type={entry.type}
     >
+      {/* Timeline Connector Dot */}
+      <div
+        className={`
+          absolute left-4 -translate-x-1/2
+          w-4 h-4 rounded-full border-2
+          ${isEducation ? 'bg-terminal-secondary border-terminal-secondary' : 'bg-terminal-accent border-terminal-accent'}
+          ${isHovered ? 'scale-125' : ''}
+          transition-transform duration-300
+        `}
+        aria-hidden="true"
+      />
+
       {/* Entry Card */}
       <div
         className={`
-          w-[calc(100%-3rem)] p-4 ml-8
-          md:w-[calc(50%-2rem)] md:ml-0
-          ${isLeftOnDesktop ? 'md:mr-8 md:text-right' : 'md:ml-8 md:text-left'}
+          w-full p-4 ml-10
           bg-terminal-bg-secondary border rounded-lg
           transition-all duration-300 ease-in-out
-          text-left
-          ${isHovered ? 'border-terminal-accent scale-[1.02] shadow-lg shadow-terminal-accent/20' : 'border-terminal-border'}
+          ${isHovered ? 'border-terminal-accent scale-[1.01] shadow-lg shadow-terminal-accent/20' : 'border-terminal-border'}
         `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -61,14 +61,14 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
         aria-label={`${entry.role} at ${entry.organization}`}
       >
         {/* Header with Logo */}
-        <div className={`flex items-center gap-3 mb-3 ${isLeftOnDesktop ? 'md:flex-row-reverse' : ''}`}>
+        <div className="flex items-center gap-3 mb-3">
           <img
             src={entry.logo}
             alt={`${entry.organization} logo`}
             className="w-10 h-10 rounded object-contain bg-terminal-bg p-1"
             loading="lazy"
           />
-          <div className={`text-left ${isLeftOnDesktop ? 'md:text-right' : ''}`}>
+          <div>
             <h3 className="font-bold text-terminal-text text-lg leading-tight">
               {entry.role}
             </h3>
@@ -79,7 +79,7 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
         </div>
 
         {/* Date and Location */}
-        <div className={`flex flex-wrap items-center gap-2 text-xs text-terminal-muted mb-2 ${isLeftOnDesktop ? 'md:justify-end' : ''}`}>
+        <div className="flex flex-wrap items-center gap-2 text-xs text-terminal-muted mb-2">
           <span>{dateRange}</span>
           {isCurrent && (
             <span className="px-1.5 py-0.5 bg-terminal-accent/20 text-terminal-accent rounded text-[10px] font-semibold">
@@ -96,11 +96,11 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
         </p>
 
         {/* Highlights */}
-        <ul className={`space-y-1 text-left ${isLeftOnDesktop ? 'md:text-right' : ''}`}>
+        <ul className="space-y-1">
           {entry.highlights.map((highlight, idx) => (
             <li
               key={idx}
-              className={`text-xs text-terminal-muted flex items-start gap-2 ${isLeftOnDesktop ? 'md:flex-row-reverse' : ''}`}
+              className="text-xs text-terminal-muted flex items-start gap-2"
             >
               <span className={isEducation ? 'text-terminal-secondary' : 'text-terminal-accent'}>
                 {isEducation ? '◆' : '▸'}
@@ -112,7 +112,7 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
 
         {/* Tags */}
         {entry.tags && entry.tags.length > 0 && (
-          <div className={`flex flex-wrap gap-2 mt-3 pt-3 border-t border-terminal-border ${isLeftOnDesktop ? 'md:justify-end' : ''}`}>
+          <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-terminal-border">
             {entry.tags.map((tag) => (
               <span
                 key={tag}
@@ -124,18 +124,6 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
           </div>
         )}
       </div>
-
-      {/* Timeline Connector Dot */}
-      <div
-        className={`
-          absolute left-4 md:left-1/2 md:-translate-x-1/2
-          w-4 h-4 rounded-full border-2
-          ${isEducation ? 'bg-terminal-secondary border-terminal-secondary' : 'bg-terminal-accent border-terminal-accent'}
-          ${isHovered ? 'scale-125' : ''}
-          transition-transform duration-300
-        `}
-        aria-hidden="true"
-      />
     </div>
   )
 }

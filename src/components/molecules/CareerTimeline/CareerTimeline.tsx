@@ -18,7 +18,7 @@ function sortByDateDescending(entries: CareerEntry[]): CareerEntry[] {
 
 /**
  * CareerTimeline
- * Vertical alternating (zigzag) timeline of career entries
+ * Vertical single-sided timeline of career entries
  */
 export function CareerTimeline({ entries }: CareerTimelineProps) {
   const sortedEntries = sortByDateDescending(entries)
@@ -33,26 +33,25 @@ export function CareerTimeline({ entries }: CareerTimelineProps) {
 
   return (
     <div className="relative py-8" data-testid="career-timeline">
-      {/* Center vertical line - moves to left on mobile */}
+      {/* Vertical line on the left */}
       <div
-        className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:-translate-x-1/2 bg-terminal-border"
+        className="absolute left-4 top-0 bottom-0 w-0.5 bg-terminal-border"
         aria-hidden="true"
       />
 
       {/* Timeline entries */}
-      <div className="space-y-8">
-        {sortedEntries.map((entry, index) => (
+      <div className="space-y-6">
+        {sortedEntries.map((entry) => (
           <CareerTimelineEntry
             key={`${entry.organization}-${entry.startDate}`}
             entry={entry}
-            position={index % 2 === 0 ? 'left' : 'right'}
           />
         ))}
       </div>
 
-      {/* Timeline start indicator */}
+      {/* Timeline end indicator */}
       <div
-        className="absolute left-4 md:left-1/2 bottom-0 md:-translate-x-1/2 w-3 h-3 rounded-full bg-terminal-border"
+        className="absolute left-4 bottom-0 -translate-x-[3px] w-3 h-3 rounded-full bg-terminal-border"
         aria-hidden="true"
       />
     </div>
