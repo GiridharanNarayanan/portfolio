@@ -34,6 +34,8 @@ export interface CareerEntry {
   description: string
   /** Exactly 3 key highlights/achievements */
   highlights: [string, string, string]
+  /** Tags for categorizing the role (e.g., 'Developer Productivity') */
+  tags?: string[]
   /** Path to organization logo image */
   logo: string
   /** Type of entry for styling differentiation */

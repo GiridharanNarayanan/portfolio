@@ -109,6 +109,20 @@ export function CareerTimelineEntry({ entry, position }: CareerTimelineEntryProp
             </li>
           ))}
         </ul>
+
+        {/* Tags */}
+        {entry.tags && entry.tags.length > 0 && (
+          <div className={`flex flex-wrap gap-2 mt-3 pt-3 border-t border-terminal-border ${isLeftOnDesktop ? 'md:justify-end' : ''}`}>
+            {entry.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 text-xs bg-terminal-accent/10 text-terminal-accent rounded-full font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Timeline Connector Dot */}

@@ -3,63 +3,123 @@
   "resumeUrl": "/resume.pdf",
   "careerTimeline": [
     {
-      "organization": "TechCorp Inc.",
-      "role": "Senior Software Engineer",
-      "startDate": "2022-03",
-      "location": "San Francisco, CA",
-      "description": "Leading frontend architecture and developer experience initiatives for a B2B SaaS platform serving 500K+ users.",
+      "organization": "Microsoft",
+      "role": "Principal Software Engineering Manager",
+      "startDate": "2024-07",
+      "location": "United States",
+      "description": "Leading development of Copilot Analytics—helping organizations measure adoption and business impact of their investment in Microsoft AI.",
       "highlights": [
-        "Architected micro-frontend system reducing deployment time by 60%",
-        "Led team of 5 engineers delivering major product redesign",
-        "Established testing practices achieving 90% coverage"
+        "Building analytics platform to measure AI adoption and ROI across organizations",
+        "Defining product vision for enterprise AI measurement"
       ],
-      "logo": "/logos/techcorp.svg",
+      "tags": ["Organizational AI Analytics"],
+      "logo": "/logos/microsoft.svg",
       "type": "work"
     },
     {
-      "organization": "StartupXYZ",
-      "role": "Full Stack Developer",
-      "startDate": "2019-06",
-      "endDate": "2022-02",
-      "location": "Austin, TX",
-      "description": "Full-stack development for a real-time collaboration platform, from MVP to Series B.",
+      "organization": "Microsoft",
+      "role": "Principal Software Engineering Manager",
+      "startDate": "2023-04",
+      "endDate": "2024-06",
+      "location": "United States",
+      "description": "Led development of Microsoft Viva Insights focused on organizational network analysis.",
       "highlights": [
-        "Built real-time sync engine handling 10K concurrent connections",
-        "Reduced API response times by 40% through optimization",
-        "Implemented CI/CD pipeline cutting release cycles in half"
+        "Built features for understanding collaboration patterns across organizations",
+        "Delivered change management analytics for enterprise customers"
       ],
-      "logo": "/logos/startupxyz.svg",
+      "tags": ["Organizational Health"],
+      "logo": "/logos/microsoft.svg",
       "type": "work"
     },
     {
-      "organization": "Digital Agency Co.",
-      "role": "Frontend Developer",
-      "startDate": "2016-01",
-      "endDate": "2019-05",
-      "location": "Seattle, WA",
-      "description": "Developed responsive web applications for diverse clients across e-commerce, media, and fintech sectors.",
+      "organization": "Microsoft",
+      "role": "Principal Software Development Engineer",
+      "startDate": "2022-09",
+      "endDate": "2023-04",
+      "location": "United States",
+      "description": "Led development of Viva Insights and Viva Email focused on manager and team effectiveness.",
       "highlights": [
-        "Delivered 20+ client projects on time and within budget",
-        "Introduced component library reducing development time by 30%",
-        "Mentored 3 junior developers into mid-level roles"
+        "Built manager effectiveness insights and recommendations",
+        "Shipped team productivity features for Viva platform"
       ],
-      "logo": "/logos/agency.svg",
+      "tags": ["Individual Productivity"],
+      "logo": "/logos/microsoft.svg",
       "type": "work"
     },
     {
-      "organization": "University of Technology",
-      "role": "B.S. Computer Science",
-      "startDate": "2012-09",
-      "endDate": "2016-05",
-      "location": "Boston, MA",
-      "description": "Graduated with honors, focusing on software engineering and human-computer interaction.",
+      "organization": "Microsoft",
+      "role": "Senior Software Development Engineer",
+      "startDate": "2020-01",
+      "endDate": "2022-09",
+      "location": "Redmond, WA",
+      "description": "Part of Microsoft Office MyAnalytics team, building actionable productivity insights for users.",
       "highlights": [
-        "Dean's List all semesters with 3.8 GPA",
-        "Led university hackathon team to regional finals",
-        "Published research on UI accessibility patterns"
+        "Built features helping users manage time, resources, and collaboration",
+        "Shipped assistive insights improving workplace productivity"
       ],
-      "logo": "/logos/university.svg",
-      "type": "education"
+      "tags": ["Individual Productivity"],
+      "logo": "/logos/microsoft.svg",
+      "type": "work"
+    },
+    {
+      "organization": "Microsoft",
+      "role": "Senior Software Development Engineer",
+      "startDate": "2018-02",
+      "endDate": "2019-09",
+      "location": "Hyderabad, India",
+      "description": "Part of Azure DevOps Modern Interactions team, building intuitive developer experiences.",
+      "highlights": [
+        "Built modern, fluid UX patterns for developer productivity",
+        "Shipped features serving millions of developers on Azure DevOps"
+      ],
+      "tags": ["Developer Productivity"],
+      "logo": "/logos/microsoft.svg",
+      "type": "work"
+    },
+    {
+      "organization": "Microsoft",
+      "role": "Software Development Engineer II",
+      "startDate": "2015-02",
+      "endDate": "2018-01",
+      "location": "Hyderabad, India",
+      "description": "Built core Azure DevOps features across work item tracking, version control, and documentation.",
+      "highlights": [
+        "Shipped Kanban boards for agile work item planning",
+        "Built Git user experiences for source control",
+        "Created modern Wiki for team documentation"
+      ],
+      "tags": ["Developer Productivity"],
+      "logo": "/logos/microsoft.svg",
+      "type": "work"
+    },
+    {
+      "organization": "Microsoft",
+      "role": "Software Development Engineer",
+      "startDate": "2013-06",
+      "endDate": "2015-01",
+      "location": "Hyderabad, India",
+      "description": "Built CodeLens—a developer collaboration tool shipped in Visual Studio IDE with scalable cloud backend.",
+      "highlights": [
+        "Shipped CodeLens client in Visual Studio IDE",
+        "Built highly scalable cloud service powering CodeLens"
+      ],
+      "tags": ["Developer Productivity"],
+      "logo": "/logos/microsoft.svg",
+      "type": "work"
+    },
+    {
+      "organization": "Microsoft",
+      "role": "Software Engineering Intern",
+      "startDate": "2013-01",
+      "endDate": "2013-05",
+      "location": "Hyderabad, India",
+      "description": "Interned at Microsoft, contributing to developer tools and gaining industry experience.",
+      "highlights": [
+        "First exposure to large-scale software development",
+        "Received full-time offer"
+      ],
+      "logo": "/logos/microsoft.svg",
+      "type": "work"
     }
   ],
   "contactLinks": [
