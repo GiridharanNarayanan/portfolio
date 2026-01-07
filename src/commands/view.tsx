@@ -25,7 +25,7 @@ export const viewCommand: Command = {
               Example: <code className="text-terminal-accent">view 1</code> or <code className="text-terminal-accent">view heads-up</code>
             </p>
             <p className="text-terminal-muted mt-1">
-              Tip: Type <code className="text-terminal-accent">writings</code> or <code className="text-terminal-accent">projects</code> to see available content with index numbers.
+              Tip: Type <code className="text-terminal-accent">cd writings</code> or <code className="text-terminal-accent">cd projects</code> then <code className="text-terminal-accent">ls</code> to browse content.
             </p>
           </div>
         ),
