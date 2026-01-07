@@ -82,6 +82,7 @@ export function ContentCard({ item, index, onClick, commandHint, className }: Co
         {/* Tech stack tags (for projects) */}
         {item.techStack && item.techStack.length > 0 && (
           <>
+            <span className="text-xs text-terminal-muted font-mono">Stack:</span>
             {item.techStack.slice(0, 5).map((tech: string) => (
               <span
                 key={tech}

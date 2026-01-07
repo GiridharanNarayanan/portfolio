@@ -83,7 +83,8 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
 
         {/* Tech Stack (for projects) */}
         {content.techStack && content.techStack.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-3">
+          <div className="flex flex-wrap items-center gap-2 mt-3">
+            <span className="text-xs text-terminal-muted font-mono">Stack:</span>
             {content.techStack.map((tech: string) => (
               <span
                 key={tech}
