@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- ASCII-style G from GIRID logo - centered with equal margins -->
+  <!-- Background -->
+  <rect width="32" height="32" fill="#1a1a1a"/>
+  
+  <!-- G letter in pixel/block style matching ASCII art -->
+  <!-- Row 1: Top curve -->
+  <rect x="10" y="6" width="3" height="4" fill="#c5a93c"/>
+  <rect x="13" y="6" width="3" height="4" fill="#c5a93c"/>
+  <rect x="16" y="6" width="3" height="4" fill="#c5a93c"/>
+  <rect x="19" y="6" width="3" height="4" fill="#c5a93c"/>
+  
+  <!-- Row 2: Left side only -->
+  <rect x="7" y="10" width="3" height="4" fill="#c5a93c"/>
+  
+  <!-- Row 3: Left side + inner bar -->
+  <rect x="7" y="14" width="3" height="4" fill="#c5a93c"/>
+  <rect x="16" y="14" width="3" height="4" fill="#c5a93c"/>
+  <rect x="19" y="14" width="3" height="4" fill="#c5a93c"/>
+  <rect x="22" y="14" width="3" height="4" fill="#c5a93c"/>
+  
+  <!-- Row 4: Left + right side -->
+  <rect x="7" y="18" width="3" height="4" fill="#c5a93c"/>
+  <rect x="22" y="18" width="3" height="4" fill="#c5a93c"/>
+  
+  <!-- Row 5: Bottom curve -->
+  <rect x="10" y="22" width="3" height="4" fill="#c5a93c"/>
+  <rect x="13" y="22" width="3" height="4" fill="#c5a93c"/>
+  <rect x="16" y="22" width="3" height="4" fill="#c5a93c"/>
+  <rect x="19" y="22" width="3" height="4" fill="#c5a93c"/>
+</svg>
