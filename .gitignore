@@ -29,6 +29,9 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Internal tooling
+.specify/
+
 # Azure Functions
 api/local.settings.json
 

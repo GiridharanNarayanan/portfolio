@@ -1,12 +1,10 @@
-# GiriD Portfolio - Pixel Art Style Guide
-
-## For Figma / Pixel Art Tools
+# Pixel Art Style Guide
 
 Use this guide when creating featured images for writings and projects.
 
 ---
 
-## 🎨 Color Palette
+## Color Palette
 
 ### Dark Theme (Primary)
 
@@ -39,7 +37,7 @@ Use this guide when creating featured images for writings and projects.
 
 ---
 
-## 📐 Pixel Art Guidelines
+## Pixel Art Guidelines
 
 ### Resolution & Grid
 - **Pixel Size:** Small, fine pixels (2-4px blocks) - NOT chunky retro style
@@ -59,7 +57,7 @@ Use this guide when creating featured images for writings and projects.
 
 ---
 
-## 📝 Figma Setup
+## Figma Setup
 
 ### Create a Color Styles Library:
 1. Create new Figma file: "GiriD Design System"
@@ -85,7 +83,7 @@ Use this guide when creating featured images for writings and projects.
 
 ---
 
-## ✨ Quick Reference
+## Quick Reference
 
 **For any featured image:**
 1. Start with `#0f1419` background
@@ -97,7 +95,7 @@ Use this guide when creating featured images for writings and projects.
 
 ---
 
-## 🎯 AI Prompt Examples
+## AI Prompt Examples
 
 When using AI image generation, include these style keywords:
 
@@ -112,7 +110,7 @@ high contrast, indie game aesthetic"
 
 ---
 
-## 🔗 Figma Color Import
+## Figma Color Import
 
 Copy this CSS and use Figma's "Styles from CSS" importer:
 
