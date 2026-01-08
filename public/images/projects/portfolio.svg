@@ -1,0 +1,37 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    .cursor { animation: blink 1s infinite; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0f1419"/>
+  
+  <!-- ASCII Art "PORTFOLIO" in block letters -->
+  <text x="600" y="230" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" text-anchor="middle" xml:space="preserve">
+██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
+  </text>
+  <text x="600" y="260" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" text-anchor="middle" xml:space="preserve">
+██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
+  </text>
+  <text x="600" y="290" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" text-anchor="middle" xml:space="preserve">
+██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
+  </text>
+  <text x="600" y="320" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" text-anchor="middle" xml:space="preserve">
+██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
+  </text>
+  <text x="600" y="350" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" text-anchor="middle" xml:space="preserve">
+██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
+  </text>
+  <text x="600" y="380" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" text-anchor="middle" xml:space="preserve">
+╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ 
+  </text>
+  
+  <!-- "Press any key to continue..." with blinking cursor -->
+  <text x="600" y="460" fill="#8b949e" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="18" text-anchor="middle">
+    Press any key to continue...<tspan class="cursor" fill="#c5a93c">█</tspan>
+  </text>
+</svg>

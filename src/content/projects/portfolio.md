@@ -3,7 +3,7 @@ title: "Portfolio"
 date: "2025-01-01"
 excerpt: "A portfolio website styled as an interactive terminal, inspired by the efficiency of recent TUI-based tools."
 published: true
-featuredImage: "/images/projects/terminal-portfolio.png"
+featuredImage: "/images/projects/portfolio.svg"
 readTime: "4 min read"
 techStack:
   - React
