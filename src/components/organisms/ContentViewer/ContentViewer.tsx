@@ -297,8 +297,8 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
       {/* Navigation hint */}
       <div className="mt-8 text-sm text-terminal-muted">
         <span className="text-terminal-secondary">Tip:</span> Type{' '}
-        <code className="px-1 bg-terminal-muted/30 rounded">cd ..</code> to go back, or{' '}
-        <code className="px-1 bg-terminal-muted/30 rounded">ls</code> to see other files
+        <code className="px-1 bg-terminal-muted/30 rounded">cd ~</code> to go home, or{' '}
+        <code className="px-1 bg-terminal-muted/30 rounded">help</code> to see all commands
       </div>
     </article>
   );

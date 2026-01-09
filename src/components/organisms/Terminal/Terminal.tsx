@@ -36,6 +36,8 @@ export interface TerminalProps {
   className?: string
   /** Initial command to execute with typing animation (for deep links) */
   initialCommand?: string | null
+  /** Callback to restart terminal (show startup screen) */
+  onRestart?: () => void
 }
 
 /** Typing animation state */
@@ -48,7 +50,7 @@ interface TypingState {
 /**
  * Main terminal component
  */
-export function Terminal({ className, initialCommand }: TerminalProps) {
+export function Terminal({ className, initialCommand, onRestart }: TerminalProps) {
   const { theme, toggleTheme } = useTheme()
   const terminalState = useTerminal()
   const commandHistory = useCommandHistory()
@@ -255,7 +257,7 @@ export function Terminal({ className, initialCommand }: TerminalProps) {
       />
 
       {/* Sticky header */}
-      <StickyCommandBar currentPath={filesystem.currentPath} />
+      <StickyCommandBar currentPath={filesystem.currentPath} onRestart={onRestart} />
 
       {/* Main content area - wrapped with MobileCommandProvider for tappable items */}
       <MobileCommandProvider isMobile={isMobile} onCommandExecute={handleCommand}>

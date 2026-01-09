@@ -19,7 +19,14 @@ function App() {
           <StartupScreen onActivate={() => setIsStarted(true)} />
         )}
         {isStarted && (
-          <Terminal initialCommand={deepLink.hasDeepLink ? deepLink.command : null} />
+          <Terminal 
+            initialCommand={deepLink.hasDeepLink ? deepLink.command : null} 
+            onRestart={() => {
+              // Reset URL to root when restarting
+              window.history.pushState({}, '', '/')
+              setIsStarted(false)
+            }}
+          />
         )}
       </ThemeProvider>
     </ErrorBoundary>
