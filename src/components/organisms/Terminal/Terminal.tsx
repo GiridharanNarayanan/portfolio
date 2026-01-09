@@ -170,6 +170,19 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
     [execute, commandHistory, terminalState]
   )
 
+  // Handler that triggers typing animation before executing (for mobile taps)
+  const handleCommandWithAnimation = useCallback(
+    (command: string) => {
+      // Start typing animation
+      setTypingState({
+        isTyping: true,
+        displayedText: '',
+        fullCommand: command,
+      })
+    },
+    []
+  )
+
   // Auto-execute ls on first load to show home directory
   // OR execute initial command from deep link with typing animation
   useEffect(() => {
@@ -260,7 +273,7 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
       <StickyCommandBar currentPath={filesystem.currentPath} onRestart={onRestart} />
 
       {/* Main content area - wrapped with MobileCommandProvider for tappable items */}
-      <MobileCommandProvider isMobile={isMobile} onCommandExecute={handleCommand}>
+      <MobileCommandProvider isMobile={isMobile} onCommandExecute={handleCommandWithAnimation}>
       <main 
         id="main-content"
         ref={mainContentRef}
