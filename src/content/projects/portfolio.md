@@ -22,9 +22,9 @@ links:
   repo: "https://github.com/GiridharanNarayanan/portfolio"
 ---
 
-# Terminal Portfolio
-
 A portfolio website that trades the familiar click-and-scroll for something more deliberate: a terminal interface.
+
+---
 
 ## Why a terminal?
 
@@ -36,11 +36,15 @@ Over the past year, a wave of TUI-based coding agents emerged. Tools like Claude
 
 It made me curious. Not about abandoning graphical interfaces, but about what a terminal-first design might teach me. This portfolio became the experiment.
 
+---
+
 ## What it does
 
 The site functions like a simplified Unix shell. You navigate with `cd`, list contents with `ls`, and read files with `cat`. There is tab completion, command history, and a small set of Easter eggs for those who look for them.
 
 Underneath, it is a React application styled to feel like something older. The monospace fonts, the blinking cursor, the sparse layout, all of it is intentional. The goal was not to simulate a terminal perfectly, but to capture the feeling of one: the directness, the quiet, the sense that every action is deliberate.
+
+---
 
 ## Technical choices
 
@@ -50,6 +54,8 @@ Underneath, it is a React application styled to feel like something older. The m
 - **Azure Static Web Apps** for hosting with automatic deployments from GitHub
 
 The content lives in Markdown files with frontmatter. Adding a new writing or project is as simple as dropping a file into the right folder.
+
+---
 
 ## Desktop and mobile
 
@@ -65,6 +71,8 @@ The challenge was making these two experiences feel like the same product. Not a
 
 Getting this right required more iteration than I anticipated. Early versions felt awkward on one platform or the other. The current balance is not perfect, but it is considered. Every choice has a reason.
 
+---
+
 ## What I learned
 
 Building this taught me a few things I did not expect.
@@ -74,6 +82,8 @@ First, constraints can be generative. The terminal aesthetic limited what I coul
 Second, designing for multiple form factors requires more than responsive layouts. A phone and a laptop are not just different screen sizes. They are different interaction paradigms. Recognizing that distinction early would have saved some rework.
 
 Third, there is real value in building something that feels different. Most portfolios follow similar patterns. This one does not. Whether that is a strength or a weakness depends on who is visiting, but it at least creates a moment of pause. Sometimes, that is enough.
+
+---
 
 ## What is next
 
