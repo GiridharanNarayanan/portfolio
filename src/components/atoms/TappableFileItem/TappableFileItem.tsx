@@ -50,9 +50,18 @@ export function TappableFileItem({
     executeCommand(command)
   }, [command, executeCommand, isStale])
 
-  // On desktop, just render the name
+  // On desktop, render with stale styling if applicable
   if (!isMobile) {
-    return <span className={className}>{name}</span>
+    return (
+      <span 
+        className={cn(
+          isStale && 'opacity-50',
+          className
+        )}
+      >
+        {name}
+      </span>
+    )
   }
 
   // On mobile, make it tappable (or show as stale/disabled)
