@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { ContentItem } from '../../../types/Content.types';
 import { cn } from '../../../utils/cn';
+import { ThemedImage } from '../../atoms/ThemedImage';
 
 interface ContentViewerProps {
   content: ContentItem;
@@ -31,7 +32,7 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
       {/* Featured Image */}
       {content.featuredImage && (
         <figure className="mb-6">
-          <img
+          <ThemedImage
             src={content.featuredImage}
             alt={content.title}
             className="w-full h-auto rounded border border-terminal-border"

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ContentItem } from '../../../types/Content.types';
 import { cn } from '../../../utils/cn';
+import { ThemedImage } from '../../atoms/ThemedImage';
 
 interface ContentCardProps {
   item: ContentItem;
@@ -137,7 +138,7 @@ export function ContentCard({ item, index, onClick, commandHint, className }: Co
       {/* Featured image thumbnail (optional) */}
       {item.featuredImage && (
         <div className="mt-3 pt-3 border-t border-terminal-border">
-          <img
+          <ThemedImage
             src={item.featuredImage}
             alt=""
             className="w-full h-24 object-cover rounded opacity-80"

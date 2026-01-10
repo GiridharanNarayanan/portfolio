@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ContentViewer } from './ContentViewer';
+import { ThemeProvider } from '../../atoms/ThemeProvider';
 import type { ContentItem } from '../../../types/Content.types';
 
 // Mock react-markdown
@@ -12,6 +13,11 @@ vi.mock('react-markdown', () => ({
 vi.mock('remark-gfm', () => ({
   default: () => {},
 }));
+
+// Helper to render with ThemeProvider
+const renderWithTheme = (ui: React.ReactElement) => {
+  return render(<ThemeProvider>{ui}</ThemeProvider>);
+};
 
 describe('ContentViewer', () => {
   const baseContent: ContentItem = {
@@ -29,12 +35,12 @@ describe('ContentViewer', () => {
   });
 
   it('renders the title', () => {
-    render(<ContentViewer content={baseContent} />);
+    renderWithTheme(<ContentViewer content={baseContent} />);
     expect(screen.getByText('Test Post Title')).toBeInTheDocument();
   });
 
   it('renders the formatted date', () => {
-    render(<ContentViewer content={baseContent} />);
+    renderWithTheme(<ContentViewer content={baseContent} />);
     // Check for the time element with the correct datetime attribute
     const timeElement = screen.getByRole('time');
     expect(timeElement).toHaveAttribute('datetime', '2024-01-15');
@@ -43,7 +49,7 @@ describe('ContentViewer', () => {
   });
 
   it('renders markdown content', () => {
-    render(<ContentViewer content={baseContent} />);
+    renderWithTheme(<ContentViewer content={baseContent} />);
     expect(screen.getByTestId('markdown-content')).toBeInTheDocument();
   });
 
@@ -52,13 +58,13 @@ describe('ContentViewer', () => {
       ...baseContent,
       featuredImage: '/images/featured.jpg',
     };
-    render(<ContentViewer content={contentWithImage} />);
+    renderWithTheme(<ContentViewer content={contentWithImage} />);
     const img = screen.getByRole('img', { name: 'Test Post Title' });
     expect(img).toHaveAttribute('src', '/images/featured.jpg');
   });
 
   it('does not render featured image when not provided', () => {
-    render(<ContentViewer content={baseContent} />);
+    renderWithTheme(<ContentViewer content={baseContent} />);
     const images = screen.queryAllByRole('img');
     expect(images.length).toBe(0);
   });
@@ -68,7 +74,7 @@ describe('ContentViewer', () => {
       ...baseContent,
       tags: ['react', 'typescript', 'testing'],
     };
-    render(<ContentViewer content={contentWithTags} />);
+    renderWithTheme(<ContentViewer content={contentWithTags} />);
     expect(screen.getByText('#react')).toBeInTheDocument();
     expect(screen.getByText('#typescript')).toBeInTheDocument();
     expect(screen.getByText('#testing')).toBeInTheDocument();
@@ -80,7 +86,7 @@ describe('ContentViewer', () => {
       type: 'projects',
       techStack: ['React', 'Node.js', 'PostgreSQL'],
     };
-    render(<ContentViewer content={contentWithTech} />);
+    renderWithTheme(<ContentViewer content={contentWithTech} />);
     expect(screen.getByText('React')).toBeInTheDocument();
     expect(screen.getByText('Node.js')).toBeInTheDocument();
     expect(screen.getByText('PostgreSQL')).toBeInTheDocument();
@@ -92,7 +98,7 @@ describe('ContentViewer', () => {
       type: 'projects',
       location: 'Tokyo, Japan',
     };
-    render(<ContentViewer content={contentWithLocation} />);
+    renderWithTheme(<ContentViewer content={contentWithLocation} />);
     expect(screen.getByText('Tokyo, Japan')).toBeInTheDocument();
   });
 
@@ -105,7 +111,7 @@ describe('ContentViewer', () => {
         repo: 'https://github.com/example/repo',
       },
     };
-    render(<ContentViewer content={contentWithLinks} />);
+    renderWithTheme(<ContentViewer content={contentWithLinks} />);
     
     const demoLink = screen.getByRole('link', { name: /live demo/i });
     expect(demoLink).toHaveAttribute('href', 'https://demo.example.com');
@@ -121,20 +127,20 @@ describe('ContentViewer', () => {
       ...baseContent,
       gallery: ['/images/1.jpg', '/images/2.jpg', '/images/3.jpg'],
     };
-    render(<ContentViewer content={contentWithGallery} />);
+    renderWithTheme(<ContentViewer content={contentWithGallery} />);
     
     const galleryImages = screen.getAllByAltText(/Gallery image/);
     expect(galleryImages).toHaveLength(3);
   });
 
   it('renders back navigation hint', () => {
-    render(<ContentViewer content={baseContent} />);
+    renderWithTheme(<ContentViewer content={baseContent} />);
     expect(screen.getByText('cd ~')).toBeInTheDocument();
     expect(screen.getByText(/to go home/)).toBeInTheDocument();
   });
 
   it('applies custom className', () => {
-    const { container } = render(<ContentViewer content={baseContent} className="custom-class" />);
+    const { container } = renderWithTheme(<ContentViewer content={baseContent} className="custom-class" />);
     expect(container.firstChild).toHaveClass('custom-class');
   });
 });
