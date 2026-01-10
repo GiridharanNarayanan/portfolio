@@ -97,8 +97,8 @@ describe('CommandInput', () => {
   it('renders prompt and cursor', () => {
     const { container } = render(<CommandInput onSubmit={vi.fn()} />)
     
-    // Check for prompt
-    expect(screen.getByText('$ >')).toBeInTheDocument()
+    // Check for prompt (includes path prefix)
+    expect(screen.getByText(/\$ >/)).toBeInTheDocument()
     
     // Cursor should be visible when focused
     const input = screen.getByRole('textbox')

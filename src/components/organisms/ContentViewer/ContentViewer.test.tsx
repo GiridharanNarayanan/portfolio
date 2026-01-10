@@ -129,8 +129,8 @@ describe('ContentViewer', () => {
 
   it('renders back navigation hint', () => {
     render(<ContentViewer content={baseContent} />);
-    expect(screen.getByText('back')).toBeInTheDocument();
-    expect(screen.getByText(/return to the list/)).toBeInTheDocument();
+    expect(screen.getByText('cd ~')).toBeInTheDocument();
+    expect(screen.getByText(/to go home/)).toBeInTheDocument();
   });
 
   it('applies custom className', () => {

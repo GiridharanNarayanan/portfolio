@@ -4,12 +4,15 @@
  */
 
 import { createContext, useContext, type ReactNode } from 'react'
+import { getDirectoryGeneration } from './directoryGeneration'
 
 interface MobileCommandContextValue {
   /** Whether we're in mobile mode */
   isMobile: boolean
   /** Execute a command */
   executeCommand: (command: string) => void
+  /** Current generation number (increments on directory change) */
+  generation: number
 }
 
 const MobileCommandContext = createContext<MobileCommandContextValue | null>(null)
@@ -22,6 +25,7 @@ export interface MobileCommandProviderProps {
 
 /**
  * Provider for mobile command execution
+ * Generation is managed by the cd command via directoryGeneration module
  */
 export function MobileCommandProvider({
   children,
@@ -33,6 +37,7 @@ export function MobileCommandProvider({
       value={{
         isMobile,
         executeCommand: onCommandExecute,
+        generation: getDirectoryGeneration(),
       }}
     >
       {children}
@@ -50,6 +55,7 @@ export function useMobileCommand(): MobileCommandContextValue {
     return {
       isMobile: false,
       executeCommand: () => {},
+      generation: 0,
     }
   }
   return context

@@ -4,6 +4,7 @@
 
 import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
+import { getDirectoryGeneration } from '../context/directoryGeneration'
 import { CorruptedFile } from '../components/atoms/CorruptedFile'
 import { TappableFileItem } from '../components/atoms/TappableFileItem'
 import { markEasterEggSeen } from '../utils/easterEggState'
@@ -18,6 +19,9 @@ export const lsCommand: Command = {
     if (!fs) {
       return { success: false, error: 'Filesystem not initialized' }
     }
+
+    // Capture the current generation for staleness detection on mobile
+    const generation = getDirectoryGeneration()
 
     const result = fs.ls(args[0])
     
@@ -81,6 +85,7 @@ export const lsCommand: Command = {
                     name={item} 
                     isDirectory={isDir}
                     command={command}
+                    generation={generation}
                   />
                 )}
               </div>

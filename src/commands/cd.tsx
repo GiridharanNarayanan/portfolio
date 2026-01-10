@@ -4,6 +4,7 @@
 
 import type { Command } from '../types/Command.types'
 import { getGlobalFilesystem } from '../context/FilesystemContext'
+import { getDirectoryGeneration, incrementDirectoryGeneration } from '../context/directoryGeneration'
 import { CorruptedFile } from '../components/atoms/CorruptedFile'
 import { TappableFileItem } from '../components/atoms/TappableFileItem'
 import { isEasterEggRevealed, markEasterEggSeen } from '../utils/easterEggState'
@@ -25,6 +26,12 @@ export const cdCommand: Command = {
     if (!result.success) {
       return { success: false, error: result.error }
     }
+
+    // Since cd changes the directory, we increment the generation BEFORE rendering
+    // This ensures the new directory's items get the current generation,
+    // while all previous outputs (from before the cd) become stale
+    incrementDirectoryGeneration()
+    const generation = getDirectoryGeneration()
 
     // After cd, show ls output of the NEW directory (pass the new path explicitly)
     const lsResult = fs.ls(result.newPath)
@@ -80,6 +87,7 @@ export const cdCommand: Command = {
                         name={item} 
                         isDirectory={isDir}
                         command={command}
+                        generation={generation}
                       />
                     )}
                   </div>

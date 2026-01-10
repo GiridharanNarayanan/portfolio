@@ -25,15 +25,15 @@ describe('StartupScreen', () => {
   it('displays name and job title', () => {
     render(<StartupScreen />)
     
-    expect(screen.getByText('Giri Dayanandan')).toBeInTheDocument()
-    expect(screen.getByText('Software Engineer')).toBeInTheDocument()
+    expect(screen.getByText('Giridharan Narayanan')).toBeInTheDocument()
+    expect(screen.getByText('Engineering leader. Creator.')).toBeInTheDocument()
   })
 
   it('shows idle prompt after 3 seconds', async () => {
     render(<StartupScreen />)
     
     // Initially hidden (opacity-0)
-    const promptContainer = screen.getByText(/Press any key to continue/i).parentElement
+    const promptContainer = screen.getByText(/Press any key to explore/i).parentElement
     expect(promptContainer).toHaveClass('opacity-0')
     
     // After 3 seconds, should be visible
