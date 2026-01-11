@@ -1,10 +1,9 @@
 ---
 location: New Jersey
-updated: 2026-01-06
+updated: 2026-01-11
 ---
 
-Body and mind orienting to work & focus. 
-Getting into the routine of workout + work.
-Still prioritizing some learning & building in the side. 
-Continuing the painting for my wife.
+Feeling a tad enthusiastic. Spending time building even during weekends - finished a couple of 3D prints for my work desk this weekend.
+Continuing the painting for my wife in the background.
+Have an idea for another project that I'm discussing with AI tools.
 
