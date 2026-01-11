@@ -52,8 +52,9 @@ Underneath, it is a React application styled to feel like something older. The m
 - **Tailwind CSS** for styling that could adapt to the terminal aesthetic
 - **Vite** and **Bun** for fast builds and a pleasant development experience. Bun was new to me, and I was curious whether the speed claims held up. They did. Cold starts that used to take seconds now take milliseconds. It changed how often I was willing to restart the dev server, which sounds small but adds up.
 - **Azure Static Web Apps** for hosting with automatic deployments from GitHub
+- **Markdown with frontmatter** for content. Adding a new writing or project is as simple as dropping a file into the right folder.
 
-The content lives in Markdown files with frontmatter. Adding a new writing or project is as simple as dropping a file into the right folder.
+> **Note:** While this looks like a TUI, it is still a content website at heart. The goal was to evoke the terminal aesthetic while remaining accessible to anyone with a browser. Libraries like [Ink](https://github.com/vadimdemedes/ink) exist for building actual terminal interfaces, but they render to stdout, not the DOM. This project needed to live on the web, serve content, and work on mobile. So it is React pretending to be something older, which turned out to be exactly the right kind of pretending.
 
 ---
 
