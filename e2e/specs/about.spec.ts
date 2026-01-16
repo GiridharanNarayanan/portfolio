@@ -34,7 +34,7 @@ test.describe('About Page (US7)', () => {
 
     // Verify download attribute
     await expect(downloadButton).toHaveAttribute('download', '')
-    await expect(downloadButton).toHaveAttribute('href', '/resume.pdf')
+    await expect(downloadButton).toHaveAttribute('href', '/Giridharan-Narayanan-Resume.pdf')
   })
 
   test('career timeline renders with entries', async ({ page }) => {
