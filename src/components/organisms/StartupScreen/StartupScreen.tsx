@@ -136,7 +136,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
             </div>
             <p className="mt-3 text-xs" style={{ color: 'var(--color-text-muted)' }}>
               {isMobile ? (
-                <>Tip: <span style={{ color: 'var(--color-accent)' }}>Tap</span> on folders and files to navigate</>
+                <>Tip: You can also <span style={{ color: 'var(--color-accent)' }}>tap</span> on folders and files to navigate</>
               ) : (
                 <>Tip: Use <span style={{ color: 'var(--color-accent)' }}>Tab</span> to autocomplete commands and paths</>
               )}
