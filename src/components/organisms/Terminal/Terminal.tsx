@@ -364,7 +364,7 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
       {/* Command input - desktop vs mobile */}
       {isMobile ? (
         <MobileNavigation 
-          onCommandExecute={handleCommand} 
+          onCommandExecute={handleCommandWithAnimation} 
           currentPath={filesystem.currentPath}
         />
       ) : (
