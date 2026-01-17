@@ -59,6 +59,7 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
   const mainContentRef = useRef<HTMLElement>(null)
   const liveRegionRef = useRef<HTMLDivElement>(null)
   const latestOutputRef = useRef<HTMLDivElement>(null)
+  const typingAnimationRef = useRef<HTMLDivElement>(null)
   const [commandsReady, setCommandsReady] = useState(false)
   
   // Typing animation state for deep links
@@ -179,6 +180,13 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
         displayedText: '',
         fullCommand: command,
       })
+      // Scroll smoothly to typing animation so user can see command being typed
+      setTimeout(() => {
+        typingAnimationRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        })
+      }, 0)
     },
     []
   )
@@ -318,9 +326,12 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
           <div className="mb-4">{terminalState.currentOutput}</div>
         )}
 
-        {/* Typing animation for deep links */}
+        {/* Typing animation for deep links and mobile taps */}
         {typingState.isTyping && (
-          <div className="mb-4 font-mono flex items-center gap-2">
+          <div 
+            ref={typingAnimationRef}
+            className="mb-4 font-mono flex items-center gap-2 scroll-mt-16 animate-fade-in"
+          >
             <span style={{ color: 'var(--color-accent-secondary)' }}>
               $ &gt;
             </span>
