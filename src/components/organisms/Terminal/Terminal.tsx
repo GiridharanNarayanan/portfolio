@@ -259,7 +259,7 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
       className={cn('flex flex-col min-h-screen', className)}
       style={{ backgroundColor: 'var(--color-bg)' }}
       role="application"
-      aria-label="Terminal Portfolio"
+      aria-label="Portfolio"
     >
       {/* Skip link for accessibility */}
       <a

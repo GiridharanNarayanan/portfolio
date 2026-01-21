@@ -33,7 +33,7 @@ test.describe('US4 - Browse Projects', () => {
     await input.press('Enter');
 
     // Verify the sample project appears
-    await expect(page.locator('text=Terminal Portfolio Website')).toBeVisible();
+    await expect(page.locator('text=Portfolio Website')).toBeVisible();
   });
 
   test('shows tech stack tags on project cards', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('US4 - Browse Projects', () => {
     await input.press('Enter');
 
     // Verify the project title appears
-    await expect(page.locator('h1:has-text("Terminal Portfolio Website")')).toBeVisible();
+    await expect(page.locator('h1:has-text("Portfolio Website")')).toBeVisible();
   });
 
   test('displays external links in project detail', async ({ page }) => {
