@@ -7,8 +7,8 @@ featuredImage: "/images/writings/heads-up.svg"
 readTime: "4 min read"
 tags:
   - leadership
-  - mindfulness
-  - productivity
+  - learning
+  - ai
   - reflection
 ---
 
