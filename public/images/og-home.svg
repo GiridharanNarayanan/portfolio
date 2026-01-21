@@ -1,0 +1,12 @@
+<svg width="1584" height="396" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1584" height="396" fill="#0f1419"/>
+  
+  <!-- ASCII Art "GIRID" in block letters (centered) -->
+  <text x="792" y="98" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" text-anchor="middle" xml:space="preserve"> ██████╗  ██╗ ██████╗  ██╗ ██████╗ </text>
+  <text x="792" y="140" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" text-anchor="middle" xml:space="preserve">██╔════╝  ██║ ██╔══██╗ ██║ ██╔══██╗</text>
+  <text x="792" y="182" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" text-anchor="middle" xml:space="preserve">██║  ███╗ ██║ ██████╔╝ ██║ ██║  ██║</text>
+  <text x="792" y="224" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" text-anchor="middle" xml:space="preserve">██║   ██║ ██║ ██╔══██╗ ██║ ██║  ██║</text>
+  <text x="792" y="266" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" text-anchor="middle" xml:space="preserve">╚██████╔╝ ██║ ██║  ██║ ██║ ██████╔╝</text>
+  <text x="792" y="308" fill="#c5a93c" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" text-anchor="middle" xml:space="preserve"> ╚═════╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝ ╚═════╝ </text>
+</svg>

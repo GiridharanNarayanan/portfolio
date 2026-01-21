@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/api/*", "/assets/*"]
+    "exclude": ["/api/*", "/assets/*", "/images/*", "/writings/*/index.html", "/projects/*/index.html"]
   },
   "platform": {
     "apiRuntime": "node:18"
