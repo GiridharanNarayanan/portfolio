@@ -27,13 +27,20 @@ export interface DeepLinkResult {
  * Also checks for ?deeplink= query param (used by OG static pages)
  */
 export function parseDeepLink(pathname: string): DeepLinkResult {
-  // Check for deeplink query parameter first (from OG static page redirects)
-  const urlParams = new URLSearchParams(window.location.search)
-  const deeplinkParam = urlParams.get('deeplink')
-  if (deeplinkParam) {
-    // Clean the URL by removing the query param
-    window.history.replaceState({}, '', deeplinkParam)
-    return parseDeepLink(deeplinkParam)
+  // Check for deeplink query parameter (from OG static page redirects)
+  // Only check on root path to avoid false positives
+  if (pathname === '/' || pathname === '') {
+    const urlParams = new URLSearchParams(window.location.search)
+    const deeplinkParam = urlParams.get('deeplink')
+    if (deeplinkParam) {
+      // Clean the URL by removing the query param and navigate to the deep link path
+      const cleanPath = decodeURIComponent(deeplinkParam)
+      window.history.replaceState({}, '', cleanPath)
+      // Parse the deep link path (recursive call with the actual path)
+      return parseDeepLink(cleanPath)
+    }
+    // No deeplink param on root - not a deep link
+    return { hasDeepLink: false, command: null, contentType: null, slug: null }
   }
 
   // Remove leading slash and any trailing slashes
