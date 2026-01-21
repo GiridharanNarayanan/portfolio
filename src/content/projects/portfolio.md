@@ -1,6 +1,6 @@
 ---
 title: "Portfolio"
-date: "2025-01-01"
+date: "2025-01-16"
 excerpt: "A portfolio website styled as an interactive terminal, inspired by the efficiency of recent TUI-based tools."
 published: true
 featuredImage: "/images/projects/portfolio.svg"

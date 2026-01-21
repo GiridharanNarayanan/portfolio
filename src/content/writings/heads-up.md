@@ -1,6 +1,6 @@
 ---
 title: "Heads-Up"
-date: "2025-01-05"
+date: "2025-01-21"
 excerpt: "A reflection on recalibrating how I learn and stay aware in a fast-changing industry."
 published: true
 featuredImage: "/images/writings/heads-up.svg"
