@@ -164,8 +164,6 @@ test.describe('Cross-browser basics', () => {
     await page.fill('[data-testid="command-input"] input', 'help')
     await page.keyboard.press('Enter')
     await expect(page.getByText(/Available commands/i)).toBeVisible()
-
-    console.log(`Test passed on ${browserName}`)
   })
 })
 
