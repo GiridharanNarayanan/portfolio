@@ -68,7 +68,7 @@ export function StartupScreen({ onActivate, className }: StartupScreenProps) {
           style={{ 
             color: 'var(--color-accent)',
             fontSize: 'clamp(0.5rem, 2.5vw, 1rem)',
-            lineHeight: 1.2,
+            lineHeight: 1.3,
           }}
           aria-label="GIRID"
         >
