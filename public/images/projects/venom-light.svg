@@ -7,11 +7,11 @@
       .w { fill: #f0f0f0; }
       .eye {
         fill: #f0f0f0;
-        animation: blink 3s ease-in-out infinite;
+        animation: blink 1.5s ease-in-out infinite;
       }
       @keyframes blink {
-        0%, 85%, 100% { fill: #f0f0f0; }
-        90%, 95% { fill: #505050; }
+        0%, 70%, 100% { fill: #f0f0f0; }
+        80%, 90% { fill: #505050; }
       }
     </style>
   </defs>
