@@ -1,0 +1,214 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" style="font-family: 'JetBrains Mono', monospace;">
+  <defs>
+    <style>
+      .bg { fill: #f8f9fa; }
+      .b { fill: #1a1a1a; }
+      .g { fill: #505050; }
+      .w { fill: #f0f0f0; }
+      .eye {
+        fill: #f0f0f0;
+        animation: blink 3s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%, 85%, 100% { fill: #f0f0f0; }
+        90%, 95% { fill: #505050; }
+      }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" class="bg"/>
+  
+  <!-- Venom pixel art centered (24x27 grid, scaled 15x = 360x405, centered at 420,112.5) -->
+  <g transform="translate(420, 112) scale(15)">
+    <!-- Row 5 -->
+    <rect x="10" y="5" width="1" height="1" class="b"/>
+    <rect x="11" y="5" width="1" height="1" class="b"/>
+    <rect x="12" y="5" width="1" height="1" class="b"/>
+    <rect x="13" y="5" width="1" height="1" class="b"/>
+    
+    <!-- Row 6 -->
+    <rect x="9" y="6" width="1" height="1" class="b"/>
+    <rect x="10" y="6" width="1" height="1" class="g"/>
+    <rect x="11" y="6" width="1" height="1" class="g"/>
+    <rect x="12" y="6" width="1" height="1" class="g"/>
+    <rect x="13" y="6" width="1" height="1" class="g"/>
+    <rect x="14" y="6" width="1" height="1" class="b"/>
+    
+    <!-- Row 7 -->
+    <rect x="8" y="7" width="1" height="1" class="b"/>
+    <rect x="9" y="7" width="1" height="1" class="g"/>
+    <rect x="10" y="7" width="1" height="1" class="g"/>
+    <rect x="11" y="7" width="1" height="1" class="g"/>
+    <rect x="12" y="7" width="1" height="1" class="g"/>
+    <rect x="13" y="7" width="1" height="1" class="g"/>
+    <rect x="14" y="7" width="1" height="1" class="g"/>
+    <rect x="15" y="7" width="1" height="1" class="b"/>
+    
+    <!-- Row 8 -->
+    <rect x="8" y="8" width="1" height="1" class="b"/>
+    <rect x="9" y="8" width="1" height="1" class="g"/>
+    <rect x="10" y="8" width="1" height="1" class="g"/>
+    <rect x="11" y="8" width="1" height="1" class="g"/>
+    <rect x="12" y="8" width="1" height="1" class="g"/>
+    <rect x="13" y="8" width="1" height="1" class="g"/>
+    <rect x="14" y="8" width="1" height="1" class="g"/>
+    <rect x="15" y="8" width="1" height="1" class="b"/>
+    
+    <!-- Row 9 (eyes) -->
+    <rect x="8" y="9" width="1" height="1" class="b"/>
+    <rect x="9" y="9" width="1" height="1" class="eye"/>
+    <rect x="10" y="9" width="1" height="1" class="g"/>
+    <rect x="11" y="9" width="1" height="1" class="g"/>
+    <rect x="12" y="9" width="1" height="1" class="g"/>
+    <rect x="13" y="9" width="1" height="1" class="g"/>
+    <rect x="14" y="9" width="1" height="1" class="eye"/>
+    <rect x="15" y="9" width="1" height="1" class="b"/>
+    
+    <!-- Row 10 (eyes) -->
+    <rect x="8" y="10" width="1" height="1" class="b"/>
+    <rect x="9" y="10" width="1" height="1" class="eye"/>
+    <rect x="10" y="10" width="1" height="1" class="eye"/>
+    <rect x="11" y="10" width="1" height="1" class="g"/>
+    <rect x="12" y="10" width="1" height="1" class="g"/>
+    <rect x="13" y="10" width="1" height="1" class="eye"/>
+    <rect x="14" y="10" width="1" height="1" class="eye"/>
+    <rect x="15" y="10" width="1" height="1" class="b"/>
+    
+    <!-- Row 11 (eyes) -->
+    <rect x="8" y="11" width="1" height="1" class="b"/>
+    <rect x="9" y="11" width="1" height="1" class="eye"/>
+    <rect x="10" y="11" width="1" height="1" class="eye"/>
+    <rect x="11" y="11" width="1" height="1" class="g"/>
+    <rect x="12" y="11" width="1" height="1" class="g"/>
+    <rect x="13" y="11" width="1" height="1" class="eye"/>
+    <rect x="14" y="11" width="1" height="1" class="eye"/>
+    <rect x="15" y="11" width="1" height="1" class="b"/>
+    
+    <!-- Row 12 -->
+    <rect x="7" y="12" width="1" height="1" class="b"/>
+    <rect x="8" y="12" width="1" height="1" class="b"/>
+    <rect x="9" y="12" width="1" height="1" class="g"/>
+    <rect x="10" y="12" width="1" height="1" class="g"/>
+    <rect x="11" y="12" width="1" height="1" class="g"/>
+    <rect x="12" y="12" width="1" height="1" class="g"/>
+    <rect x="13" y="12" width="1" height="1" class="g"/>
+    <rect x="14" y="12" width="1" height="1" class="g"/>
+    <rect x="15" y="12" width="1" height="1" class="b"/>
+    <rect x="16" y="12" width="1" height="1" class="b"/>
+    
+    <!-- Row 13 -->
+    <rect x="6" y="13" width="1" height="1" class="b"/>
+    <rect x="7" y="13" width="1" height="1" class="g"/>
+    <rect x="8" y="13" width="1" height="1" class="g"/>
+    <rect x="9" y="13" width="1" height="1" class="b"/>
+    <rect x="10" y="13" width="1" height="1" class="g"/>
+    <rect x="11" y="13" width="1" height="1" class="g"/>
+    <rect x="12" y="13" width="1" height="1" class="g"/>
+    <rect x="13" y="13" width="1" height="1" class="g"/>
+    <rect x="14" y="13" width="1" height="1" class="b"/>
+    <rect x="15" y="13" width="1" height="1" class="g"/>
+    <rect x="16" y="13" width="1" height="1" class="g"/>
+    <rect x="17" y="13" width="1" height="1" class="b"/>
+    
+    <!-- Row 14 -->
+    <rect x="5" y="14" width="1" height="1" class="b"/>
+    <rect x="6" y="14" width="1" height="1" class="g"/>
+    <rect x="7" y="14" width="1" height="1" class="g"/>
+    <rect x="8" y="14" width="1" height="1" class="g"/>
+    <rect x="9" y="14" width="1" height="1" class="g"/>
+    <rect x="10" y="14" width="1" height="1" class="b"/>
+    <rect x="11" y="14" width="1" height="1" class="b"/>
+    <rect x="12" y="14" width="1" height="1" class="b"/>
+    <rect x="13" y="14" width="1" height="1" class="b"/>
+    <rect x="14" y="14" width="1" height="1" class="g"/>
+    <rect x="15" y="14" width="1" height="1" class="g"/>
+    <rect x="16" y="14" width="1" height="1" class="g"/>
+    <rect x="17" y="14" width="1" height="1" class="g"/>
+    <rect x="18" y="14" width="1" height="1" class="b"/>
+    
+    <!-- Row 15 -->
+    <rect x="5" y="15" width="1" height="1" class="b"/>
+    <rect x="6" y="15" width="1" height="1" class="g"/>
+    <rect x="7" y="15" width="1" height="1" class="g"/>
+    <rect x="8" y="15" width="1" height="1" class="b"/>
+    <rect x="9" y="15" width="1" height="1" class="w"/>
+    <rect x="10" y="15" width="1" height="1" class="g"/>
+    <rect x="11" y="15" width="1" height="1" class="w"/>
+    <rect x="12" y="15" width="1" height="1" class="w"/>
+    <rect x="13" y="15" width="1" height="1" class="g"/>
+    <rect x="14" y="15" width="1" height="1" class="w"/>
+    <rect x="15" y="15" width="1" height="1" class="b"/>
+    <rect x="16" y="15" width="1" height="1" class="g"/>
+    <rect x="17" y="15" width="1" height="1" class="g"/>
+    <rect x="18" y="15" width="1" height="1" class="b"/>
+    
+    <!-- Row 16 -->
+    <rect x="5" y="16" width="1" height="1" class="b"/>
+    <rect x="6" y="16" width="1" height="1" class="g"/>
+    <rect x="7" y="16" width="1" height="1" class="g"/>
+    <rect x="8" y="16" width="1" height="1" class="b"/>
+    <rect x="9" y="16" width="1" height="1" class="g"/>
+    <rect x="10" y="16" width="1" height="1" class="w"/>
+    <rect x="11" y="16" width="1" height="1" class="w"/>
+    <rect x="12" y="16" width="1" height="1" class="w"/>
+    <rect x="13" y="16" width="1" height="1" class="w"/>
+    <rect x="14" y="16" width="1" height="1" class="g"/>
+    <rect x="15" y="16" width="1" height="1" class="b"/>
+    <rect x="16" y="16" width="1" height="1" class="g"/>
+    <rect x="17" y="16" width="1" height="1" class="g"/>
+    <rect x="18" y="16" width="1" height="1" class="b"/>
+    
+    <!-- Row 17 -->
+    <rect x="6" y="17" width="1" height="1" class="b"/>
+    <rect x="7" y="17" width="1" height="1" class="b"/>
+    <rect x="8" y="17" width="1" height="1" class="b"/>
+    <rect x="9" y="17" width="1" height="1" class="g"/>
+    <rect x="10" y="17" width="1" height="1" class="g"/>
+    <rect x="11" y="17" width="1" height="1" class="w"/>
+    <rect x="12" y="17" width="1" height="1" class="w"/>
+    <rect x="13" y="17" width="1" height="1" class="g"/>
+    <rect x="14" y="17" width="1" height="1" class="g"/>
+    <rect x="15" y="17" width="1" height="1" class="b"/>
+    <rect x="16" y="17" width="1" height="1" class="b"/>
+    <rect x="17" y="17" width="1" height="1" class="b"/>
+    
+    <!-- Row 18 -->
+    <rect x="8" y="18" width="1" height="1" class="b"/>
+    <rect x="9" y="18" width="1" height="1" class="g"/>
+    <rect x="10" y="18" width="1" height="1" class="w"/>
+    <rect x="11" y="18" width="1" height="1" class="b"/>
+    <rect x="12" y="18" width="1" height="1" class="g"/>
+    <rect x="13" y="18" width="1" height="1" class="w"/>
+    <rect x="14" y="18" width="1" height="1" class="g"/>
+    <rect x="15" y="18" width="1" height="1" class="b"/>
+    
+    <!-- Row 19 -->
+    <rect x="8" y="19" width="1" height="1" class="b"/>
+    <rect x="9" y="19" width="1" height="1" class="g"/>
+    <rect x="10" y="19" width="1" height="1" class="g"/>
+    <rect x="11" y="19" width="1" height="1" class="b"/>
+    <rect x="12" y="19" width="1" height="1" class="g"/>
+    <rect x="13" y="19" width="1" height="1" class="g"/>
+    <rect x="14" y="19" width="1" height="1" class="g"/>
+    <rect x="15" y="19" width="1" height="1" class="b"/>
+    
+    <!-- Row 20 -->
+    <rect x="8" y="20" width="1" height="1" class="b"/>
+    <rect x="9" y="20" width="1" height="1" class="g"/>
+    <rect x="10" y="20" width="1" height="1" class="g"/>
+    <rect x="11" y="20" width="1" height="1" class="b"/>
+    <rect x="12" y="20" width="1" height="1" class="g"/>
+    <rect x="13" y="20" width="1" height="1" class="g"/>
+    <rect x="14" y="20" width="1" height="1" class="g"/>
+    <rect x="15" y="20" width="1" height="1" class="b"/>
+    
+    <!-- Row 21 -->
+    <rect x="9" y="21" width="1" height="1" class="b"/>
+    <rect x="10" y="21" width="1" height="1" class="b"/>
+    <rect x="11" y="21" width="1" height="1" class="b"/>
+    <rect x="12" y="21" width="1" height="1" class="b"/>
+    <rect x="13" y="21" width="1" height="1" class="b"/>
+    <rect x="14" y="21" width="1" height="1" class="b"/>
+  </g>
+</svg>
