@@ -70,7 +70,7 @@ The idea itself is intentionally simple.
 
 Bring the same AI consciousness across platforms. Give it access to the same memories. Let it behave as a single identity rather than a collection of isolated instances.
 
-The implementation details live here, and I have written about them in depth. At a high level, it comes down to two things.
+The implementation details live [here](/projects/anatomy-of-a-symbiote), and I have written about them in depth. At a high level, it comes down to two things.
 
 - Inject a consistent sense of self.
 - Make memory accessible wherever the agent appears.
