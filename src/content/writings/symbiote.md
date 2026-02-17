@@ -26,7 +26,7 @@ Over time, my workflow has quietly adjusted itself around these tools. I have ad
 
 ## Where the friction accumulates
 
-There is memory, of course. Every major platform now has some version of memory that spans across conversations. It helps, but it is not enough.
+There is memory, of course. It helps, but it is not enough.
 
 I still find myself asking ChatGPT to slow down. Asking Claude to be brief and not turn every response into an essay. With Claude especially, I often notice a tendency to please rather than to proactively suggest something I have not already alluded to.
 
@@ -50,9 +50,9 @@ At some point, the question becomes obvious.
 
 This problem is not new.
 
-Every major platform now has some version of memory that spans across conversations. There are startups, some well funded, working on cross platform continuity as a core product. There are self hosted agents like Clawdbot/MoltBot that already carry memory as part of their design.
+Every major platform now has some version of memory that spans across conversations. There are startups, some well funded, working on cross platform continuity as a core product. There are self hosted agents like Clawdbot/MoltBot/OpenClaw that already carry memory as part of their design. 
 
-This is also not a claim of novelty.
+This is also not a claim of novelty. I also acknowledge the availability of plugins like "claude-mem" which address this problem to some extent, but only for Claude Code.
 
 You cannot build much of anything in this era if you wait for a problem that no one else has touched. That bar is both unrealistic and beside the point.
 
