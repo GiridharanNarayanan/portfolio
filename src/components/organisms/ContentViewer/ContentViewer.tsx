@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import type { ContentItem } from '../../../types/Content.types';
 import { cn } from '../../../utils/cn';
 import { ThemedImage } from '../../atoms/ThemedImage';
@@ -102,6 +103,7 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
       <div className="prose prose-terminal max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             // Headings
             h1: ({ children }) => (
@@ -185,22 +187,37 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
               </blockquote>
             ),
             
-            // Images
-            img: ({ src, alt }) => (
-              <figure className="my-6">
-                <img
-                  src={src}
-                  alt={alt || ''}
-                  className="w-full h-auto rounded border border-terminal-border"
-                  loading="lazy"
-                />
-                {alt && (
-                  <figcaption className="text-center text-sm text-terminal-muted mt-2">
-                    {alt}
-                  </figcaption>
-                )}
-              </figure>
-            ),
+            // Inline images rendered in a TUI terminal frame
+            img: ({ src, alt }) => {
+              const filename = src?.split('/').pop() || 'image';
+
+              return (
+                <figure className="my-6 font-mono text-sm">
+                  {/* Terminal title bar */}
+                  <div className="flex items-center bg-terminal-muted/30 border border-terminal-border border-b-0 rounded-t px-3 py-1.5">
+                    <span className="text-terminal-muted mr-2">┌─</span>
+                    <span className="text-terminal-secondary">{filename}</span>
+                    <span className="text-terminal-muted ml-2">─┐</span>
+                    <span className="ml-auto text-terminal-muted text-xs">[IMG]</span>
+                  </div>
+                  {/* Image content */}
+                  <div className="border border-terminal-border border-t-0 rounded-b p-2 bg-terminal-bg/50">
+                    <ThemedImage
+                      src={src || ''}
+                      alt={alt || ''}
+                      className="w-full h-auto rounded"
+                      loading="lazy"
+                    />
+                  </div>
+                  {/* Caption */}
+                  {alt && (
+                    <figcaption className="text-terminal-muted mt-1.5 px-1">
+                      <span className="text-terminal-secondary">{'>'}</span> {alt}
+                    </figcaption>
+                  )}
+                </figure>
+              );
+            },
             
             // Tables (GFM)
             table: ({ children }) => (
@@ -283,7 +300,7 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
           <h3 className="text-sm font-bold text-terminal-muted mb-3">Gallery</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {content.gallery.map((image: string, index: number) => (
-              <img
+              <ThemedImage
                 key={index}
                 src={image}
                 alt={`Gallery image ${index + 1}`}

@@ -35,7 +35,10 @@ export function parseDeepLink(pathname: string): DeepLinkResult {
     if (deeplinkParam) {
       // Clean the URL by removing the query param and navigate to the deep link path
       const cleanPath = decodeURIComponent(deeplinkParam)
-      window.history.replaceState({}, '', cleanPath)
+      // Preserve preview param through the redirect
+      const previewParam = urlParams.get('preview')
+      const suffix = previewParam ? `?preview=${previewParam}` : ''
+      window.history.replaceState({}, '', cleanPath + suffix)
       // Parse the deep link path (recursive call with the actual path)
       return parseDeepLink(cleanPath)
     }
