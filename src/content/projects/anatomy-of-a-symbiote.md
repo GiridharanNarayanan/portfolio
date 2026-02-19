@@ -90,11 +90,13 @@ I then continued that same discussion across Claude Code, GitHub Copilot in VS C
 
 Not every client supports every MCP capability. This table shows what is available across the clients I used or tested with, based on the [official MCP clients page](https://modelcontextprotocol.io/clients) and validated through my own usage.
 
-| Capability | GHC in VS Code | Claude Code | Claude Desktop | ChatGPT [m/w] | Claude [m/w] |
-|---|---|---|---|---|---|
-| Tools | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Prompts | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Instructions | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Client | Tools | Prompts | Instructions |
+|---|---|---|---|
+| GHC in VS Code | ✅ | ✅ | ✅ |
+| Claude Code | ✅ | ✅ | ✅ |
+| Claude Desktop | ✅ | ✅ | ❌ |
+| ChatGPT [m/w] | ✅ | ❌ | ❌ |
+| Claude [m/w] | ✅ | ✅ | ❌ |
 
 *[m/w] = mobile and web clients*
 

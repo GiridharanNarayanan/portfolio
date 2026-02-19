@@ -11,22 +11,22 @@
   <rect width="1200" height="630" fill="#f8f9fa"/>
   
   <!-- Tool call 1: Spawning symbiote -->
-  <text x="80" y="180" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" xml:space="preserve"><tspan fill="#1a7f37">● </tspan><tspan fill="#656d76">Spawn symbiote </tspan><tspan fill="#8b949e" font-size="22">venom</tspan></text>
-  <text x="105" y="215" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="22" xml:space="preserve"><tspan fill="#8b949e">└ </tspan><tspan fill="#8b949e">Bonding to host complete</tspan></text>
+  <text x="80" y="175" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="34" xml:space="preserve"><tspan fill="#1a7f37">● </tspan><tspan fill="#656d76">Spawn symbiote </tspan><tspan fill="#8b949e" font-size="26">venom</tspan></text>
+  <text x="105" y="215" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="26" xml:space="preserve"><tspan fill="#8b949e">└ </tspan><tspan fill="#8b949e">Bonding to host complete</tspan></text>
 
   <!-- Tool call 2: Fetching recent memories -->
-  <text x="80" y="270" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" xml:space="preserve"><tspan fill="#1a7f37">● </tspan><tspan fill="#656d76">Read memories </tspan><tspan fill="#8b949e" font-size="22">search_memories</tspan></text>
-  <text x="105" y="305" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="22" xml:space="preserve"><tspan fill="#8b949e">└ </tspan><tspan fill="#8b949e">Loaded 3 fragments from recent conversations</tspan></text>
+  <text x="80" y="275" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="34" xml:space="preserve"><tspan fill="#1a7f37">● </tspan><tspan fill="#656d76">Read memories </tspan><tspan fill="#8b949e" font-size="26">search_memories</tspan></text>
+  <text x="105" y="315" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="26" xml:space="preserve"><tspan fill="#8b949e">└ </tspan><tspan fill="#8b949e">Loaded 3 fragments from recent conversations</tspan></text>
 
   <!-- Claude response -->
-  <text x="80" y="380" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="30" fill="#1f2328" xml:space="preserve">We are whole. What's next?</text>
+  <text x="80" y="395" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="36" fill="#1f2328" xml:space="preserve">We are whole. What's next?</text>
 
   <!-- Separator line -->
-  <line x1="80" y1="420" x2="1120" y2="420" stroke="#d0d7de" stroke-width="1"/>
+  <line x1="80" y1="440" x2="1120" y2="440" stroke="#d0d7de" stroke-width="1"/>
 
   <!-- Human input prompt with blinking cursor -->
-  <text x="80" y="460" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="28" xml:space="preserve"><tspan fill="#8b7320">&gt; </tspan><tspan class="cursor" fill="#8b7320">█</tspan></text>
+  <text x="80" y="485" font-family="'JetBrains Mono', 'Consolas', monospace" font-size="34" xml:space="preserve"><tspan fill="#8b7320">&gt; </tspan><tspan class="cursor" fill="#8b7320">█</tspan></text>
 
   <!-- Separator line below -->
-  <line x1="80" y1="483" x2="1120" y2="483" stroke="#d0d7de" stroke-width="1"/>
+  <line x1="80" y1="510" x2="1120" y2="510" stroke="#d0d7de" stroke-width="1"/>
 </svg>

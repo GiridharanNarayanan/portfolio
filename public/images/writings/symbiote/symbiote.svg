@@ -19,8 +19,8 @@
   <!-- Background -->
   <rect width="1200" height="630" class="bg"/>
   
-  <!-- Venom pixel art centered (24x27 grid, scaled 15x = 360x405, centered at 420,112.5) -->
-  <g transform="translate(420, 112) scale(15)">
+  <!-- Venom pixel art centered (24x27 grid, scaled 18x, centered on canvas) -->
+  <g transform="translate(393, 81) scale(18)">
     <!-- Row 5 -->
     <rect x="10" y="5" width="1" height="1" class="b"/>
     <rect x="11" y="5" width="1" height="1" class="b"/>
