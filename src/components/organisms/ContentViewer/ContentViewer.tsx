@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import type { ContentItem } from '../../../types/Content.types';
 import { cn } from '../../../utils/cn';
 import { ThemedImage } from '../../atoms/ThemedImage';
@@ -102,6 +103,7 @@ export function ContentViewer({ content, className }: ContentViewerProps) {
       <div className="prose prose-terminal max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             // Headings
             h1: ({ children }) => (

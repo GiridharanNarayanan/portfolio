@@ -5,8 +5,8 @@
  * Light mode variants should be named with '-light' suffix before the extension.
  * 
  * Example:
- *   Dark (default): /images/projects/portfolio.svg
- *   Light variant:  /images/projects/portfolio-light.svg
+ *   Dark (default): /images/projects/portfolio/portfolio.svg
+ *   Light variant:  /images/projects/portfolio/portfolio-light.svg
  */
 
 /**

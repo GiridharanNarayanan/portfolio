@@ -1,0 +1,107 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg" style="font-family: 'JetBrains Mono', monospace;">
+  <style>
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .fade-hyphen {
+      animation: fadeInOut 2s ease-in-out infinite;
+    }
+  </style>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#f8f9fa"/>
+  
+  <!-- Letter tiles positioned at center -->
+  <!-- H tile -->
+  <g transform="translate(170, 262)">
+    <!-- Shadow -->
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <!-- Background -->
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <!-- Borders -->
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <!-- Letter -->
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">H</text>
+  </g>
+  
+  <!-- E tile -->
+  <g transform="translate(275, 262)">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">E</text>
+  </g>
+  
+  <!-- A tile -->
+  <g transform="translate(380, 262)">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">A</text>
+  </g>
+  
+  <!-- D tile -->
+  <g transform="translate(485, 262)">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">D</text>
+  </g>
+  
+  <!-- S tile (with fade animation for wordplay) -->
+  <g transform="translate(590, 262)" class="fade-hyphen">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">S</text>
+  </g>
+  
+  <!-- Hyphen tile (with fade animation) -->
+  <g transform="translate(695, 262)" class="fade-hyphen">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">-</text>
+  </g>
+  
+  <!-- U tile -->
+  <g transform="translate(800, 262)">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">U</text>
+  </g>
+  
+  <!-- P tile -->
+  <g transform="translate(905, 262)">
+    <rect x="4" y="8" width="90" height="105" fill="#d0d7de"/>
+    <rect x="0" y="0" width="90" height="105" fill="#e8e5e0"/>
+    <rect x="0" y="0" width="90" height="4" fill="#8b7320"/>
+    <rect x="0" y="0" width="4" height="105" fill="#8b7320"/>
+    <rect x="86" y="0" width="4" height="105" fill="#d0d7de"/>
+    <rect x="0" y="101" width="90" height="4" fill="#d0d7de"/>
+    <text x="45" y="68" fill="#1f2328" font-size="54" text-anchor="middle" font-weight="700">P</text>
+  </g>
+</svg>

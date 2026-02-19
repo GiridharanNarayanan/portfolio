@@ -4,7 +4,7 @@ A personal portfolio styled as a terminal interface. Built with React and TypeSc
 
 **Live:** [girid.me](https://girid.me)
 
-![Portfolio](public/images/writings/heads-up.svg)
+![Portfolio](public/images/writings/heads-up/heads-up.svg)
 
 ---
 

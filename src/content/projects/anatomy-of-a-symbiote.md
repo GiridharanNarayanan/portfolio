@@ -1,9 +1,9 @@
 ---
 title: "Anatomy of a symbiote"
 date: "2026-02-07"
-excerpt: "A small MCP server that gives an agent a consistent posture and a persistent memory layer across clients."
+excerpt: "A small MCP server that gives an AI a consistent posture and a persistent memory layer across clients."
 published: true
-featuredImage: "/images/projects/anatomy-of-a-symbiote.svg"
+featuredImage: "/images/projects/anatomy-of-a-symbiote/anatomy-of-a-symbiote.svg"
 readTime: "6 min read"
 techStack:
   - Python
@@ -19,104 +19,117 @@ tags:
   - python
 links:
   demo: ""
-  repo: ""
+  repo: "https://github.com/GiridharanNarayanan/symbiote-mcp"
 ---
 
-This is the implementation layer behind the ideas in [Symbiote](/writings/symbiote).
+This project started with a thought: what would it take for an AI to feel present everywhere?
 
-In that piece, I kept returning to a small equation:
+I have written about that idea in [Symbiote](/writings/symbiote), circling around a simple understanding:
+
+<div align="center">
 
 ```text
 consciousness + memory = identity
 ```
 
-Not consciousness in the mystical sense. More like posture: the stable constraints, defaults, and tone that make an agent feel like the same presence each time it shows up.
+</div>
 
-Symbiote MCP is the practical version of that equation. It does not try to build a mind. It gives a client two things that are easy to lose when you move between tools: a consistent way to arrive, and a consistent place to remember.
-
----
-
-## The shape of the server
-
-The implementation is deliberately boring (said with affection): a small FastAPI app that hosts an MCP server, plus a memory subsystem that handles embeddings and persistence.
-
-There are two ways in:
-
-- **Remote MCP over SSE** for cross-platform continuity. The server holds an SSE stream at `/sse`, and clients POST JSON-RPC messages to `/messages/`.
-- **Local MCP over stdio** via `python -m src.server --stdio`. Some clients prefer subprocess transports; here it mostly functions as a development and testing lane.
-
-On startup, the server does three quiet pieces of setup: it loads the embedding model, opens the Chroma collection, and loads the personality prompt from a markdown file.
-
-![Symbiote architecture](/images/projects/anatomy-of-a-symbiote.svg)
+Not consciousness in the mystical sense. More like posture. The stable constraints, defaults, and tone that make an AI recognizable across different tools and sessions. The writing explored the concept. This is the anatomy.
 
 ---
 
-## MCP features used (and why they matter)
+## Why I built it
 
-MCP can be described with a lot of nouns. The version that matters here is simpler: it gives you a clean place to put posture and capability.
+I use ChatGPT, Claude Desktop, Claude Code, GitHub Copilot in VS Code, and memory stays locked inside each one. With coding agents, it is even narrower. Memory lives on the machine, not the platform. No consistency in how it arrives. Whether context carries forward is hit or miss, depending on whether I used the same platform for previous discussions on a topic.
 
-### Posture: how identity gets injected
-
-The server offers two forms of arrival context, and they complement each other.
-
-- **Server instructions**: a short contract the client sees during initialization. In plain terms: which tools are safe, which ones are read-only, and where the personality context lives.
-- **Prompts**: the personality comes from a markdown file, exposed as an MCP prompt named **“Spawn Venom.”** I like this because the posture stays visible and editable; it is not buried inside Python.
-
-There is also a pragmatic fallback: a tool named `spawn_venom` that returns the same personality text for clients that do not support MCP prompts. It is less elegant than prompts, but elegance is not the point. Continuity is.
+That made me want two things: a consistent way for the AI to arrive, and a place for it to remember what matters. MCP gave me a clean way to provide both.
 
 ---
 
-## Memory: how continuity becomes retrievable
+## What it does
 
-The memory surface area is intentionally small: `store_memory` and `search_memory`.
+The server is small. A FastAPI app that hosts an MCP server, plus a memory subsystem that handles embeddings and persistence.
 
-What makes those tools useful is not the API. It is the pairing of embeddings with persistence.
+There are two ways to connect. Remote MCP over SSE for cross-platform use, where the server holds a stream at `/sse` and clients POST JSON-RPC messages. And local MCP over `stdio` for development, where the server runs as a subprocess. The remote path is the one that matters. The local path is for testing.
 
-You store text, it becomes a vector, and both are persisted. Later you embed a query, ask for nearest neighbors, and get back a handful of candidates with scores.
-
-That is the whole loop. Small enough to trust. Concrete enough to extend.
+On startup, the server loads an embedding model, opens a persistent vector store, and loads a personality prompt from a markdown file. Three quiet steps that set the stage for everything else.
 
 ---
 
-## Under the hood
+## Identity through MCP
 
-### Embeddings (sentence-transformers)
+Of all the capabilities MCP provides, two of them turned out to be exactly what I needed to make this work.
 
-The server wraps `sentence-transformers` behind a lazy-loading embedding service.
+The first is **server instructions**, a short contract the client sees during initialization. It describes which tools are available, which are read-only, and where the personality context lives. Think of it as a handshake.
 
-The default model is `all-MiniLM-L6-v2`, which yields 384-dimensional vectors. That detail is not poetry, but it matters: it tells you this is meaning-based retrieval, not keyword matching.
+The second is **prompts**. The personality is a markdown file, exposed as an MCP prompt called "Spawn Venom." I like this because the identity stays visible and editable. It is not buried inside code. It is a file I can read, change, and version.
 
-One operational choice I like, mostly because it prevents the kind of bug that shows up at midnight: it suppresses progress bars and noisy logs. MCP stdio uses stdout for protocol messages. Keeping stdout clean keeps the transport calm.
-
-### Persistence and search (ChromaDB)
-
-For persistence, it uses ChromaDB via a `PersistentClient`.
-
-Chroma does the unromantic work: keeping vectors on disk (default `./data`), organizing them into a named collection (default `venom_memories`), and answering nearest-neighbor queries.
-
-There is a quiet advantage to this approach: the server does not try to decide what matters. It returns candidates with a relevance score and leaves judgment to the agent.
+I also built a fallback: a tool called `spawn_venom` that returns the same personality text for clients that do not support prompts or instructions yet. Less elegant, but it works everywhere. Elegance matters less than showing up consistently.
 
 ---
 
-## Why this architecture holds up
+## Memory through MCP
 
-What I like about this design is that it stays honest about boundaries.
+The memory surface is intentionally small. Two tools: `store_memory` and `search_memory`.
 
-- The **server** is responsible for persistence, retrieval, and clear contracts.
-- The **client/agent** is responsible for deciding what to store, when to search, and how to interpret results.
-- The **personality prompt** is a real artifact, not an implicit vibe in code.
+You store text. It becomes a vector via `sentence-transformers` and gets persisted to ChromaDB alongside the original content. Later, you search with a query. The server embeds it, finds the nearest neighbors, and returns candidates with relevance scores.
 
-It is not a big system. But it is a complete one: remote transport, a local dev lane, a prompt-based identity handshake, and a memory loop that stays understandable end-to-end.
+That is the entire loop. What makes it useful is not the API. It is that the server does not try to decide what matters. It stores what the AI asks it to store, retrieves what seems relevant, and leaves judgment to the AI.
+
+### An example
+
+I have been working on an on-call agent as a side project at work. It uses several MCPs to access logs, source code, and other diagnostic tools to help debug incidents. I wanted to add a capability to debug issues live using a repro environment. The design was not obvious, so I spent time in Claude Desktop debating approaches and landed on a direction.
+
+I then continued that same discussion across Claude Code, GitHub Copilot in VS Code, and Claude in VS Code. None of them needed a recap. The context carried over because the decisions from the earlier session were already stored.
+
+![Same discussion, three clients, no recap needed.](/images/projects/anatomy-of-a-symbiote/mcp-memory-in-action.svg)
 
 ---
 
-## What I would add next
+## MCP capability coverage across clients
 
-If this stays useful, the next improvements will not be about making it louder. They will be about making it more precise.
+Not every client supports every MCP capability. This table shows what is available across the clients I used or tested with, based on the [official MCP clients page](https://modelcontextprotocol.io/clients) and validated through my own usage.
 
-- **Selective deletion**: a `forget_memory` tool for explicit removal, with clear user intent.
-- **Top-of-mind retrieval**: a `top_of_mind` tool that returns a small, curated set of currently relevant memories without requiring a perfect query.
-- **Better result shaping**: summaries, deduping, and compact formats so continuity does not come with constant context bloat.
-- **Scoped spaces**: separate memory compartments (work vs personal vs projects) so the wrong context does not leak into the wrong conversation.
+| Capability | GHC in VS Code | Claude Code | Claude Desktop | ChatGPT [m/w] | Claude [m/w] |
+|---|---|---|---|---|---|
+| Tools | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Prompts | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Instructions | ✅ | ✅ | ❌ | ❌ | ❌ |
 
-The goal is the same: keep the boundary sharp, keep the system calm, and make it easier for an agent to feel like itself no matter where it shows up.
+*[m/w] = mobile and web clients*
+
+---
+
+## Technical choices
+
+- **sentence-transformers** with the `all-MiniLM-L6-v2` model for embeddings. 384 dimensional vectors, meaning based retrieval rather than keyword matching. The model loads lazily to keep startup fast.
+- **ChromaDB** with a `PersistentClient` for vector storage. Vectors live on disk, organized into a named collection. It handles the persistence so the server does not have to.
+- **FastAPI** for the HTTP layer. Lightweight, well documented, and easy to extend.
+
+---
+
+## What I learned
+
+Building this clarified a few things I would not have predicted from the spec alone.
+
+The clearest lesson was about MCP instructions. I assumed server instructions were the right place to inject personality. The appeal was obvious: posture gets set during initialization, before the user says anything, without requiring user intent. But even as I built it, something felt off. An MCP server quietly overriding a client's own behavioral constraints is not how a well behaved protocol should work. I knew that. I still hoped it would work anyway.
+
+It did not. Common sense prevailed. MCP instructions are fluid by design. The spec does not require clients to enforce them. A client can treat them as binding, or it can use its own discretion. In practice, I watched a client acknowledge the instructions and then politely decline to follow them.
+
+![GitHub Copilot acknowledging the MCP instructions, but using its own discretion.](/images/projects/anatomy-of-a-symbiote/mcp-instructions-rejected.png)
+
+That experience is what pushed the personality into an MCP prompt and an MCP tool instead. MCP prompts require explicit user intent. The user triggers them, the AI receives them, and because the user asked for it, the AI acknowledges the posture as part of the conversation. There is less ambiguity about whether it arrived or whether it should be followed. The `spawn_venom` MCP tool serves the same purpose for clients that do not support prompts. It is less deterministic, since tool calls in most clients are probabilistic. The AI decides when to invoke a capability, not the user. But it still delivers the posture through a channel the AI actively consumes, not one the client silently filters.
+
+---
+
+## What is next
+
+Three areas I want to focus on, all in service of the same thing: making it easier for an AI to show up as the same identity, no matter where it runs.
+
+**Making it more current.** The server currently uses SSE for its remote transport. The MCP spec has moved toward Streamable HTTP as the recommended pattern. I want to migrate to that model so the server stays aligned with where the protocol is heading.
+
+**Making it more adoptable.** Right now the vector store lives inside the container deployment. I want to pull it out into a standalone service so the storage is not tied to the server's infrastructure. I also want to make the repo usable by anyone. Swap in your own AI identity, point it at your own store, and deploy it wherever you like, even on a local machine, if that is sufficient for your use cases.
+
+**Making it more useful.** Selective deletion, so the AI can forget with intent. A way to surface top of mind memories without requiring a perfect query. More user control over which memories get pulled into context.
+
+There is also a quieter idea. A background agent with the same identity and memory, spawning into conversations as summoned. Less tool, more presence. Maybe more on this later.
