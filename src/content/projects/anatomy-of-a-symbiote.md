@@ -2,7 +2,7 @@
 title: "Anatomy of a symbiote"
 date: "2026-02-07"
 excerpt: "A small MCP server that gives an AI a consistent posture and a persistent memory layer across clients."
-published: true
+published: false
 featuredImage: "/images/projects/anatomy-of-a-symbiote/anatomy-of-a-symbiote.svg"
 readTime: "6 min read"
 techStack:

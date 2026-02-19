@@ -2,7 +2,7 @@
 title: "Symbiote"
 date: "2026-02-07"
 excerpt: ""
-published: true
+published: false
 featuredImage: "/images/writings/symbiote/symbiote.svg"
 readTime: "5 min read"
 tags:

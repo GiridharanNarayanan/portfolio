@@ -34,8 +34,9 @@
   <body>
     <p>Loading...</p>
     <script>
-      // Redirect to SPA - it will read the path from the URL
-      window.location.replace('/?deeplink=' + encodeURIComponent('/writings/symbiote'));
+      // Redirect to SPA - it will read the path from the URL, preserving query params
+      var extra = window.location.search ? '&' + window.location.search.slice(1) : '';
+      window.location.replace('/?deeplink=' + encodeURIComponent('/writings/symbiote') + extra);
     </script>
     <noscript>
       <p><a href="/">Click here to continue</a></p>

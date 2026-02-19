@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import matter from 'gray-matter';
 import type { ContentItem, ContentType, ContentFrontmatter } from '../types/Content.types';
+import { isPreviewMode } from '../utils/previewMode';
 
 // Vite's import.meta.glob for markdown files by category
 // Using eager loading to ensure files are found at build time
@@ -86,9 +87,10 @@ export function useMarkdownContent(type: ContentType): UseMarkdownContentResult 
         }
       });
 
-      // Filter out failed loads and unpublished items, sort by date descending
+      // Filter out failed loads and unpublished items (unless preview mode), sort by date descending
+      const preview = isPreviewMode();
       const validItems = loadedItems
-        .filter((item): item is ContentItem => item !== null && item.published)
+        .filter((item): item is ContentItem => item !== null && (item.published || preview))
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
       setItems(validItems);

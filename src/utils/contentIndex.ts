@@ -5,6 +5,7 @@
 
 import matter from 'gray-matter';
 import type { ContentType } from '../types/Content.types';
+import { isPreviewMode } from './previewMode';
 
 // Eagerly load all content modules
 const writingsModules = import.meta.glob('../content/writings/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
@@ -28,10 +29,10 @@ function extractSlug(path: string): string {
 /**
  * Parse content for index
  */
-function parseForIndex(rawContent: string, path: string, type: ContentType): ContentIndexItem | null {
+function parseForIndex(rawContent: string, path: string, type: ContentType, preview: boolean): ContentIndexItem | null {
   try {
     const { data } = matter(rawContent);
-    if (data.published === false) return null;
+    if (data.published === false && !preview) return null;
     
     return {
       slug: extractSlug(path),
@@ -50,9 +51,10 @@ function parseForIndex(rawContent: string, path: string, type: ContentType): Con
  */
 export function getContentIndex(type: ContentType): ContentIndexItem[] {
   const modules = type === 'writings' ? writingsModules : projectsModules;
+  const preview = isPreviewMode();
   
   const items = Object.entries(modules)
-    .map(([path, content]) => parseForIndex(content, path, type))
+    .map(([path, content]) => parseForIndex(content, path, type, preview))
     .filter((item): item is ContentIndexItem => item !== null)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
