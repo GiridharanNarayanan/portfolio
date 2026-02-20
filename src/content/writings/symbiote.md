@@ -1,7 +1,7 @@
 ---
 title: "Symbiote"
 date: "2026-02-07"
-excerpt: ""
+excerpt: "A reflection on what it would take for an AI to feel like the same presence, no matter where it runs."
 published: false
 featuredImage: "/images/writings/symbiote/symbiote.svg"
 readTime: "5 min read"

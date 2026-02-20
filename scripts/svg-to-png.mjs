@@ -31,7 +31,6 @@ const png = outputPath
 const browser = await chromium.launch();
 const context = await browser.newContext({
   viewport: { width: 1200, height: 630 },
-  deviceScaleFactor: 2,
 });
 
 const page = await context.newPage();
