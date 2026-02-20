@@ -19,7 +19,7 @@
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/api/*", "/assets/*", "/images/**/*.{png,jpg,gif,svg}", "/images/*.{png,jpg,gif,svg}", "/css/*"]
+    "exclude": ["/api/*", "/assets/*", "/images/*", "/css/*"]
   },
   "platform": {
     "apiRuntime": "node:18"
