@@ -5,13 +5,21 @@
       "rewrite": "/writings/heads-up/index.html"
     },
     {
+      "route": "/writings/symbiote",
+      "rewrite": "/writings/symbiote/index.html"
+    },
+    {
       "route": "/projects/portfolio",
       "rewrite": "/projects/portfolio/index.html"
+    },
+    {
+      "route": "/projects/anatomy-of-a-symbiote",
+      "rewrite": "/projects/anatomy-of-a-symbiote/index.html"
     }
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/api/*", "/assets/*", "/images/*.{png,jpg,gif,svg}", "/css/*"]
+    "exclude": ["/api/*", "/assets/*", "/images/**/*.{png,jpg,gif,svg}", "/images/*.{png,jpg,gif,svg}", "/css/*"]
   },
   "platform": {
     "apiRuntime": "node:18"
