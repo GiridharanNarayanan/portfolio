@@ -256,7 +256,7 @@ export function Terminal({ className, initialCommand, onRestart }: TerminalProps
 
   return (
     <div
-      className={cn('flex flex-col min-h-screen', className)}
+      className={cn('flex flex-col h-screen [height:100dvh]', className)}
       style={{ backgroundColor: 'var(--color-bg)' }}
       role="application"
       aria-label="Portfolio"
