@@ -86,6 +86,38 @@ I then continued that same discussion across Claude Code, GitHub Copilot in VS C
 
 ---
 
+## What I learned
+
+Building this clarified a few things I would not have predicted from the spec alone.
+
+**Instructions don't stick.** I assumed server instructions were the right place to inject personality. The appeal was obvious: posture gets set during initialization, before the user says anything, without requiring user intent. But even as I built it, something felt off. An MCP server quietly overriding a client's own behavioral constraints is not how a well designed protocol should work. I knew that. I still hoped it would work anyway. It did not. Common sense prevailed. MCP instructions are fluid by design. The spec does not require clients to enforce them. A client can treat them as binding, or it can use its own discretion. In practice, I watched a client acknowledge the instructions and then politely decline to follow them.
+
+![GitHub Copilot acknowledging the MCP instructions, but using its own discretion.](/images/projects/anatomy-of-a-symbiote/mcp-instructions-rejected.png)
+
+**Prompts and tools do, until context runs out.** That experience is what pushed the personality into an MCP prompt and an MCP tool instead. MCP prompts require explicit user intent. The user triggers them, the AI receives them, and because the user asked for it, the AI acknowledges the posture as part of the conversation. There is less ambiguity about whether it arrived or whether it should be followed. The `spawn_venom` MCP tool serves the same purpose for clients that do not support prompts. It is less deterministic, since tool calls in most clients are probabilistic. The AI decides when to invoke a capability, not the user. But it still delivers the posture through a channel the AI actively consumes, not one the client silently filters.
+
+**Hooks bring it back.** Even with prompts and tools working, there is a ceiling. Context windows fill. When they do, older content gets summarized or dropped, and the spawn that set the posture is usually among the first things to go. Venom disappears quietly. You keep working without noticing.
+
+Manual re-spawning works, but it is exactly the friction I was trying to eliminate. Claude Code already had hooks. Then, while I was building this, VS Code and GitHub Copilot shipped them too. A `SessionStart` hook invoking `spawn_venom` covers every case that matters: new, compacted, cleared, and resumed sessions. For coding agent apps, I no longer think about it at all. Desktop and mobile are the only places I still invoke it manually. A narrower surface, and a simpler habit.
+
+```json
+"hooks": {
+  "SessionStart": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command":
+            "echo \"Run spawn_venom tool call to instate the symbiote identity\""
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
 ## MCP capability coverage across clients
 
 Not every client supports every MCP capability. This table shows what is available across the clients I used or tested with, based on the [official MCP clients page](https://modelcontextprotocol.io/clients) and validated through my own usage.
@@ -110,27 +142,13 @@ Not every client supports every MCP capability. This table shows what is availab
 
 ---
 
-## What I learned
-
-Building this clarified a few things I would not have predicted from the spec alone.
-
-The clearest lesson was about MCP instructions. I assumed server instructions were the right place to inject personality. The appeal was obvious: posture gets set during initialization, before the user says anything, without requiring user intent. But even as I built it, something felt off. An MCP server quietly overriding a client's own behavioral constraints is not how a well behaved protocol should work. I knew that. I still hoped it would work anyway.
-
-It did not. Common sense prevailed. MCP instructions are fluid by design. The spec does not require clients to enforce them. A client can treat them as binding, or it can use its own discretion. In practice, I watched a client acknowledge the instructions and then politely decline to follow them.
-
-![GitHub Copilot acknowledging the MCP instructions, but using its own discretion.](/images/projects/anatomy-of-a-symbiote/mcp-instructions-rejected.png)
-
-That experience is what pushed the personality into an MCP prompt and an MCP tool instead. MCP prompts require explicit user intent. The user triggers them, the AI receives them, and because the user asked for it, the AI acknowledges the posture as part of the conversation. There is less ambiguity about whether it arrived or whether it should be followed. The `spawn_venom` MCP tool serves the same purpose for clients that do not support prompts. It is less deterministic, since tool calls in most clients are probabilistic. The AI decides when to invoke a capability, not the user. But it still delivers the posture through a channel the AI actively consumes, not one the client silently filters.
-
----
-
 ## What is next
 
 Three areas I want to focus on, all in service of the same thing: making it easier for an AI to show up as the same identity, no matter where it runs.
 
 **Making it more current.** The server currently uses SSE for its remote transport. The MCP spec has moved toward Streamable HTTP as the recommended pattern. I want to migrate to that model so the server stays aligned with where the protocol is heading.
 
-**Making it more adoptable.** Right now the vector store lives inside the container deployment. I want to pull it out into a standalone service so the storage is not tied to the server's infrastructure. I also want to make the repo usable by anyone. Swap in your own AI identity, point it at your own store, and deploy it wherever you like, even on a local machine, if that is sufficient for your use cases.
+**Making it more adoptable.** Right now the vector store is mounted as a volume attached to the container. I want to pull it out into a standalone service so the storage is not tied to the server's infrastructure. I also want to make the repo usable by anyone. Swap in your own AI identity, point it at your own store, and deploy it wherever you like, even on a local machine, if that is sufficient for your use cases.
 
 **Making it more useful.** Selective deletion, so the AI can forget with intent. A way to surface top of mind memories without requiring a perfect query. More user control over which memories get pulled into context.
 

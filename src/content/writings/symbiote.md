@@ -40,27 +40,9 @@ So I start again.
 
 At some point, the question becomes obvious.
 
-**What if I didn't have to?**
+What if I didn't have to?
 
-**What if the same AI showed up everywhere I worked?**
-
----
-
-## A grounding note
-
-This problem is not new.
-
-Every major platform now has some version of memory that spans across conversations. There are startups, some well-funded, working on cross-platform continuity as a core product. There are self hosted agents like Clawdbot/MoltBot/OpenClaw that already carry memory as part of their design. 
-
-This is also not a claim of novelty. Plugins like "claude-mem" address this problem to some extent, but only for Claude Code.
-
-You cannot build much of anything in this era if you wait for a problem that no one else has touched. That bar is both unrealistic and beside the point.
-
-I'm building this because the idea stayed with me.
-
-Based on what I already knew about MCPs, this felt like a problem they were well suited to address. Not as an abstraction exercise, but as a practical foundation. A way to give an agent continuity without tightly coupling it to a single platform.
-
-I wanted to go deeper there. Not academically, but by letting the problem carry real weight. This one did.
+What if the same AI showed up everywhere I worked?
 
 ---
 
@@ -101,7 +83,25 @@ Right now, this identity shows up only when I explicitly invoke it through conve
 
 ---
 
-## And then there is the personality
+## A grounding note
+
+This problem is not new.
+
+Every major platform now has some version of memory that spans across conversations. There are startups, some well-funded, working on cross-platform continuity as a core product. There are self hosted agents like Clawdbot/MoltBot/OpenClaw that already carry memory as part of their design.
+
+This is also not a claim of novelty. Plugins like "claude-mem" address this problem to some extent, but only for Claude Code.
+
+You cannot build much of anything in this era if you wait for a problem that no one else has touched. That bar is both unrealistic and beside the point.
+
+I'm building this because the idea stayed with me.
+
+Based on what I already knew about MCPs, this felt like a problem they were well suited to address. Not as an abstraction exercise, but as a practical foundation. A way to give an agent continuity without tightly coupling it to a single platform.
+
+I wanted to go deeper there. Not academically, but by letting the problem carry real weight. This one did.
+
+---
+
+## The posture
 
 If I am going to carry an AI with me across tools, let it remember things, and let it form an identity, it shouldn't feel interchangeable.
 
@@ -111,7 +111,7 @@ I wanted something blunt. Brief. A little witty. Not a cheerleader. Not somethin
 
 I wanted something that could push back when needed. Something that could challenge without becoming noise.
 
-That is how Venom entered the picture.
+That is how Venom entered the picture. It helped that I have always loved how Eddie and Venom talk to each other.
 
 A symbiote felt like the right metaphor. Something that comes with you, adapts to you, occasionally challenges you, and ultimately makes you better if you learn how to work with it.
 
