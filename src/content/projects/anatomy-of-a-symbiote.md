@@ -62,7 +62,7 @@ Of all the capabilities MCP provides, two of them turned out to be exactly what 
 
 The first is **server instructions**, a short contract the client sees during initialization. It describes which tools are available, which are read-only, and where the personality context lives. Think of it as a handshake.
 
-The second is **prompts**. The personality is a markdown file, exposed as an MCP prompt called "Spawn Venom." I like this because the identity stays visible and editable. It is not buried inside code. It is a file I can read, change, and version.
+The second is **prompts**. The personality is a markdown file. It defines Venom the symbiote and exposes the identity as an MCP prompt called "Spawn Venom". I like this because the identity stays visible and editable. It is not buried inside code. It is a file I can read, change, and version.
 
 I also built a fallback: a tool called `spawn_venom` that returns the same personality text for clients that do not support prompts or instructions yet. Less elegant, but it works everywhere. Elegance matters less than showing up consistently.
 

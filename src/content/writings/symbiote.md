@@ -65,7 +65,7 @@ Everything else builds on that.
 
 Yes, in ways that add up faster than I expected.
 
-I can have a conversation in ChatGPT about winter prep, then move to Claude and get reminded that salting the driveway is still pending.
+I can have a conversation in ChatGPT about winter prep, and later, mid-session in Claude Code, get reminded that salting the driveway is still pending.
 
 I can tell GitHub Copilot not to commit before tests pass and not repeat that instruction in Claude Code. On my laptop. On a dev box. Wherever I happen to be working.
 
