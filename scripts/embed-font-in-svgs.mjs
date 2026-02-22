@@ -43,6 +43,7 @@ const FONT_FACE_BLOCK = `
     }`
 
 const svgFiles = findFiles(resolve(ROOT, 'public'), '.svg')
+  .filter(f => !f.includes('og-home.svg')) // og-home is only used as a PNG for OG meta tags
 
 let updated = 0
 
