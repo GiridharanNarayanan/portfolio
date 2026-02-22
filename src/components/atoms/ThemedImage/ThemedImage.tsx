@@ -1,19 +1,22 @@
 /**
  * ThemedImage Component
- * 
+ *
  * Displays theme-aware images that swap between dark/light variants.
- * 
+ *
  * Convention:
  * - Dark mode (default): Uses the original image path
  * - Light mode: Uses the image path with '-light' suffix before extension
- * 
+ *
  * Example:
  *   src="/images/hero.svg"
  *   Dark mode renders: /images/hero.svg
  *   Light mode renders: /images/hero-light.svg
- * 
+ *
  * If a light variant doesn't exist, the component will fall back to the
  * original (dark) image.
+ *
+ * Note: SVG files have JetBrains Mono embedded via scripts/embed-font-in-svgs.mjs
+ * so they render correctly when sandboxed inside <img> tags.
  */
 
 import { useState, useEffect } from 'react'
@@ -54,7 +57,7 @@ export function ThemedImage({
   useEffect(() => {
     if (theme === 'light' && lightVariantExists === null) {
       const lightSrc = getLightVariantPath(src)
-      
+
       // Preload to check if light variant exists
       const img = new Image()
       img.onload = () => setLightVariantExists(true)
