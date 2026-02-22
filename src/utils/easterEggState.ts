@@ -21,7 +21,7 @@ let state: EasterEggState = {
 }
 
 const REVEAL_THRESHOLD = {
-  ls: 2,        // Reveal on 2nd ls
+  ls: 4,        // Reveal on 4th ls
   homeVisits: 1, // Reveal on first cd ~
 }
 

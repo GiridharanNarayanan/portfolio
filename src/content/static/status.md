@@ -1,9 +1,8 @@
 ---
 location: New Jersey
-updated: 2026-01-23
+updated: 2026-02-22
 ---
 
-Work picking pace after the holidays.
-Continuing to spend little time on the painting for wife in the side.
-Struggling to do some workout in this freezing weather, while awaiting for the winter storm.
-
+Heads down at work. Spending more time on the next post in between.
+Embracing the nor'easter — turns out blizzard conditions are good for writing.
+Workout and the painting for the wife on the backburner for now.
