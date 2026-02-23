@@ -1,6 +1,6 @@
 ---
 title: "Symbiote"
-date: "2026-02-07"
+date: "2026-02-18"
 excerpt: "Exploring the idea of a single AI presence, consistent across every tool, everywhere I work."
 published: false
 featuredImage: "/images/writings/symbiote/symbiote.svg"
