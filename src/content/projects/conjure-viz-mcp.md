@@ -31,7 +31,7 @@ I started wanting that everywhere.
 
 ## The premise
 
-At Microsoft, the tools we use for different kinds of work are shaped by what data they touch. I use Claude Code for agentic coding and design thinking. It is excellent at both. But it is not an option for on-call management or business intelligence. That path leads to customer and service data outside compliance boundaries. For live site investigation, service diagnostics, and anything that touches production telemetry, GitHub Copilot is the right surface. Its MCP and agent integration support is adequate and catching up.
+At Microsoft, the tool you reach for is shaped by the data it touches. I use Claude Code for building and design thinking. It is excellent at both. But production telemetry is out of bounds — that path runs through customer and service data that compliance boundaries define clearly. For live site investigation, on-call work, and anything touching operational data, GitHub Copilot is the right surface. Its agent integration is adequate and catching up.
 
 So the split is natural. Claude Code for building. GitHub Copilot for engineering operations: on-call, diagnostics, maintenance, BI. And it is the operations side where I wanted visuals.
 
@@ -119,17 +119,15 @@ Charts adapt to the VS Code theme automatically. The host injects `--vscode-*` C
 
 Right now, conjure-viz-mcp is wired into the MCP servers and custom agents I use for internal work. The on-call agent can render an incident timeline as a Gantt chart or a service dependency as a graph diagram. The analytics workflows can show adoption trendlines or funnel breakdowns inline, instead of describing them in text.
 
-The instruction baked into the server says: prefer visualizing data over presenting raw tables or bullet-point lists. That is the whole philosophy. When data has a natural visual shape, draw it.
+The instruction baked into the server says: prefer visualizing data over presenting raw tables or bullet-point lists. When data has a natural visual shape, draw it.
 
 ---
 
 ## What is next
 
-The current version covers the chart types I reach for most. The next round is about making the output more useful after it renders.
+The current version covers the chart types I reach for most. What comes next is about making the output more useful after it renders.
 
-- **Annotations.** Mark a data point during an incident review, so the chart carries context, not just shape.
-- **Export.** PNG or SVG output for pasting into postmortems and reports.
-- **Composability.** A single prompt producing multiple charts side by side, closer to a dashboard than a single visual.
+Annotations first — a way to mark a data point during an incident review so the chart carries context, not just shape. Then export: PNG or SVG for pasting into postmortems and reports. Further out, composability — a single prompt producing multiple charts side by side, closer to a dashboard than a single visual.
 
 Further out, the interesting question is whether the rendering layer can close the loop with the diagnostic layer. Right now, the on-call agent queries telemetry, reasons about it, and then calls conjure-viz-mcp to draw the result. Those are still separate steps. The vision is a single pass: the agent investigates, decides what matters, and renders the answer in the same motion.
 
