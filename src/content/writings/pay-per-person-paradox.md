@@ -13,8 +13,6 @@ tags:
 
 I work in Microsoft Copilot Analytics, so I spend a fair amount of time close to where adoption is measured and what it means.
 
-For a while, the layers felt comfortably aligned.
-
 Software has long had a simple growth story. More people use the product. More value gets created. More revenue follows. It has never been the only story, though it has usually been the clearest one.
 
 Lately, that clarity has started to feel less complete.
@@ -111,4 +109,4 @@ But even that would not make the underlying question disappear. It would only ma
 
 What stays with me is the growing mismatch between what the systems are becoming and what many of our models still assume. We are building tools that scale through leverage, while the cost of delivering that leverage grows with every capability we add. The economics are shifting on both sides, fewer people needed, more compute consumed, and the models we use to measure success have not caught up with either.
 
-The old metrics still work. They just explain a little less than they used to. And that gap is widening.
+The old metrics explain a little less than they used to. And that gap is widening.
