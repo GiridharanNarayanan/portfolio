@@ -1,8 +1,8 @@
 ---
 location: New Jersey
-updated: 2026-02-22
+updated: 2026-05-01
 ---
 
-Heads down at work. Spending more time on the next post in between.
-Embracing the nor'easter — turns out blizzard conditions are good for writing.
-Workout and the painting for the wife on the backburner for now.
+Picking up more side projects. Delivered half a dozen artisan resin keycaps to patrons of Microsoft Give Campaign - been working on this for the last month.
+Trying to do some hardware projects as well given software is getting easy.
+Painting and workouts are still slow.
