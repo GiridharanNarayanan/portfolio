@@ -31,7 +31,7 @@ I started wanting that everywhere.
 
 ## The premise
 
-At Microsoft, the tool you reach for is shaped by the data it touches. I use Claude Code for building and design thinking. It is excellent at both. But production telemetry is out of bounds — that path runs through customer and service data that compliance boundaries define clearly. For live site investigation, on-call work, and anything touching operational data, GitHub Copilot is the right surface. Its agent integration is adequate and catching up.
+At Microsoft, the tool you reach for is shaped by the data it touches. I use Claude Code for building and design thinking. It is excellent at both. But production telemetry is out of bounds. That path runs through customer and service data that compliance boundaries define clearly. For live site investigation, on-call work, and anything touching operational data, GitHub Copilot is the right surface. Its agent integration is adequate and catching up.
 
 So the split is natural. Claude Code for building. GitHub Copilot for engineering operations: on-call, diagnostics, maintenance, BI. And it is the operations side where I wanted visuals.
 
@@ -47,17 +47,13 @@ But GitHub Copilot Chat does not have built-in visualization the way Claude's ap
 
 ## Custom personal software
 
-There is a shift happening in how people relate to software. For a long time, the default was to find an existing product that came close enough to what you needed. You adapted to its opinions. You lived with the gaps. Now, if you know what you want to build, AI makes it far easier to just build it. The barrier between having an idea and having the tool is lower than it has ever been.
+The default, for a long time, was to find a product that came close enough and adapt to its opinions. AI has changed that calculus. If you know what you want, building it is no longer the expensive path.
 
-This is where MCP Apps come in. GitHub Copilot supports app rendering: an MCP server can ship a self-contained HTML resource and the host renders it inline in the conversation. That means you can build a visualization layer that lives inside your editor, shaped entirely around your own workflows.
+The opening came from MCP Apps, a capability in the protocol where an MCP server ships a self-contained HTML resource that the host renders inline in the conversation. That felt like exactly the right surface for what I was after. A visualization layer living inside the conversation, shaped around work I actually do.
 
-So I built one. An MCP server that exposes 14 chart tools, for now. The LLM calls a tool, passes structured data, and a chart appears inline in the conversation. Trendlines, funnels, pie charts, bar charts, KPIs, heatmaps, scatter plots, histograms, sankey diagrams, sparklines, threshold lines, sequence diagrams, dependency graphs, and Gantt charts.
+So I built into it. The server exposes 14 chart tools. The LLM calls a tool, passes structured data, and a chart appears. No business logic. No telemetry querying. No opinions about the data. A pure renderer. The value is in what it does not do.
 
-No business logic. No telemetry querying. No opinions about the data. It is a pure renderer. It receives structured data from whatever calls it and draws. The value is in what it does not do.
-
-I tuned it for my primary use cases with minimum interactions. More will come later. For distribution, I use npm as a personal pipeline. `npx conjure-viz-mcp --stdio` and it is running. No cloning, no build step. That simplicity matters when you want to use it across machines without thinking about it.
-
-There is something satisfying about building software this way. You stop searching for a product that does what you want and start assembling the pieces yourself. A tool shaped to your hand, distributed through infrastructure that already exists, wired into the environment you already use.
+Distribution runs through npm. `npx conjure-viz-mcp --stdio` and it is running. No cloning, no build step. That simplicity matters when you want it available across machines without thinking about it.
 
 ---
 
@@ -127,7 +123,7 @@ The instruction baked into the server says: prefer visualizing data over present
 
 The current version covers the chart types I reach for most. What comes next is about making the output more useful after it renders.
 
-Annotations first — a way to mark a data point during an incident review so the chart carries context, not just shape. Then export: PNG or SVG for pasting into postmortems and reports. Further out, composability — a single prompt producing multiple charts side by side, closer to a dashboard than a single visual.
+Annotations first: a way to mark a data point during an incident review so the chart carries context, not just shape. Then export, PNG or SVG for pasting into postmortems and reports. Further out, composability: a single prompt producing multiple charts side by side, closer to a dashboard than a single visual.
 
 Further out, the interesting question is whether the rendering layer can close the loop with the diagnostic layer. Right now, the on-call agent queries telemetry, reasons about it, and then calls conjure-viz-mcp to draw the result. Those are still separate steps. The vision is a single pass: the agent investigates, decides what matters, and renders the answer in the same motion.
 
