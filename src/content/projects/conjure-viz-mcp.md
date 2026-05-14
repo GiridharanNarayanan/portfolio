@@ -55,6 +55,8 @@ So I built into it. The server exposes 14 chart tools. The LLM calls a tool, pas
 
 Distribution runs through npm. `npx conjure-viz-mcp --stdio` and it is running. No cloning, no build step. That simplicity matters when you want it available across machines without thinking about it.
 
+![% of tenants meeting freshness SLA, before and after a fix, rendered inline in a GitHub Copilot live site investigation.](/images/projects/conjure-viz-mcp/mcp-app-in-action.png)
+
 ---
 
 ## Architecture
